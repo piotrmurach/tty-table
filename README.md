@@ -33,7 +33,7 @@ Or install it yourself as:
 ## Contents
 
 * [1. Usage](#1-usage)
-* [2. Table](#1-table)
+* [2. Interface](#2-interface)
   * [2.1 Initializaation](#21-initialization)
   * [2.2 Rendering](#22-rendering)
   * [2.3 Multiline](#23-multiline)
