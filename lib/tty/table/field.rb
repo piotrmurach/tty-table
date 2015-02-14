@@ -19,7 +19,7 @@ module TTY
       # The formatted value inside the field used for display
       #
       # @api public
-      attr_accessor :content
+      attr_reader :content
 
       # The name for the value
       #
@@ -28,6 +28,8 @@ module TTY
 
       # TODO: Change to :content to separate value from formatted string
       attr_writer :value
+
+      attr_writer :content
 
       # The field value width
       #
@@ -107,8 +109,8 @@ module TTY
       #
       # @api public
       def lines
-        escaped = value.to_s.scan(/(\\n|\\t|\\r)/)
-        escaped.empty? ? value.to_s.split(/\n/, -1) : [value.to_s]
+        escaped = content.scan(/(\\n|\\t|\\r)/)
+        escaped.empty? ? content.split(/\n/, -1) : [content]
       end
 
       # If the string contains unescaped new lines then the longest token
@@ -131,14 +133,16 @@ module TTY
       end
 
       def chars
-        value.chars
+        content.chars
       end
 
-      # Return field value
+      # Return field content
+      #
+      # @return [String]
       #
       # @api public
       def to_s
-        value
+        content
       end
     end # Field
   end # Table

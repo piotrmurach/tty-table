@@ -20,7 +20,7 @@ module TTY
         #
         # @api public
         def call(field, row, col)
-          field.value = field.value.to_s.gsub(/(\t|\r|\n)/) do |val|
+          field.content = field.content.to_s.gsub(/(\t|\r|\n)/) do |val|
             val.dump.gsub('"', '')
           end
         end

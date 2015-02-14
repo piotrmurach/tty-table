@@ -12,6 +12,6 @@ RSpec.describe TTY::Table::Operation::Filter, '#call' do
 
   it 'changes field value' do
     subject.call(field, 0, 0)
-    expect(field.value).to eql(value)
+    expect(field.content).to eql(value)
   end
 end

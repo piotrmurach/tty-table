@@ -22,12 +22,12 @@ RSpec.describe TTY::Table::Operation::Wrapped, '#call' do
 
     it "wraps string for 0 column" do
       object.call(field, 0, 0)
-      expect(field.value).to eql("ラドクリフ、マラソン五輪\n代表に1万m出場にも含み")
+      expect(field.content).to eql("ラドクリフ、マラソン五輪\n代表に1万m出場にも含み")
     end
 
     it "wraps string for 1 column" do
       object.call(field, 0, 1)
-      expect(field.value).to eql("ラドクリフ、マラソン五輪代表\nに1万m出場にも含み")
+      expect(field.content).to eql("ラドクリフ、マラソン五輪代表\nに1万m出場にも含み")
     end
   end
 end

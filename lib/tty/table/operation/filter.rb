@@ -26,7 +26,7 @@ module TTY
         #
         # @api public
         def call(field, row, col)
-          field.value = @filter.call(field.value, row, col)
+          field.content = @filter.call(field.content, row, col)
         end
       end # Filter
     end # Operation

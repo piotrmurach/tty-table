@@ -35,7 +35,7 @@ module TTY
         # @api public
         def call(field, row, col)
           width = widths[col] || field.width
-          field.value = Verse.wrap(field.value, width, padding: padding)
+          field.content = Verse.wrap(field.content, width, padding: padding)
         end
       end # Wrapped
     end # Operation

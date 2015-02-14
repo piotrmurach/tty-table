@@ -12,7 +12,7 @@ RSpec.describe TTY::Table::Operation::Truncation, '#call' do
 
     it "truncates string" do
       object.call(field, 0, 0)
-      expect(field.value).to eql(text)
+      expect(field.content).to eql(text)
     end
   end
 
@@ -21,12 +21,12 @@ RSpec.describe TTY::Table::Operation::Truncation, '#call' do
 
     it "truncates string for 0 column" do
       object.call(field, 0, 0)
-      expect(field.value).to eql('太丸…')
+      expect(field.content).to eql('太丸…')
     end
 
     it "truncates string for 1 column" do
       object.call(field, 0, 1)
-      expect(field.value).to eql('太丸ゴシッ…')
+      expect(field.content).to eql('太丸ゴシッ…')
     end
   end
 end

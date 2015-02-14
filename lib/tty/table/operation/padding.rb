@@ -48,12 +48,11 @@ module TTY
         #
         # @api public
         def call(field, row, col)
-          text      = field.value.to_s
-
+          text = field.content
           text = multiline ?  pad_multi_line(text) : pad_single_line(text)
           text.insert(0, padding_top).insert(-1, padding_bottom)
 
-          field.value = text
+          field.content = text
         end
 
         # Apply padding to multi line text
@@ -88,7 +87,6 @@ module TTY
         def pad_around(text)
           text.insert(0, padding_left).insert(-1, padding_right)
         end
-
       end # Padding
     end # Operation
   end # Table

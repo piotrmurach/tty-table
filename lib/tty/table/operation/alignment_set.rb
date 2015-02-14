@@ -95,7 +95,7 @@ module TTY
         def align_field(field, col)
           column_width = widths[col]
           direction    = field.align || self[col]
-          field.value = Verse.align(field.to_s, column_width, direction)
+          field.content = Verse.align(field.content, column_width, direction)
         end
       end # AlignmentSet
     end # Operation
