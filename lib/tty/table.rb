@@ -61,19 +61,18 @@ module TTY
     # Instantiate a new Table
     #
     # @example of no header
-    #   rows  = [ ['a1', 'a2'], ['b1', 'b2'] ]
-    #   table = Table.new rows
+    #   table = Table.new [['a1', 'a2'], ['b1', 'b2']]
     #
     # @example of direct parameters
-    #   rows  = [ ['a1', 'a2'], ['b1', 'b2'] ]
+    #   rows  = [['a1', 'a2'], ['b1', 'b2']]
     #   table = Table.new ['Header 1', 'Header 2'], rows
     #
     # @example of parameters passed as options
-    #   rows  = [ ['a1', 'a2'], ['b1', 'b2'] ]
+    #   rows  = [['a1', 'a2'], ['b1', 'b2']]
     #   table = Table.new header: ['Header 1', 'Header 2'], rows: rows
     #
     # @example of parameters passed as hash
-    #   Table.new [ {'Header1' => ['a1','a2'], 'Header2' => ['b1', 'b2'] }] }
+    #   Table.new [{'Header1' => ['a1','a2'], 'Header2' => ['b1', 'b2'] }]}
     #
     # @param [Array[Symbol], Hash] *args
     #
