@@ -4,7 +4,8 @@ module TTY
   class Table
     # A class that represents a unique element in a table.
     #
-    # Used internally by {Table::Row} to define internal structure.
+    # Used internally by {Table::Header} and {Table::Row} to
+    # define internal structure.
     #
     # @api private
     class Field
@@ -14,6 +15,11 @@ module TTY
       #
       # @api public
       attr_reader :value
+
+      # The formatted value inside the field used for display
+      #
+      # @api public
+      attr_accessor :content
 
       # The name for the value
       #
@@ -30,12 +36,17 @@ module TTY
 
       # Number of columns this field spans. Defaults to 1.
       #
+      # @api public
       attr_reader :colspan
 
       # Number of rows this field spans. Defaults to 1.
       #
+      # @api public
       attr_reader :rowspan
 
+      # The field alignment
+      #
+      # @api public
       attr_reader :align
 
       # Initialize a Field
@@ -56,6 +67,7 @@ module TTY
       # @api private
       def initialize(value)
         options  = extract_options(value)
+        @content = @value.to_s
         @width   = options.fetch(:width) { @value.to_s.size }
         @align   = options.fetch(:align) { nil }
         @colspan = options.fetch(:colspan) { 1 }
@@ -120,12 +132,6 @@ module TTY
 
       def chars
         value.chars
-      end
-
-      # Render value inside this field box
-      #
-      # @api public
-      def render
       end
 
       # Return field value
