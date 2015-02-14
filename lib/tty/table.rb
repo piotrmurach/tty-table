@@ -287,29 +287,22 @@ module TTY
       self
     end
 
-    # Iterate over each element yielding in addition row and column index
+    # Same as #each but passes the index of the row with the row itself
     #
     # @example
     #   table = TTY::Table.new(header, tuples)
-    #   table.each_with_index { |el, row, col| puts "#{el} at #{row},#{col}" }
+    #   table.each_with_index { |row, index|
+    #     puts "#{row} at #{index}"
+    #   }
     #
     # @return self
     #
     # @api public
     def each_with_index
       return to_enum unless block_given?
-      start_index = 0
-      if header && !header.empty?
-        header.attributes.each_with_index do |el, col_index|
-          yield el, 0, col_index
-        end
-        start_index = 1
-      end
-
-      rows.each_with_index do |row, row_index|
-        row.fields.each_with_index do |el, col_index|
-          yield el, row_index + start_index, col_index
-        end
+      start_index = -1
+      data.each do |row|
+        yield row.to_a, start_index += 1
       end
       self
     end
