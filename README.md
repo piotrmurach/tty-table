@@ -34,14 +34,14 @@ Or install it yourself as:
 
 * [1. Usage](#1-usage)
 * [2. Interface](#2-interface)
-  * [2.1 Initializaation](#21-initialization)
-  * [2.2 Rendering](#22-rendering)
-  * [2.3 Multiline](#23-multiline)
-  * [2.4 Border](#24-border)
-  * [2.5 Alignment](#25-alignment)
-  * [2.6 Padding](#26-padding)
-  * [2.7 Filter](#27-filter)
-  * [2.8 Width](#28-width)
+  * [2.1 Initialization](#21-initialization)
+* [3 Rendering](#3-rendering)
+* [2.3 Multiline](#23-multiline)
+* [2.4 Border](#24-border)
+* [2.5 Alignment](#25-alignment)
+* [2.6 Padding](#26-padding)
+* [2.7 Filter](#27-filter)
+* [2.8 Width](#28-width)
 
 ## 1. Usage
 
@@ -69,12 +69,34 @@ table.render
 
 ### 2.1 Initialization
 
-To instantiate **TTY::Table** pass 2-dimensional array:
+**TTY::Table** can be created in variety of ways. The easiest way is to pass 2-dimensional array:
 
 ```ruby
 table = TTY::Table[['a1', 'a2'], ['b1', 'b2']]
 table = TTY::Table.new [['a1', 'a2'], ['b1', 'b2']]
 table = TTY::Table.new rows: [['a1', 'a2'], ['b1', 'b2']]
+```
+
+Alternatively you can specify rows one by one inside block:
+
+```ruby
+table = TTY::Table.new do |t|
+  t << ['a1', 'a2']
+  t << ['b1', 'b2']
+end
+```
+
+You can add rows of data after initialization:
+
+```ruby
+table = TTY::Table.new
+table << ['a1','a2']
+table << ['b1','b2']
+```
+
+In addition to rows you can specify table header:
+
+```ruby
 table = TTY::Table.new ['h1', 'h2'], [['a1', 'a2'], ['b1', 'b2']]
 table = TTY::Table.new header: ['h1', 'h2'], rows: [['a1', 'a2'], ['b1', 'b2']]
 ```
@@ -84,6 +106,8 @@ or cross header with rows inside a hash like so
 ```ruby
 table = TTY::Table.new [{'h1' => ['a1', 'a2'], 'h2' => ['b1', 'b2']}]
 ```
+
+### 2.2 each
 
 Table behaves like an Array so `<<`, `each` and familiar methods can be used
 
@@ -104,16 +128,7 @@ table.size                # return an array of [row_size, column_size]
 table.border              # specify border properties
 ```
 
-or pass your rows in a block
-
-```ruby
-table = TTY::Table.new  do |t|
-  t << ['a1', 'a2', 'a3']
-  t << ['b1', 'b2', 'b3']
-end
-```
-
-### 2.2 Rendering
+### 3 Rendering
 
 Once you have an instance of `TTY::Table` you can print it out to the stdout like so:
 
