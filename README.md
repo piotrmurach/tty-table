@@ -35,6 +35,8 @@ Or install it yourself as:
 * [1. Usage](#1-usage)
 * [2. Interface](#2-interface)
   * [2.1 Initialization](#21-initialization)
+  * [2.2 Iteration](#22-iteration)
+  * [2.3 Row](#23-iteration)
 * [3 Rendering](#3-rendering)
 * [2.3 Multiline](#23-multiline)
 * [2.4 Border](#24-border)
@@ -107,25 +109,36 @@ or cross header with rows inside a hash like so
 table = TTY::Table.new [{'h1' => ['a1', 'a2'], 'h2' => ['b1', 'b2']}]
 ```
 
-### 2.2 each
+### 2.2 Iteration
 
-Table behaves like an Array so `<<`, `each` and familiar methods can be used
+Table behaves like an Array so `<<`, `each` and familiar methods can be used:
 
 ```ruby
 table << ['a1', 'a2', 'a3']
 table << ['b1', 'b2', 'b3']
 table << ['a1', 'a2'] << ['b1', 'b2']  # chain rows assignment
+```
 
-table.each { |row| ... }  # iterate over rows
-table.each_with_index     # iterate over each element with row and column index
+In order to iterate over table rows including headers do:
+
+```ruby
+table.each { |row| ... }                       # iterate over rows
+table.each_with_index  { |row, index| ... }    # iterate over rows with an index
+```
+
+###  2.3
+
+```ruby
 table[i, j]               # return element at row(i) and column(j)
 table.row(i) { ... }      # return array for row(i)
 table.column(j) { ... }   # return array for column(j)
 table.column(name)        # return array for column(name), name of header
+```
+
+```ruby 2.4
 table.row_size            # return row size
 table.column_size         # return column size
 table.size                # return an array of [row_size, column_size]
-table.border              # specify border properties
 ```
 
 ### 3 Rendering
