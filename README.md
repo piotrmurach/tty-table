@@ -36,7 +36,8 @@ Or install it yourself as:
 * [2. Interface](#2-interface)
   * [2.1 Initialization](#21-initialization)
   * [2.2 Iteration](#22-iteration)
-  * [2.3 Row](#23-iteration)
+  * [2.3 Access](#23-access)
+  * [2.4 Size](#24-size)
 * [3 Rendering](#3-rendering)
 * [2.3 Multiline](#23-multiline)
 * [2.4 Border](#24-border)
@@ -126,19 +127,48 @@ table.each { |row| ... }                       # iterate over rows
 table.each_with_index  { |row, index| ... }    # iterate over rows with an index
 ```
 
-###  2.3
+### 2.3 Access
+
+In order to referene the row at `index` do:
 
 ```ruby
-table[i, j]               # return element at row(i) and column(j)
-table.row(i) { ... }      # return array for row(i)
+table = TTY::Table.new [['a1','a2'], ['b1','b2']]
+table[0]                    # => ['a1','a2']
+table.row(0)                # => ['a1','a2']
+table.row(i) { |row| ... }  # return array for row(i)
+```
+
+Negative indices count backwards from the end of table data (`-1` is the last element):
+
+```ruby
+table[-1]   # => ['b1','b2']
+```
+
+To reference element at given row(i) and column(j) do:
+
+```ruby
+table[i, j]   # return element at row(i) and column(j)
+table[0,0]    # => 'a1'
+```
+
+To specifically reference column(j) do:
+
+```ruby
 table.column(j) { ... }   # return array for column(j)
+table.column(0)           # => ['a1','b1']
 table.column(name)        # return array for column(name), name of header
 ```
 
-```ruby 2.4
-table.row_size            # return row size
-table.column_size         # return column size
-table.size                # return an array of [row_size, column_size]
+An `IndexError` is raised for indexes outside of data range.
+
+### 2.4 Size
+
+In order to query the number of rows, columns or size do:
+
+```ruby
+table.rows_size        # return row size
+table.columns_size     # return column size
+table.size             # return an array of [row_size, column_size]
 ```
 
 ### 3 Rendering
