@@ -58,9 +58,11 @@ module TTY
       # @api public
       def run_operations(*args)
         operation_types = args
-        table.each_with_index do |val, row, col|
-          operation_types.each do |type|
-            operations[type].each { |op| op.call(val, row, col) }
+        table.data.each_with_index do |row, row_i|
+          row.fields.each_with_index do |val, col_i|
+            operation_types.each do |type|
+              operations[type].each { |op| op.call(val, row_i, col_i) }
+            end
           end
         end
       end
