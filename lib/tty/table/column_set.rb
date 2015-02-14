@@ -10,13 +10,13 @@ module TTY
     class ColumnSet
       include Equatable
 
-      attr_reader :table
-
       # Initialize a ColumnSet
+      #
+      # @param [Array[Array[Object]]] data
       #
       # @api public
       def initialize(table)
-        @table = table
+        @data = table.data
       end
 
       # Calculate total table width
@@ -34,10 +34,8 @@ module TTY
       #
       # @api private
       def extract_widths
-        data     = table.data
         colcount = data.max { |row_a, row_b| row_a.size <=> row_b.size }.size
-
-        self.class.find_maximas(colcount, data)
+        find_maximas(colcount)
       end
 
       # Assert data integrity for column widths
@@ -85,20 +83,22 @@ module TTY
 
       private
 
+      attr_reader :data
+
       # Find maximum widths for each row and header if present.
       #
       # @param [Integer] colcount
       #   number of columns
-      # @param [Array[Array]] data
-      #   the table's header and rows
+      #
+      # @return [Array[Integer]]
       #
       # @api private
-      def self.find_maximas(colcount, data)
+      def find_maximas(colcount)
         maximas = []
         start   = 0
 
         start.upto(colcount - 1) do |col_index|
-          maximas << find_maximum(data, col_index)
+          maximas << find_maximum(col_index)
         end
         maximas
       end
@@ -106,14 +106,13 @@ module TTY
       # Find a maximum column width. The calculation takes into account
       # wether the content is escaped or not.
       #
-      # @param [Array] data
-      #   the table data
-      #
       # @param [Integer] index
       #   the column index
       #
+      # @return [Integer]
+      #
       # @api private
-      def self.find_maximum(data, index)
+      def find_maximum(index)
         data.map { |row| (value = row.call(index)) ? value.length : 0 }.max
       end
     end # ColumnSet
