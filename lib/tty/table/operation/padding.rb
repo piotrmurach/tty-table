@@ -51,8 +51,6 @@ module TTY
           text = field.content
           text = multiline ?  pad_multi_line(text) : pad_single_line(text)
           text.insert(0, padding_top).insert(-1, padding_bottom)
-
-          field.content = text
         end
 
         # Apply padding to multi line text

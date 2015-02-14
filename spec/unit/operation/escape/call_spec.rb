@@ -7,10 +7,9 @@ RSpec.describe TTY::Table::Operation::Escape, '#call' do
   let(:text)   { "太丸\nゴシ\tック体\r" }
   let(:field)  { TTY::Table::Field.new(text) }
 
-  subject { object.new }
+  subject(:operation) { object.new }
 
   it 'changes field value' do
-    subject.call(field, 0, 0)
-    expect(field.content).to eql("太丸\\nゴシ\\tック体\\r")
+    expect(operation.call(field, 0, 0)).to eql("太丸\\nゴシ\\tック体\\r")
   end
 end

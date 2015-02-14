@@ -3,16 +3,16 @@
 require 'spec_helper'
 
 RSpec.describe TTY::Table::Operation::Truncation, '#call' do
-  let(:object) { described_class.new column_widths }
   let(:text)   { '太丸ゴシック体' }
   let(:field)  { TTY::Table::Field.new(text) }
+
+  subject(:operation) { described_class.new(column_widths) }
 
   context 'without column width' do
     let(:column_widths) { [] }
 
     it "truncates string" do
-      object.call(field, 0, 0)
-      expect(field.content).to eql(text)
+      expect(operation.call(field, 0, 0)).to eql(text)
     end
   end
 
@@ -20,13 +20,11 @@ RSpec.describe TTY::Table::Operation::Truncation, '#call' do
     let(:column_widths) { [3, 6] }
 
     it "truncates string for 0 column" do
-      object.call(field, 0, 0)
-      expect(field.content).to eql('太丸…')
+      expect(operation.call(field, 0, 0)).to eql('太丸…')
     end
 
     it "truncates string for 1 column" do
-      object.call(field, 0, 1)
-      expect(field.content).to eql('太丸ゴシッ…')
+      expect(operation.call(field, 0, 1)).to eql('太丸ゴシッ…')
     end
   end
 end

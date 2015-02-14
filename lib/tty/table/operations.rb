@@ -46,7 +46,7 @@ module TTY
         operations[operation_type] << object
       end
 
-      # Apply operations to a table row
+      # Apply operations to a table data
       #
       # @param [Array[Symbol]] types
       #  the operation types
@@ -61,7 +61,9 @@ module TTY
         table.data.each_with_index do |row, row_i|
           row.fields.each_with_index do |val, col_i|
             operation_types.each do |type|
-              operations[type].each { |op| op.call(val, row_i, col_i) }
+              operations[type].each do |operation|
+                val.content = operation.call(val, row_i, col_i)
+              end
             end
           end
         end
