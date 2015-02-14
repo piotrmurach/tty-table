@@ -17,11 +17,11 @@ RSpec.describe TTY::Table, 'access' do
   context 'when array like access' do
     it { expect(table[0,0]).to eq('a1') }
 
-    it { expect(table[0]).to eq(rows[0]) }
+    it { expect(table[0]).to eq(['a1','a2']) }
 
     it { expect(table[5]).to eq(nil) }
 
-    it { expect(table[-1]).to eq(rows[-1]) }
+    it { expect(table[-1]).to eq(['b1','b2']) }
 
     it { expect(table[5,5]).to eq(nil) }
 
@@ -46,9 +46,9 @@ RSpec.describe TTY::Table, 'access' do
 
     it 'yields row at index' do
       yields = []
-      expect { table.row(1).each { |el| yields << el } }.to change { yields }.
-        from( [] ).
-        to( rows[1] )
+      expect {
+        table.row(1).each { |el| yields << el }
+      }.to change { yields }.from( [] ).to( rows[1] )
     end
   end
 
@@ -78,9 +78,9 @@ RSpec.describe TTY::Table, 'access' do
 
     it 'yields column at index' do
       yields = []
-      expect { table.column(1).each { |el| yields << el } }.to change { yields }.
-        from( [] ).
-        to( ['a2', 'b2'])
+      expect {
+        table.column(1).each { |el| yields << el }
+      }.to change { yields }.from( [] ).to( ['a2', 'b2'])
     end
   end
 end

@@ -9,17 +9,17 @@ RSpec.describe TTY::Table, 'properties' do
 
   it { expect(table.width).to eq(6) }
 
-  it { expect(table.row_size).to eq(2) }
+  it { expect(table.rows_size).to eq(2) }
 
-  it { expect(table.column_size).to eq(3) }
+  it { expect(table.columns_size).to eq(3) }
 
   it { expect(table.size).to eq([2,3]) }
 
   context 'no size' do
     let(:rows) { []  }
 
-    it { expect(table.row_size).to eq(0) }
+    it { expect(table.rows_size).to eq(0) }
 
-    it { expect(table.column_size).to eq(0) }
+    it { expect(table.columns_size).to eq(0) }
   end
 end

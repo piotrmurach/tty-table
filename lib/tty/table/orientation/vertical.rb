@@ -23,12 +23,12 @@ module TTY
         #
         # @api public
         def slice(table)
-          header   = table.header
-          row_size = table.row_size
+          header    = table.header
+          rows_size = table.rows_size
 
-          head = header ? header : (0..row_size).map { |n| (n + 1).to_s }
+          head = header ? header : (0..rows_size).map { |n| (n + 1).to_s }
 
-          (0...row_size).reduce([]) do |array, index|
+          (0...rows_size).reduce([]) do |array, index|
             array + head.zip(table.rows[index]).map { |row| table.to_row(row) }
           end
         end

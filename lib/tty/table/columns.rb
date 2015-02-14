@@ -42,7 +42,7 @@ module TTY
       #
       # @api public
       def border_size
-        BORDER_WIDTH * (table.column_size - 1) + outside_border_size
+        BORDER_WIDTH * (table.columns_size - 1) + outside_border_size
       end
 
       # Estimate minimum table width to be able to display content
@@ -51,7 +51,7 @@ module TTY
       #
       # @api public
       def minimum_width
-        table.column_size * MIN_WIDTH + border_size
+        table.columns_size * MIN_WIDTH + border_size
       end
 
       # Return column's natural unconstrained widths
@@ -93,7 +93,7 @@ module TTY
       # @api private
       def adjust_padding
         padding     =  renderer.padding
-        column_size = table.column_size
+        column_size = table.columns_size
 
         (0...column_size).reduce([]) do |lengths, col|
           lengths + [padding.left + renderer.column_widths[col] + padding.right]
@@ -115,7 +115,7 @@ module TTY
       #
       # @api private
       def expand
-        column_size = table.column_size
+        column_size = table.columns_size
         ratio       = ((renderer.width - natural_width) / column_size.to_f).floor
 
         widths = (0...column_size).reduce([]) do |lengths, col|
@@ -128,7 +128,7 @@ module TTY
       #
       # @api private
       def shrink
-        column_size = table.column_size
+        column_size = table.columns_size
         ratio       = ((natural_width - renderer.width) / column_size.to_f).ceil
 
         widths = (0...column_size).reduce([]) do |lengths, col|
@@ -155,7 +155,7 @@ module TTY
       #
       # @api private
       def distribute_extra_width(widths)
-        column_size     = table.column_size
+        column_size     = table.columns_size
         extra_width     = renderer.width - (widths.reduce(:+) + border_size)
         per_field_width = extra_width / column_size
         remaining_width = extra_width % column_size

@@ -155,8 +155,8 @@ module TTY
     #
     # @api private
     def rotate_vertical
-      @original_columns = column_size
-      @original_rows    = row_size
+      @original_columns = columns_size
+      @original_rows    = rows_size
       @rows             = orientation.slice(self)
       @header           = [] if header
       @rotated          = true
@@ -178,6 +178,15 @@ module TTY
 
     # Lookup element of the table given a row(i) and column(j)
     #
+    # @param [Integer] row_index
+    # @param [Integer] column_index
+    #
+    # @example
+    #   table = TTY::Table.new [['a1','a2'], ['b1','b2']]
+    #   table[0]    # => ['a1','a2']
+    #   table[0,0]  # => 'a1'
+    #   table[-1]   # => ['b1','b2']
+    #
     # @api public
     def [](row_index, column_index = false)
       return row(row_index) unless column_index
@@ -187,9 +196,9 @@ module TTY
         fail TTY::Table::TupleMissing.new(row_index, column_index)
       end
     end
-    alias at        []
-    alias element   []
-    alias component []
+    alias_method :at, :[]
+    alias_method :element, :[]
+    alias_method :component, :[]
 
     # Set table value at row(i) and column(j)
     #
@@ -203,9 +212,9 @@ module TTY
     # When a block is given, the elements of that Array are iterated over.
     #
     # @example
-    #   rows  = [ ['a1', 'a2'], ['b1', 'b2'] ]
-    #   table = TTY::Table.new :rows => rows
-    #   table.row(1) { |element| ... }
+    #   rows  = [['a1', 'a2'], ['b1', 'b2']]
+    #   table = TTY::Table.new rows: rows
+    #   table.row(1) { |row| ... }
     #
     # @param [Integer] index
     #
@@ -246,7 +255,7 @@ module TTY
     #
     # @api public
     def column(index)
-      index_unknown = index.is_a?(Integer) && (index >= column_size || index < 0)
+      index_unknown = index.is_a?(Integer) && (index >= columns_size || index < 0)
       if block_given?
         return self if index_unknown
         rows.map { |row| yield row[index] }
@@ -310,13 +319,12 @@ module TTY
     # Return the number of columns
     #
     # @example
-    #   table.column_size # => 5
+    #   table.columns_size # => 5
     #
     # @return [Integer]
     #
     # @api public
-    # TODO: renmae to columns_size
-    def column_size
+    def columns_size
       rows.size > 0 ? rows[0].size : 0
     end
 
@@ -328,7 +336,7 @@ module TTY
     # @return [Integer]
     #
     # @api public
-    def row_size
+    def rows_size
       rows.size
     end
 
@@ -341,7 +349,7 @@ module TTY
     #
     # @api public
     def size
-      [row_size, column_size]
+      [rows_size, columns_size]
     end
 
     # Check table width
@@ -360,7 +368,7 @@ module TTY
     #
     # @api public
     def empty?
-      column_size == 0 || row_size == 0
+      columns_size == 0 || rows_size == 0
     end
 
     # Return string representation of table using basic renderer.

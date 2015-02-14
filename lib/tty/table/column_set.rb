@@ -72,10 +72,10 @@ module TTY
       def self.widths_from(table, column_widths = nil)
         case column_widths
         when Array
-          assert_widths(column_widths, table.column_size)
+          assert_widths(column_widths, table.columns_size)
           Array(column_widths).map(&:to_i)
         when Numeric
-          Array.new(table.column_size, column_widths)
+          Array.new(table.columns_size, column_widths)
         when NilClass
           new(table).extract_widths
         else
