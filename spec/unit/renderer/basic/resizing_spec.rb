@@ -56,25 +56,25 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
     let(:rows)    { [['aaaa1','aaaa2',], ['bbbb1','bbbb2']] }
 
     context 'even columns' do
-      let(:options) { {width: 7, resize: true} }
+      let(:options) { {width: 8, resize: true} }
 
       it 'resizes each column' do
         expect(renderer.render).to eql <<-EOS.normalize
-          he… he…
-          aa… aa…
-          bb… bb…
+          he…  h… 
+          aa…  a… 
+          bb…  b… 
         EOS
       end
     end
 
     context 'even columns with extra width' do
-      let(:options) { {width: 8, resize: true} }
+      let(:options) { {width: 9, resize: true} }
 
       it 'resizes each column' do
         expect(renderer.render).to eql <<-EOS.normalize
-          hea… he…
-          aaa… aa…
-          bbb… bb…
+          he…  he… 
+          aa…  aa… 
+          bb…  bb… 
         EOS
       end
     end
@@ -82,13 +82,13 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
     context 'uneven columns' do
       let(:header)  { ['head1', 'head2', 'head3'] }
       let(:rows)    { [['aaa1', 'aa2', 'aaaaaaa3'], ['b1', 'b2', 'b3']] }
-      let(:options) { {width: 15, resize: true} }
+      let(:options) { {width: 16, resize: true} }
 
       it 'resizes each column' do
         expect(renderer.render).to eql <<-EOS.normalize
-          hea… he… head3 
-          aaa1 aa2 aaaaa…
-          b1   b2  b3    
+          he…  he…  head3 
+          aaa1 aa2  aaaa… 
+          b1   b2   b3    
         EOS
       end
     end

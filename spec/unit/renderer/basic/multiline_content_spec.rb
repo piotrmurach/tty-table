@@ -26,7 +26,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'with multiline content' do
       it "renders single line" do
         expect(table.render(multiline: false, column_widths: [8,1])).to eq <<-EOS.normalize
           First    1
-          Multili… 2
+          Multil…  2
           Third    3
         EOS
       end

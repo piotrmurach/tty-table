@@ -65,31 +65,31 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
     let(:rows)    { [['aaaa1','aaaa2',], ['bbbb1','bbbb2']] }
 
     context 'even columns' do
-      let(:options) { {width: 7, resize: true} }
+      let(:options) { {width: 9, resize: true} }
 
       it 'resizes each column' do
         expect(renderer.render).to eql <<-EOS.normalize
-         +--+--+
-         |h…|h…|
-         +--+--+
-         |a…|a…|
-         |b…|b…|
-         +--+--+
+         +---+---+
+         |h… |h… |
+         +---+---+
+         |a… |a… |
+         |b… |b… |
+         +---+---+
         EOS
       end
     end
 
     context 'even columns with extra width' do
-      let(:options) { {width: 8, resize: true} }
+      let(:options) { {width: 10, resize: true} }
 
       it 'resizes each column' do
         expect(renderer.render).to eql <<-EOS.normalize
-         +---+--+
-         |he…|h…|
-         +---+--+
-         |aa…|a…|
-         |bb…|b…|
-         +---+--+
+         +----+---+
+         |he… |h… |
+         +----+---+
+         |aa… |a… |
+         |bb… |b… |
+         +----+---+
         EOS
       end
     end
@@ -102,9 +102,9 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
       it 'resizes each column' do
         expect(renderer.render).to eql <<-EOS.normalize
          +---+---+-----+
-         |he…|he…|head3|
+         |h… |h… |head3|
          +---+---+-----+
-         |aa…|aa2|aaaa…|
+         |a… |aa2|aaa… |
          |b1 |b2 |b3   |
          +---+---+-----+
         EOS

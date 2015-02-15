@@ -22,13 +22,13 @@ RSpec.describe TTY::Table::Renderer::Basic, 'truncation' do
   end
 
   context 'with column widths' do
-    let(:options) { { column_widths: [3, 5, 7] } }
+    let(:options) { { column_widths: [4, 5, 7] } }
 
     it 'shortens the fields' do
       expect(renderer.render).to eq <<-EOS.normalize
-        he… head2 h3     
-        a1… a222  a33333…
-        b1… b222… b333333
+        he…  head2 h3     
+        a1…  a222  a3333… 
+        b111 b22…  b333333
       EOS
     end
   end

@@ -20,11 +20,21 @@ RSpec.describe TTY::Table::Operation::Wrapped, '#call' do
     let(:column_widths) { [12, 14] }
 
     it "wraps string for 0 column" do
-      expect(operation.call(field, 0, 0)).to eql("ラドクリフ、マラソン五輪\n代表に1万m出場にも含み")
+      expect(operation.call(field, 0, 0)).to eql([
+        "ラドクリフ、",
+        "マラソン五輪",
+        "代表に1万m出",
+        "場にも含み"
+      ].join("\n"))
     end
 
     it "wraps string for 1 column" do
-      expect(operation.call(field, 0, 1)).to eql("ラドクリフ、マラソン五輪代表\nに1万m出場にも含み")
+      expect(operation.call(field, 0, 1)).to eql([
+        "ラドクリフ、マ",
+        "ラソン五輪代表",
+        "に1万m出場にも",
+        "含み"
+      ].join("\n"))
     end
   end
 end
