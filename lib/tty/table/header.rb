@@ -39,8 +39,8 @@ module TTY
       # Iterate over each element in the vector
       #
       # @example
-      #   vec = Vector[1,2,3]
-      #   vec.each { |element| ... }
+      #   header = TTY::Table::Header.new [1,2,3]
+      #   header.each { |element| ... }
       #
       # @return [self]
       #
@@ -157,6 +157,10 @@ module TTY
       # @api public
       def to_hash
         to_a.hash
+      end
+
+      def inspect
+        "#<#{self.class.name} fields=#{to_a}>"
       end
     end # Header
   end # Table
