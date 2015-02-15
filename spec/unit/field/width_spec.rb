@@ -18,6 +18,6 @@ RSpec.describe TTY::Table::Field, '#width' do
   context 'with hash value' do
     let(:value) { "foo\nbaar" }
 
-    it { is_expected.to eql(8) }
+    it { is_expected.to eql(7) }
   end
 end

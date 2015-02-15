@@ -26,15 +26,15 @@ module TTY
       # @api public
       attr_reader :name
 
-      # TODO: Change to :content to separate value from formatted string
-      attr_writer :value
-
-      attr_writer :content
-
-      # The field value width
+      # The actual value
       #
       # @api public
-      attr_reader :width
+      attr_writer :value
+
+      # The formatted string
+      #
+      # @api public
+      attr_writer :content
 
       # Number of columns this field spans. Defaults to 1.
       #
@@ -70,7 +70,7 @@ module TTY
       def initialize(value)
         options  = extract_options(value)
         @content = @value.to_s
-        @width   = options.fetch(:width) { @value.to_s.size }
+        @width   = options[:width]
         @align   = options.fetch(:align) { nil }
         @colspan = options.fetch(:colspan) { 1 }
         @rowspan = options.fetch(:rowspan) { 1 }
@@ -90,11 +90,11 @@ module TTY
         options
       end
 
-      # Return the width this field would normally have bar other contraints
+      # The content width
       #
       # @api public
-      def value_width
-        @width
+      def width
+        @width || UnicodeUtils.display_width(@content)
       end
 
       def value_height
