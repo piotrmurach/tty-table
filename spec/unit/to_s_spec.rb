@@ -5,15 +5,12 @@ require 'spec_helper'
 RSpec.describe TTY::Table, '#to_s' do
   let(:header)   { ['h1', 'h2', 'h3'] }
   let(:rows)     { [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3']] }
-  let(:renderer) { :basic }
 
   subject(:table) { described_class.new(header, rows) }
 
   context 'without renderer' do
-    let(:renderer) { nil }
-
     it 'displayes basic table' do
-      expect(table.to_s).to eq <<-EOS.normalize
+      expect(table.render(:basic)).to eq <<-EOS.normalize
         h1 h2 h3
         a1 a2 a3
         b1 b2 b3
@@ -32,10 +29,8 @@ RSpec.describe TTY::Table, '#to_s' do
   end
 
   context 'with ascii border' do
-    let(:renderer) { :ascii }
-
     it 'displays table' do
-      expect(table.render(renderer)).to eq <<-EOS.normalize
+      expect(table.render(:ascii)).to eq <<-EOS.normalize
         +--+--+--+
         |h1|h2|h3|
         +--+--+--+
@@ -47,10 +42,8 @@ RSpec.describe TTY::Table, '#to_s' do
   end
 
   context 'with unicode border' do
-    let(:renderer) { :unicode}
-
     it 'displays table' do
-      expect(table.render(renderer)).to eq <<-EOS.normalize
+      expect(table.render(:unicode)).to eq <<-EOS.normalize
         ┌──┬──┬──┐
         │h1│h2│h3│
         ├──┼──┼──┤
