@@ -3,11 +3,10 @@
 require 'spec_helper'
 
 RSpec.describe TTY::Table::Operation::Wrapped, '#call' do
-  let(:padding) { TTY::Table::Padder.parse }
   let(:text)   { 'ラドクリフ、マラソン五輪代表に1万m出場にも含み' }
   let(:field)  { TTY::Table::Field.new(text) }
 
-  subject(:operation) { described_class.new(column_widths, padding) }
+  subject(:operation) { described_class.new(column_widths) }
 
   context 'without column width' do
     let(:column_widths) { [] }

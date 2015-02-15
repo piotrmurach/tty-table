@@ -14,9 +14,8 @@ module TTY
         # Initialize a Wrapped
         #
         # @api public
-        def initialize(widths, padding)
+        def initialize(widths)
           @widths  = widths
-          @padding = padding.padding
         end
 
         # Apply wrapping to a field
@@ -35,7 +34,7 @@ module TTY
         # @api public
         def call(field, row, col)
           width = widths[col] || field.width
-          Verse.wrap(field.content, width, padding: padding)
+          Verse.wrap(field.content, width)
         end
       end # Wrapped
     end # Operation

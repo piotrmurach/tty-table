@@ -156,7 +156,7 @@ module TTY
                                                                   column_widths))
           operations.add(:filter,     Operation::Filter.new(filter))
           operations.add(:truncation, Operation::Truncation.new(column_widths))
-          operations.add(:wrapping,   Operation::Wrapped.new(column_widths, padding))
+          operations.add(:wrapping,   Operation::Wrapped.new(column_widths))
           operations.add(:padding,    Operation::Padding.new(padding, multiline))
         end
 
@@ -205,8 +205,8 @@ module TTY
           columns_constraints.enforce
           add_operations
           ops = [:alignment]
-          ops << :padding unless padding.empty?
           multiline ? ops << :wrapping : ops << :truncation
+          ops << :padding unless padding.empty?
           ops << :filter
           operations.run_operations(*ops)
 
