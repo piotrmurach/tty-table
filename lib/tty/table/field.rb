@@ -120,7 +120,7 @@ module TTY
       #
       # @api public
       def length
-        (lines.max_by(&:length) || '').size
+        display_width(lines.max_by { |line| display_width(line) } || '')
       end
 
       # Extract the number of lines this value spans
@@ -143,6 +143,10 @@ module TTY
       # @api public
       def to_s
         content
+      end
+
+      def display_width(string)
+        UnicodeUtils.display_width(string)
       end
     end # Field
   end # Table

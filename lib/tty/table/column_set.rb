@@ -113,7 +113,9 @@ module TTY
       #
       # @api private
       def find_maximum(index)
-        data.map { |row| (value = row.call(index)) ? value.length : 0 }.max
+        data.map do |row|
+          (value = row.call(index)) ? value.length : 0
+        end.max
       end
     end # ColumnSet
   end # Table
