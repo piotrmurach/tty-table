@@ -16,7 +16,7 @@
 
 ## Features
 
-* Create table once and render using custom view renderers [see]()
+* Create table once and render using custom view renderers [see](#3-rendering)
 * Supports multibyte character encodings
 * Table behaves like an array with familiar API
 
@@ -44,7 +44,7 @@ Or install it yourself as:
   * [2.2 Iteration](#22-iteration)
   * [2.3 Access](#23-access)
   * [2.4 Size](#24-size)
-* [3 Rendering](#3-rendering)
+* [3. Rendering](#3-rendering)
   * [3.1 Render](#31-render)
   * [3.2 Renderer](#32-renderer)
     * [3.1.1 Basic renderer](#311-basic)
@@ -212,7 +212,7 @@ This will use so called `:basic` renderer with default options. The other render
 
 ### 3.2 Renderer
 
-**TTY::Table** has a definition of `TTY::Table::Renderer` which allows you to provide different view for your tabular data. It comes with few initial renderers built in such as `TTY::Table::Renderer::Basic`, `TTY::Table::Rendere::ASCII` and `TTY::Table::Renderer:Unicode`.
+**TTY::Table** has a definition of `TTY::Table::Renderer` which allows you to provide different view for your tabular data. It comes with few initial renderers built in such as `TTY::Table::Renderer::Basic`, `TTY::Table::Renderer::ASCII` and `TTY::Table::Renderer:Unicode`.
 
 Given a table of data:
 
@@ -342,7 +342,7 @@ width          # constrain the table total width, by default dynamically
 
 By default all columns are `:left` aligned.
 
-You can align each column by passing `alignments` option to table renderer:
+You can align each column individuall by passing `alignments` option to table renderer:
 
 ```ruby
 table.render :ascii, alignments: [:center, :right]
@@ -352,6 +352,19 @@ table.render :ascii, alignments: [:center, :right]
   +-------+-------+
   |  a1   |     a2|
   |  b1   |     b2|
+  +-------+-------+
+```
+
+Alternatively you can align all columns with `alignment` option:
+
+```ruby
+table.render :ascii, alignment: [:center]
+# =>
+  +-------+-------+
+  |header1|header2|
+  +-------+-------+
+  |  a1   |  a2   |
+  |  b1   |  b2   |
   +-------+-------+
 ```
 
@@ -375,7 +388,6 @@ table.render(:ascii)
   |b1     |  b2   |
   +-------+-------+
 ```
-
 
 
 ### 2.3 Multiline
