@@ -5,15 +5,15 @@ require 'spec_helper'
 RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
   let(:header)  { ['h1', 'h2', 'h3'] }
   let(:rows)    { [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3']] }
-  let(:options) { { column_alignments: column_alignments } }
+  let(:options) { { alignments: alignments } }
   let(:table)   { TTY::Table.new(header, rows) }
 
   subject(:renderer) { described_class.new table, options }
 
   context 'with default' do
-    let(:header)        { ['h1', 'h2'] }
-    let(:rows)          { [['aaaaa', 'a'], ['b', 'bbbbb']] }
-    let(:column_alignments) { nil }
+    let(:header)     { ['h1', 'h2'] }
+    let(:rows)       { [['aaaaa', 'a'], ['b', 'bbbbb']] }
+    let(:alignments) { nil }
 
     it 'aligns left by default' do
       expect(renderer.render).to eql <<-EOS.normalize
@@ -25,8 +25,8 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
   end
 
   context 'with different headers' do
-    let(:header)        { ['header1', 'head2', 'h3'] }
-    let(:column_alignments) { [:left, :center, :right] }
+    let(:header)     { ['header1', 'head2', 'h3'] }
+    let(:alignments) { [:left, :center, :right] }
 
     it 'aligns headers' do
       expect(renderer.render).to eql <<-EOS.normalize
@@ -38,9 +38,9 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
   end
 
   context 'with different aligns' do
-    let(:header)         { nil }
-    let(:rows)           { [['aaaaa', 'a'], ['b', 'bbbbb']] }
-    let(:column_alignments)  { [:left, :right] }
+    let(:header)     { nil }
+    let(:rows)       { [['aaaaa', 'a'], ['b', 'bbbbb']] }
+    let(:alignments) { [:left, :right] }
 
     it 'aligns table rows' do
       expect(renderer.render.to_s).to eql <<-EOS.normalize
@@ -51,9 +51,9 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
   end
 
   context 'with individual field aligns' do
-    let(:header)        { ['header1', 'header2', 'header3'] }
-    let(:column_alignments) { [:left, :center, :right] }
-    let(:options)       { {column_alignments: column_alignments} }
+    let(:header)     { ['header1', 'header2', 'header3'] }
+    let(:alignments) { [:left, :center, :right] }
+    let(:options)    { {alignments: alignments} }
     let(:table) {
       TTY::Table.new header: header do |t|
         t << ['a1', 'a2', 'a3']

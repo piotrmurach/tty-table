@@ -36,12 +36,7 @@ module TTY
         # @return [Array]
         #
         # @api private
-        attr_accessor :column_alignments
-
-        # The table operations applied to rows
-        #
-        # @api public
-        attr_reader :operations
+        attr_accessor :alignments
 
         # A callable object used for formatting field content
         #
@@ -89,7 +84,7 @@ module TTY
         # Initialize a Renderer
         #
         # @param [Hash] options
-        # @option options [String] :column_alignments
+        # @option options [String] :alignments
         #   used to format table individual column alignment
         # @option options [String] :column_widths
         #   used to format table individula column width
@@ -108,7 +103,7 @@ module TTY
           @operations.add(:escape, Operation::Escape.new)
           @border        = TTY::Table::BorderOptions.from(options.delete(:border))
           @column_widths = options.fetch(:column_widths, nil)
-          @column_alignments = TTY::Table::AlignmentSet.new(options[:column_alignments])
+          @alignments = TTY::Table::AlignmentSet.new(options[:alignments])
           @filter        = options.fetch(:filter) { proc { |val, _| val } }
           @width         = options.fetch(:width) { TTY::Screen.width }
           @border_class  = options.fetch(:border_class) { Border::Null }
@@ -150,8 +145,7 @@ module TTY
         #
         # @api private
         def add_operations
-          operations.add(:alignment,  Operation::Alignment.new(column_alignments,
-                                                                  column_widths))
+          operations.add(:alignment,  Operation::Alignment.new(alignments, column_widths))
           operations.add(:filter,     Operation::Filter.new(filter))
           operations.add(:truncation, Operation::Truncation.new(column_widths))
           operations.add(:wrapping,   Operation::Wrapped.new(column_widths))
@@ -212,6 +206,11 @@ module TTY
         end
 
         private
+
+        # The table operations applied to rows
+        #
+        # @api public
+        attr_reader :operations
 
         # Render table data
         #
