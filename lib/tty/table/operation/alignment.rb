@@ -4,50 +4,15 @@ module TTY
   class Table
     module Operation
       # A class which responsiblity is to align table rows and header.
-      class AlignmentSet
-        include Enumerable
-        # Initialize an AlignmentSet
+      class Alignment
+        DEFAULT = :left
+
+        # Initialize an Alignment operation
         #
         # @api private
-        def initialize(aligns, widths = nil)
-          @converter = Necromancer.new
-          @elements = @converter.convert(aligns).to(:array)
-          @widths   = widths
-        end
-
-        # Iterate over each element in the alignment set
-        #
-        # @example
-        #   alignment = AlignmentSet.new [1,2,3]
-        #   alignment.each { |element| ... }
-        #
-        # @return [self]
-        #
-        # @api public
-        def each
-          return to_enum unless block_given?
-          to_ary.each { |element| yield element }
-          self
-        end
-
-        # Lookup an alignment by index
-        #
-        # @param [Integer]
-        #
-        # @return [Symbol] alignment
-        #
-        # @api public
-        def [](index)
-          elements.fetch(index, :left)
-        end
-
-        # Return each alignment in an Array
-        #
-        # @return [Array]
-        #
-        # @api private
-        def alignments
-          map { |alignment| alignment }
+        def initialize(alignments, widths = nil)
+          @alignments = alignments
+          @widths     = widths
         end
 
         # Evaluate alignment of the provided row
@@ -64,27 +29,18 @@ module TTY
           align_field(field, col)
         end
 
-        # Convert to array
-        #
-        #  @return [Array]
-        #
-        # @api public
-        def to_ary
-          @elements
-        end
+        private
 
-        protected
+        attr_reader :alignments
 
         attr_reader :widths
-
-        attr_reader :elements
 
         # Align each field in a row
         #
         # @param [TTY::Table::Field] field
         #   the table field
         #
-        # @param [Integer] col
+        # @param [Integer] co
         #   the table column index
         #
         # @param [Hash] options
@@ -94,10 +50,10 @@ module TTY
         # @api private
         def align_field(field, col)
           column_width = widths[col]
-          direction    = field.alignment || self[col]
+          direction    = field.alignment || alignments[col] || DEFAULT
           Verse.align(field.content, column_width, direction)
         end
-      end # AlignmentSet
+      end # Alignment
     end # Operation
   end # Table
 end # TTY

@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe TTY::Table::Operation::AlignmentSet, '#call' do
+RSpec.describe TTY::Table::Operation::Alignment, '#call' do
   let(:object) { described_class.new alignments, widths }
   let(:value)  { 'a1' }
   let(:field)  { TTY::Table::Field.new(value)}
