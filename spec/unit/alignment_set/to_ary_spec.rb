@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe TTY::Table::Operation::AlignmentSet, '#to_ary' do
+RSpec.describe TTY::Table::AlignmentSet, '#to_ary' do
   let(:argument) { [:center, :left] }
   let(:object)   { described_class.new argument }
 

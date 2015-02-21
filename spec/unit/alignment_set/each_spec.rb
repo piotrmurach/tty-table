@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe TTY::Table::Operation::AlignmentSet, '#each' do
+RSpec.describe TTY::Table::AlignmentSet, '#each' do
   let(:alignments) { [:left, :center, :right] }
   let(:yields)     { [] }
   let(:object)     { described_class.new alignments }

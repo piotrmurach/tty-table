@@ -2,10 +2,10 @@
 
 require 'spec_helper'
 
-RSpec.describe TTY::Table::Operation::AlignmentSet, '#new' do
+RSpec.describe TTY::Table::AlignmentSet, '#new' do
   let(:object) { described_class }
 
-  subject { object.new(argument) }
+  subject(:alignment_set) { object.new(argument) }
 
   context 'with no argument' do
     let(:argument) { [] }
@@ -14,7 +14,7 @@ RSpec.describe TTY::Table::Operation::AlignmentSet, '#new' do
 
     it { is_expected.to be_instance_of(object) }
 
-    it { expect(subject.alignments).to eq([]) }
+    it { expect(alignment_set.to_a).to eq([]) }
   end
 
   context 'with argument' do
@@ -22,6 +22,6 @@ RSpec.describe TTY::Table::Operation::AlignmentSet, '#new' do
 
     it { is_expected.to be_instance_of(object) }
 
-    it { expect(subject.alignments).to eq(argument) }
+    it { expect(alignment_set.to_a).to eq(argument) }
   end
 end
