@@ -14,6 +14,12 @@
 
 **TTY::Table** provides independent table formatting component for [TTY](https://github.com/peter-murach/tty) toolkit.
 
+## Features
+
+* Create table once and render using custom view renderers [see]()
+* Supports multibyte character encodings
+* Table behaves like an array with familiar API
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -39,9 +45,16 @@ Or install it yourself as:
   * [2.3 Access](#23-access)
   * [2.4 Size](#24-size)
 * [3 Rendering](#3-rendering)
+  * [3.1 Render](#31-render)
+  * [3.2 Renderer](#32-renderer)
+    * [3.1.1 Basic renderer](#311-basic)
+    * [3.1.2 ASCII renderer](#312-ascii-renderer)
+    * [3.1.3 Unicode renderer](#313-unicode-renderer)
+  * [3.3 Options](#33-options)
+  * [3.4 Alignment](#34-alignment)
+
 * [2.3 Multiline](#23-multiline)
 * [2.4 Border](#24-border)
-* [2.5 Alignment](#25-alignment)
 * [2.6 Padding](#26-padding)
 * [2.7 Filter](#27-filter)
 * [2.8 Width](#28-width)
@@ -171,38 +184,199 @@ table.columns_size     # return column size
 table.size             # return an array of [row_size, column_size]
 ```
 
-### 3 Rendering
+### 2.5 Orientation
 
-Once you have an instance of `TTY::Table` you can print it out to the stdout like so:
+## 3 Rendering
+
+**TTY-Table** rendering process means you can create tabular data once and then create different renderers to match your needs for formatting the data.
+
+### 3.1 Render
+
+Given a table:
 
 ```ruby
-table.to_s
-
-a1  a2  a3
-b1  b2  b3
+table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
 ```
 
-This will use so called `basic` renderer with default options.
-
-However, you can include other customization options such as
+Once you have an instance of `TTY::Table` you can decorate the content using the `render` method. In order to display a basic whitespace delimited view do:
 
 ```ruby
-border         # hash of border properties out of :characters, :style, :separator keys
-border_class   # a type of border to use
-column_widths  # array of maximum columns widths
-column_aligns  # array of cell alignments out of :left, :center and :right, default :left
+table.render(:basic)
+# =>
+  header1 header2
+  a1      a2
+  b1      b2
+```
+
+This will use so called `:basic` renderer with default options. The other renderers are `:ascii` and `:unicode`.
+
+### 3.2 Renderer
+
+**TTY::Table** has a definition of `TTY::Table::Renderer` which allows you to provide different view for your tabular data. It comes with few initial renderers built in such as `TTY::Table::Renderer::Basic`, `TTY::Table::Rendere::ASCII` and `TTY::Table::Renderer:Unicode`.
+
+Given a table of data:
+
+```ruby
+table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
+```
+
+You can create a special renderer for it:
+
+```ruby
+multi_renderer = TTY::Table::Renderer::Basic.new(table, multiline: true)
+```
+
+and then call `render`
+
+```ruby
+multi_renderer.render
+```
+
+This way, you create tabular data once and then create different renderers to match your needs for formatting the data.
+
+#### 3.2.1 Basic Renderer
+
+The basic render allows for formatting table with whitespace without any border:
+
+```ruby
+renderer = TTY::Table::Renderer::Basic.new(table)
+```
+
+```ruby
+renderer.render
+# =>
+  header1 header2
+  a1      a2
+  b1      b2
+```
+
+This is the same as calling `render` directly on table:
+
+```ruby
+table.render
+```
+
+#### 3.2.2 ASCII Renderer
+
+The ascii renderer allows for formatting table with ASCII type border.
+
+Create an instance of ASCII renderer:
+
+```ruby
+renderer = TTY::Table::Renderer::ASCII.new(table)
+```
+
+and then call `render` to get the formatted data:
+
+```ruby
+renderer.render
+# =>
+  +-------+-------+
+  |header1|header2|
+  +-------+-------+
+  |a1     |a2     |
+  |b1     |b2     |
+  +-------+-------+
+```
+
+This is the same as calling `render` directly on table instance with `:ascii` as the first argument:
+
+```ruby
+table.render(:ascii)
+```
+
+#### 3.2.3 Unicode Renderer
+
+The uniocde renderer allows for formatting table with Unicode type border.
+
+Create an instance of Unicode renderer:
+
+```ruby
+renderer = TTY::Table::Renderer::Unicode.new(table)
+```
+
+and then call `render` to get the formatted data:
+
+```ruby
+renderer.render
+# =>
+  ┌───────┬───────┐
+  │header1│header2│
+  ├───────┼───────┤
+  │a1     │a2     │
+  │b1     │b2     │
+  └───────┴───────┘
+```
+
+This is the same as calling `render` directly on table instance with `:unicode` as the first argument:
+
+```ruby
+table.render(:unicode)
+```
+
+### 3.3 Options
+
+Rendering of **TTY-Table** includes numerous customization options:
+
+```ruby
+alignments     # array of cell alignments out of :left, :center and :right,
+               # default :left
+border         # hash of border options - :characters, :style and :separator
+border_class   # a type of border to use such as TTY::Table::Border::Null,
+               # TTY::Table::Border::ASCII, TTY::Table::Border::Unicode
+column_widths  # array of maximum column widths
 filter         # a proc object that is applied to every field in a row
-indent         # indentation applied to rendered table
+indent         # indentation applied to rendered table, by default 0
 multiline      # if true will wrap text at new line or column width,
                # when false will escape special characters
-orientation    # either :horizontal or :vertical
-padding        # array of integers to set table fields padding
-renderer       # enforce display type out of :basic, :color, :unicode, :ascii
-resize         # if true will expand/shrink table column sizes to match the width,
-               # otherwise if false rotate table vertically
-width          # constrain the table total width, otherwise dynamically
-               # calculated from content and terminal size
+padding        # array of integers to set table fields padding,
+               # by default [0,0,0,0]
+resize         # if true will expand/shrink table column sizes to match
+               # the terminal width, otherwise if false will rotate
+               # table vertically. By default set to false
+width          # constrain the table total width, by default dynamically
+               # calculated based on content and terminal size
 ```
+
+### 3.4 Alignment
+
+By default all columns are `:left` aligned.
+
+You can align each column by passing `alignments` option to table renderer:
+
+```ruby
+table.render :ascii, alignments: [:center, :right]
+# =>
+  +-------+-------+
+  |header1|header2|
+  +-------+-------+
+  |  a1   |     a2|
+  |  b1   |     b2|
+  +-------+-------+
+```
+
+If you require a more granular alignment you can align individual fields in a row by passing `:alignment` option like so:
+
+```ruby
+table = TTY::Table.new header: ['header1', 'header2']
+table << [{value: 'a1', alignment: :right}, 'a2']
+table << ['b1', {value: 'b2', alignment: :center}]
+```
+
+and then simply render:
+
+```ruby
+table.render(:ascii)
+# =>
+  +-------+-------+
+  |header1|header2|
+  +-------+-------+
+  |     a1|a2     |
+  |b1     |  b2   |
+  +-------+-------+
+```
+
+
 
 ### 2.3 Multiline
 
@@ -319,31 +493,6 @@ table.render do |renderer|
 end
 ```
 
-### 2.5 Alignment
-
-All columns are left aligned by default. You can enforce per column alignment by passing `column_aligns` option like so
-
-```ruby
-rows = [['a1', 'a2'], ['b1', 'b2']
-table = TTY::Table.new rows: rows
-table.render column_aligns: [:center, :right]
-```
-
-To align a single column do
-
-```ruby
-table.align_column(1, :right)
-```
-
-If you require a more granular alignment you can align individual fields in a row by passing `align` option
-
-```ruby
-table = TTY::Table.new do |t|
-  t << ['a1', 'a2', 'a3']
-  t << ['b1', {:value => 'b2', :align => :right}, 'b3']
-  t << ['c1', 'c2', {:value => 'c3', :align => :center}]
-end
-```
 
 #### 2.6 Padding
 
