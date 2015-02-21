@@ -9,14 +9,6 @@ module TTY
       class Basic
         include TTY::Table::Validatable
 
-        # Table to be rendered
-        #
-        # @return [TTY::Table]
-        #
-        # @api public
-        attr_reader :table
-        # private :table
-
         # Table border to be rendered
         #
         # @return [TTY::Table::Border]
@@ -172,7 +164,7 @@ module TTY
         #
         # @api private
         def columns_constraints
-          TTY::Table::Columns.new(self)
+          TTY::Table::Columns.new(table, self)
         end
 
         # Sets the output padding,
@@ -206,6 +198,13 @@ module TTY
         end
 
         private
+
+        # Table to be rendered
+        #
+        # @return [TTY::Table]
+        #
+        # @api public
+        attr_reader :table
 
         # The table operations applied to rows
         #

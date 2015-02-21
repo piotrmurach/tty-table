@@ -6,16 +6,17 @@ RSpec.describe TTY::Table::Columns, '#enforce' do
   let(:header) { ['h1', 'h2', 'h3', 'h4'] }
   let(:rows)   { [['a1', 'a2', 'a3', 'a4'], ['b1', 'b2', 'b3', 'b4']] }
   let(:table)  { TTY::Table.new(header, rows) }
-  let(:object) { described_class.new(renderer) }
 
-  subject { object.enforce }
+  subject(:columns) { described_class.new(table, renderer) }
 
   context 'with width contraint' do
     let(:renderer) { TTY::Table::Renderer::Basic.new(table, options) }
     let(:options) { { width: 5 }}
 
     it 'raises error when table width is too small' do
-      expect { subject }.to raise_error(TTY::Table::ResizeError)
+      expect {
+        columns.enforce
+      }.to raise_error(TTY::Table::ResizeError)
     end
   end
 
@@ -24,8 +25,9 @@ RSpec.describe TTY::Table::Columns, '#enforce' do
     let(:options) { { width: 11, resize: true }}
 
     it 'raises error when table width is too small' do
-      expect(object).to receive(:expand)
-      subject
+      allow(columns).to receive(:expand)
+      columns.enforce
+      expect(columns).to have_received(:expand)
     end
   end
 
@@ -36,8 +38,9 @@ RSpec.describe TTY::Table::Columns, '#enforce' do
       let(:options) { { width: 8, resize: true } }
 
       it 'calls shrink' do
-        expect(object).to receive(:shrink)
-        subject
+        allow(columns).to receive(:shrink)
+        columns.enforce
+        expect(columns).to have_received(:shrink)
       end
     end
 
@@ -47,10 +50,10 @@ RSpec.describe TTY::Table::Columns, '#enforce' do
       it 'changes table orientation to vertical' do
         allow(Kernel).to receive(:warn)
         expect(renderer.column_widths).to eql([2,2,2,2])
-        expect(renderer.table.orientation.name).to eql(:horizontal)
-        subject
+        expect(table.orientation.name).to eql(:horizontal)
+        columns.enforce
         expect(renderer.column_widths).to eq([2,2])
-        expect(renderer.table.orientation.name).to eql(:vertical)
+        expect(table.orientation.name).to eql(:vertical)
       end
     end
   end

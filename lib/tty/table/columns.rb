@@ -8,23 +8,20 @@ module TTY
     #
     # @api private
     class Columns
-
-      attr_reader :table
-
-      attr_reader :renderer
-
       MIN_WIDTH = 1
 
       BORDER_WIDTH = 1
 
       # Initialize a Columns
       #
+      # @param [TTY::Table] table
+      #
       # @param [TTY::Table::Renderer] renderer
       #
       # @api public
-      def initialize(renderer)
+      def initialize(table, renderer)
+        @table    = table
         @renderer = renderer
-        @table    = renderer.table
       end
 
       # Estimate outside border size
@@ -87,6 +84,12 @@ module TTY
           end
         end
       end
+
+      private
+
+      attr_reader :table
+
+      attr_reader :renderer
 
       # Adjust column widths to account for padding whitespace
       #

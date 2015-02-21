@@ -7,17 +7,17 @@ RSpec.describe TTY::Table::Columns, 'column widths' do
   let(:rows)   { [['a1', 'a2', 'a3', 'a4'], ['b1', 'b2', 'b3', 'b4']] }
   let(:table)  { TTY::Table.new(header, rows) }
 
-  subject { described_class.new(renderer) }
+  subject(:columns) { described_class.new(table, renderer) }
 
   context 'with basic renderer' do
     let(:renderer) { TTY::Table::Renderer::Basic.new(table) }
 
     it 'calculates columns natural width' do
-      expect(subject.natural_width).to eq(11)
+      expect(columns.natural_width).to eq(11)
     end
 
     it 'calculates miminimum columns width' do
-      expect(subject.minimum_width).to eq(7)
+      expect(columns.minimum_width).to eq(7)
     end
   end
 
@@ -25,11 +25,11 @@ RSpec.describe TTY::Table::Columns, 'column widths' do
     let(:renderer) { TTY::Table::Renderer::ASCII.new(table) }
 
     it 'calculates columns natural width' do
-      expect(subject.natural_width).to eq(13)
+      expect(columns.natural_width).to eq(13)
     end
 
     it 'calculates miminimum columns width' do
-      expect(subject.minimum_width).to eq(9)
+      expect(columns.minimum_width).to eq(9)
     end
   end
 end
