@@ -108,7 +108,7 @@ module TTY
           @operations.add(:escape, Operation::Escape.new)
           @border        = TTY::Table::BorderOptions.from(options.delete(:border))
           @column_widths = options.fetch(:column_widths, nil)
-          @column_alignments = Array(options.delete(:column_alignments)).map(&:to_sym)
+          @column_alignments = TTY::Table::AlignmentSet.new(options[:column_alignments])
           @filter        = options.fetch(:filter) { proc { |val, _| val } }
           @width         = options.fetch(:width) { TTY::Screen.width }
           @border_class  = options.fetch(:border_class) { Border::Null }
@@ -150,7 +150,7 @@ module TTY
         #
         # @api private
         def add_operations
-          operations.add(:alignment,  Operation::AlignmentSet.new(column_alignments,
+          operations.add(:alignment,  Operation::Alignment.new(column_alignments,
                                                                   column_widths))
           operations.add(:filter,     Operation::Filter.new(filter))
           operations.add(:truncation, Operation::Truncation.new(column_widths))
