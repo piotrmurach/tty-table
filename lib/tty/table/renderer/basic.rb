@@ -36,7 +36,7 @@ module TTY
         # @return [Array]
         #
         # @api private
-        attr_accessor :column_aligns
+        attr_accessor :column_alignments
 
         # The table operations applied to rows
         #
@@ -89,7 +89,7 @@ module TTY
         # Initialize a Renderer
         #
         # @param [Hash] options
-        # @option options [String] :column_aligns
+        # @option options [String] :column_alignments
         #   used to format table individual column alignment
         # @option options [String] :column_widths
         #   used to format table individula column width
@@ -108,7 +108,7 @@ module TTY
           @operations.add(:escape, Operation::Escape.new)
           @border        = TTY::Table::BorderOptions.from(options.delete(:border))
           @column_widths = options.fetch(:column_widths, nil)
-          @column_aligns = Array(options.delete(:column_aligns)).map(&:to_sym)
+          @column_alignments = Array(options.delete(:column_alignments)).map(&:to_sym)
           @filter        = options.fetch(:filter) { proc { |val, _| val } }
           @width         = options.fetch(:width) { TTY::Screen.width }
           @border_class  = options.fetch(:border_class) { Border::Null }
@@ -150,7 +150,7 @@ module TTY
         #
         # @api private
         def add_operations
-          operations.add(:alignment,  Operation::AlignmentSet.new(column_aligns,
+          operations.add(:alignment,  Operation::AlignmentSet.new(column_alignments,
                                                                   column_widths))
           operations.add(:filter,     Operation::Filter.new(filter))
           operations.add(:truncation, Operation::Truncation.new(column_widths))

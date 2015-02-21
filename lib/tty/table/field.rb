@@ -49,7 +49,7 @@ module TTY
       # The field alignment
       #
       # @api public
-      attr_reader :align
+      attr_reader :alignment
 
       # Initialize a Field
       #
@@ -62,16 +62,16 @@ module TTY
       #   field.value  # => a1
       #
       # @example
-      #   field = TTY::Table::Field.new value: 'a1', align: :center
-      #   field.value  # => a1
-      #   field.align  # => :center
+      #   field = TTY::Table::Field.new value: 'a1', alignment: :center
+      #   field.value     # => a1
+      #   field.alignment # => :center
       #
       # @api private
       def initialize(value)
         options  = extract_options(value)
         @content = @value.to_s
         @width   = options[:width]
-        @align   = options.fetch(:align) { nil }
+        @alignment = options.fetch(:alignment) { nil }
         @colspan = options.fetch(:colspan) { 1 }
         @rowspan = options.fetch(:rowspan) { 1 }
       end

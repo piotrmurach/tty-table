@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
   let(:header)  { ['h1', 'h2', 'h3'] }
   let(:rows)    { [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3']] }
-  let(:options) { { column_aligns: column_aligns } }
+  let(:options) { { column_alignments: column_alignments } }
   let(:table)   { TTY::Table.new(header, rows) }
 
   subject(:renderer) { described_class.new table, options }
@@ -13,7 +13,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
   context 'with default' do
     let(:header)        { ['h1', 'h2'] }
     let(:rows)          { [['aaaaa', 'a'], ['b', 'bbbbb']] }
-    let(:column_aligns) { nil }
+    let(:column_alignments) { nil }
 
     it 'aligns left by default' do
       expect(renderer.render).to eql <<-EOS.normalize
@@ -26,7 +26,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
 
   context 'with different headers' do
     let(:header)        { ['header1', 'head2', 'h3'] }
-    let(:column_aligns) { [:left, :center, :right] }
+    let(:column_alignments) { [:left, :center, :right] }
 
     it 'aligns headers' do
       expect(renderer.render).to eql <<-EOS.normalize
@@ -40,7 +40,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
   context 'with different aligns' do
     let(:header)         { nil }
     let(:rows)           { [['aaaaa', 'a'], ['b', 'bbbbb']] }
-    let(:column_aligns)  { [:left, :right] }
+    let(:column_alignments)  { [:left, :right] }
 
     it 'aligns table rows' do
       expect(renderer.render.to_s).to eql <<-EOS.normalize
@@ -52,13 +52,13 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
 
   context 'with individual field aligns' do
     let(:header)        { ['header1', 'header2', 'header3'] }
-    let(:column_aligns) { [:left, :center, :right] }
-    let(:options)       { {column_aligns: column_aligns} }
+    let(:column_alignments) { [:left, :center, :right] }
+    let(:options)       { {column_alignments: column_alignments} }
     let(:table) {
       TTY::Table.new header: header do |t|
         t << ['a1', 'a2', 'a3']
-        t << ['b1', {value: 'b2', align: :right}, 'b3']
-        t << ['c1', 'c2', {value: 'c3', align: :center}]
+        t << ['b1', {value: 'b2', alignment: :right}, 'b3']
+        t << ['c1', 'c2', {value: 'c3', alignment: :center}]
       end
     }
 
@@ -74,7 +74,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
 
   context 'with aligned header' do
     let(:rows)    { [['aaaaa1', 'a2', 'aaa3'], ['b1', 'bbbb2', 'bb3']] }
-    let(:header)  {['h1', {:value => 'h2', :align => :right}, {:value => 'h3', :align => :center}] }
+    let(:header)  {['h1', {value: 'h2', alignment: :right}, {value: 'h3', alignment: :center}] }
     let(:options) { { renderer: :basic } }
 
     it "aligns headres" do

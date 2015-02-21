@@ -11,7 +11,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'options' do
   let(:options) {
     {
       :column_widths => widths,
-      :column_aligns  => aligns,
+      :column_alignments  => aligns,
       :renderer => :basic
     }
   }
@@ -22,9 +22,9 @@ RSpec.describe TTY::Table::Renderer::Basic, 'options' do
 
   it { expect(renderer.column_widths).to eql([2,2]) }
 
-  it { expect(renderer.column_aligns).to eql(aligns) }
+  it { expect(renderer.column_alignments).to eql(aligns) }
 
-  it { expect(renderer.column_aligns.to_a).to be_empty }
+  it { expect(renderer.column_alignments.to_a).to be_empty }
 
   context '#column_widths' do
     let(:widths) { [10, 10] }
@@ -42,11 +42,11 @@ RSpec.describe TTY::Table::Renderer::Basic, 'options' do
     }
   end
 
-  context '#column_aligns' do
+  context '#column_alignments' do
     let(:aligns) { [:center, :center] }
 
     it 'unwraps original array' do
-      expect(renderer.column_aligns.to_a).to eq(aligns)
+      expect(renderer.column_alignments.to_a).to eq(aligns)
     end
   end
 end

@@ -180,7 +180,7 @@ module TTY
       # @api private
       def row_height_line(row, line_index, line)
         line.left + row.fields.each_with_index.map do |field, index|
-          direction     = field.align || :left
+          direction     = field.alignment || :left
           field_content = field.lines[line_index]
           field_content = EMPTY_CHAR if field_content.to_s.empty?
           Verse.align(field_content, widths[index], direction)
