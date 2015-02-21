@@ -51,6 +51,15 @@ RSpec.describe TTY::Table, 'alignment' do
     ].join("\n"))
   end
 
+  it "allows to align all columns at once" do
+    table = TTY::Table.new ['header1', 'header2'], [['a1','a2'],['b1','b2']]
+    expect(table.render(alignment: [:center])).to eql([
+      "header1 header2",
+      "  a1      a2   ",
+      "  b1      b2   "
+    ].join("\n"))
+  end
+
   xit "aligns specific column" do
     table = TTY::Table.new ['header1', 'header2'], [['a1','a2'],['b1','b2']]
     expect(table.render(column_alignment: [1, :center])).to eql([

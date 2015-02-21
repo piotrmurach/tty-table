@@ -78,6 +78,8 @@ module TTY
         # @param [Hash] options
         # @option options [String] :alignments
         #   used to format table individual column alignment
+        # @option options [Hash[Symbol]] :border
+        #   the border options
         # @option options [String] :column_widths
         #   used to format table individula column width
         # @option options [Integer] :indent
@@ -95,7 +97,8 @@ module TTY
           @operations.add(:escape, Operation::Escape.new)
           @border        = TTY::Table::BorderOptions.from(options.delete(:border))
           @column_widths = options.fetch(:column_widths, nil)
-          @alignments = TTY::Table::AlignmentSet.new(options[:alignments])
+          alignment      = Array(options[:alignment]) * table.columns_size
+          @alignments    = TTY::Table::AlignmentSet.new(options[:alignments] || alignment)
           @filter        = options.fetch(:filter) { proc { |val, _| val } }
           @width         = options.fetch(:width) { TTY::Screen.width }
           @border_class  = options.fetch(:border_class) { Border::Null }
