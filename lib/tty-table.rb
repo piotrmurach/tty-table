@@ -23,11 +23,10 @@ require 'tty/table/border/ascii'
 require 'tty/table/border/null'
 require 'tty/table/border/row_line'
 
-require 'tty/table/renderer'
-require 'tty/table/renderer/ascii'
 require 'tty/table/renderer/basic'
-require 'tty/table/renderer/color'
+require 'tty/table/renderer/ascii'
 require 'tty/table/renderer/unicode'
+require 'tty/table/renderer'
 
 require 'tty/table/column_set'
 require 'tty/table/columns'

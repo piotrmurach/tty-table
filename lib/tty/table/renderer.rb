@@ -8,22 +8,16 @@ module TTY
     #
     # @api private
     class Renderer
-      autoload :ASCII,   'tty/table/renderer/ascii'
-      autoload :Basic,   'tty/table/renderer/basic'
-      autoload :Color,   'tty/table/renderer/color'
-      autoload :Unicode, 'tty/table/renderer/unicode'
-
       RENDERER_MAPPER = {
         ascii:   TTY::Table::Renderer::ASCII,
         basic:   TTY::Table::Renderer::Basic,
-        color:   TTY::Table::Renderer::Color,
         unicode: TTY::Table::Renderer::Unicode
       }
 
       # Select renderer class based on string name.
       #
       # The possible values for renderer are
-      # [:basic, :ascii, :unicode, :color]
+      #   [:basic, :ascii, :unicode]
       #
       # @param [Symbol] renderer
       #   the renderer used for displaying table

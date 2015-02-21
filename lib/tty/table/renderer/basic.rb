@@ -1,7 +1,5 @@
 # encoding: utf-8
 
-require 'tty/table/validatable'
-
 module TTY
   class Table
     class Renderer
