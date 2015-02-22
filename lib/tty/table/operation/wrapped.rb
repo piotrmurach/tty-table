@@ -9,8 +9,6 @@ module TTY
       class Wrapped
         attr_reader :widths
 
-        attr_reader :padding
-
         # Initialize a Wrapped
         #
         # @api public
