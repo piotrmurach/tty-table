@@ -4,21 +4,16 @@ module TTY
   class Table
     # A class responsible for indenting table representation
     class Indentation
-
-      attr_reader :renderer
+      # The amount of indentation
+      #
+      # @api public
+      attr_accessor :indentation
 
       # Initialize an Indentation
       #
       # @api public
-      def initialize(renderer)
-        @renderer = renderer
-      end
-
-      # Create indentation
-      #
-      # @api public
-      def indentation
-        ' ' * renderer.indent
+      def initialize(indentation)
+        @indentation = indentation
       end
 
       # Return a table part with indentation inserted
@@ -27,7 +22,7 @@ module TTY
       #   the rendered table part
       #
       # @api public
-      def insert_indent(part)
+      def indent(part)
         if part.respond_to?(:to_a)
           part.map { |line| insert_indentation(line) }
         else
@@ -45,7 +40,7 @@ module TTY
       # @api public
       def insert_indentation(line)
         line = line.is_a?(Array) ? line[0] : line
-        line.insert(0, indentation) if line
+        line.insert(0, ' ' * indentation) if line
       end
     end # Indentation
   end # Table
