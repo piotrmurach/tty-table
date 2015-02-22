@@ -48,7 +48,7 @@ module TTY
         # @return [Integer]
         #
         # @api public
-        attr_accessor :indent
+        attr_reader :indent
 
         # The table totabl width
         #
@@ -147,20 +147,14 @@ module TTY
           operations.add(:padding,    Operation::Padding.new(padding, multiline))
         end
 
-        # Initializes indentation
+        # Change the value of indentation
         #
-        # @return [TTY::Table::Indentation]
-        #
-        # @api private
-        def indentation
-          @indentation ||= TTY::Table::Indentation.new(self)
-        end
-
-        # Delegate indentation insertion
+        # @param [Integer]
+        #   the indentation value
         #
         # @api public
-        def insert_indent(line)
-          indentation.insert_indent(line)
+        def indent=(value)
+          @indentation.indentation = value
         end
 
         # Return column contraints
@@ -180,9 +174,14 @@ module TTY
           @padding = TTY::Table::Padder.parse(value)
         end
 
-        # Renders table
+        # Renders table as string with border
         #
-        # @return [String] string representation of table
+        # @example
+        #   renderer = TTY::Table::Renderer::Basic.new(table)
+        #   renderer.render
+        #
+        # @return [String]
+        #   the string representation of table
         #
         # @api public
         def render
@@ -213,6 +212,22 @@ module TTY
         #
         # @api public
         attr_reader :operations
+
+        # Initializes indentation
+        #
+        # @return [TTY::Table::Indentation]
+        #
+        # @api private
+        def indentation
+          @indentation ||= TTY::Table::Indentation.new(indent)
+        end
+
+        # Delegate indentation insertion
+        #
+        # @api public
+        def insert_indent(line)
+          indentation.indent(line)
+        end
 
         # Render table data
         #
