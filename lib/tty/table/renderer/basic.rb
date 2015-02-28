@@ -144,7 +144,7 @@ module TTY
           operations.add(:filter,     Operation::Filter.new(filter))
           operations.add(:truncation, Operation::Truncation.new(column_widths))
           operations.add(:wrapping,   Operation::Wrapped.new(column_widths))
-          operations.add(:padding,    Operation::Padding.new(padding, multiline))
+          operations.add(:padding,    Operation::Padding.new(padding, column_widths))
         end
 
         # Change the value of indentation
@@ -192,7 +192,7 @@ module TTY
           add_operations
           ops = [:alignment]
           multiline ? ops << :wrapping : ops << :truncation
-          ops << :padding unless padding.empty?
+          ops << :padding
           ops << :filter
           operations.run_operations(*ops)
 
@@ -234,7 +234,7 @@ module TTY
         # @api private
         def render_data
           first_row        = table.first
-          data_border      = border_class.new(column_widths, border)
+          data_border      = border_class.new(column_widths, padding, border)
           header           = render_header(first_row, data_border)
           rows_with_border = render_rows(data_border)
           bottom_line      = data_border.bottom_line
