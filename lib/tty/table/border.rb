@@ -22,6 +22,8 @@ module TTY
       # The table custom border characters
       attr_reader :border
 
+      attr_reader :padding
+
       # The table
 
       class << self
@@ -41,11 +43,12 @@ module TTY
       # @return [Object]
       #
       # @api private
-      def initialize(column_widths, options = nil)
+      def initialize(column_widths, padding, options = nil)
         if self.class == Border
           fail NotImplementedError, "#{self} is an abstract class"
         else
           @widths = column_widths
+          @padding = Padder.parse(padding)
           @border = TTY::Table::BorderOptions.from options
           @color  = Pastel.new
         end
@@ -144,8 +147,6 @@ module TTY
         result = row_heights(row, line)
         result.empty? ? EMPTY_CHAR : result
       end
-
-      protected
 
       # Separate multiline string into individual rows with border.
       #

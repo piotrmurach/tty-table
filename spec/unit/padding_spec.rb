@@ -71,8 +71,8 @@ RSpec.describe TTY::Table, 'padding' do
   end
 
   context 'with multi line text' do
-    let(:header) { ['head1', 'head2'] }
-    let(:rows)   { [["Multi\nLine\nContent", "Text\nthat\nwraps",],
+    let(:header) { ['h1', 'head2'] }
+    let(:rows)   { [["Multi\nLine", "Text\nthat\nwraps"],
                     ["Some\nother\ntext", 'Simple']] }
 
     context 'when wrapped' do
@@ -81,22 +81,22 @@ RSpec.describe TTY::Table, 'padding' do
           renderer.multiline = true
           renderer.padding= [1,2,1,2]
         }).to eq <<-EOS.normalize
-          +-----------+----------+
-          |           |          |
-          |  head1    |  head2   |
-          |           |          |
-          +-----------+----------+
-          |           |          |
-          |  Multi    |  Text    |
-          |  Line     |  that    |
-          |  Content  |  wraps   |
-          |           |          |
-          |           |          |
-          |  Some     |  Simple  |
-          |  other    |          |
-          |  text     |          |
-          |           |          |
-          +-----------+----------+
+          +---------+----------+
+          |         |          |
+          |  h1     |  head2   |
+          |         |          |
+          +---------+----------+
+          |         |          |
+          |  Multi  |  Text    |
+          |  Line   |  that    |
+          |         |  wraps   |
+          |         |          |
+          |         |          |
+          |  Some   |  Simple  |
+          |  other  |          |
+          |  text   |          |
+          |         |          |
+          +---------+----------+
         EOS
       end
     end
@@ -107,12 +107,12 @@ RSpec.describe TTY::Table, 'padding' do
           renderer.multiline = false
           renderer.padding= [0,2,0,2]
         }).to eq <<-EOS.normalize
-          +------------------------+---------------------+
-          |  head1                 |  head2              |
-          +------------------------+---------------------+
-          |  Multi\\nLine\\nContent  |  Text\\nthat\\nwraps  |
-          |  Some\\nother\\ntext     |  Simple             |
-          +------------------------+---------------------+
+          +---------------------+---------------------+
+          |  h1                 |  head2              |
+          +---------------------+---------------------+
+          |  Multi\\nLine        |  Text\\nthat\\nwraps  |
+          |  Some\\nother\\ntext  |  Simple             |
+          +---------------------+---------------------+
         EOS
       end
     end
