@@ -48,7 +48,7 @@ module TTY
           fail NotImplementedError, "#{self} is an abstract class"
         else
           @widths = column_widths
-          @padding = Padder.parse(padding)
+          @padding = Verse::Padder.parse(padding)
           @border = TTY::Table::BorderOptions.from options
           @color  = Pastel.new
         end

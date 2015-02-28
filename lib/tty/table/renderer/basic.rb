@@ -104,7 +104,7 @@ module TTY
           @border_class  = options.fetch(:border_class) { Border::Null }
           @indent        = options.fetch(:indent) { 0 }
           @resize        = options.fetch(:resize) { false }
-          @padding       = TTY::Table::Padder.parse(options[:padding])
+          @padding       = Verse::Padder.parse(options[:padding])
         end
 
         # Parses supplied column widths, if not present
@@ -171,7 +171,7 @@ module TTY
         #
         # @api public
         def padding=(value)
-          @padding = TTY::Table::Padder.parse(value)
+          @padding = Verse::Padder.parse(value)
         end
 
         # Renders table as string with border
