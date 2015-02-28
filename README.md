@@ -18,7 +18,7 @@
 
 * Create table once and render using custom view renderers [see](#3-rendering)
 * Supports multibyte character encodings
-* Table behaves like an array with familiar API
+* Table behaves like an array with familiar API [see](#2-interface)
 
 ## Installation
 
@@ -54,9 +54,9 @@ Or install it yourself as:
   * [3.4 Alignment](#34-alignment)
   * [3.5 Border](#35-border)
     * [3.5.1 Parts](#351-parts)
-    * [3.5.2 Custom](#351-custom)
-    * [3.5.3 Separator](#35-border)
-    * [3.5.4 Style](#35-border)
+    * [3.5.2 Custom](#352-custom)
+    * [3.5.3 Separator](#353-separator)
+    * [3.5.4 Style](#354-style)
   * [3.6 Filter](#36-filter)
   * [3.7 Multiline](#37-multiline)
   * [3.8 Padding](#38-padding)
@@ -409,6 +409,47 @@ table.render :unicode
   └───────┴───────┘
 ```
 
+#### 3.5.1 Parts
+
+The following are available border parts:
+
+| Part          | ASCII | Unicode |
+| ------------- |:-----:|:-------:|
+|  top          | -     | ─       |
+|  top_mid      | +     | ┬       |
+|  top_left     | +     | ┌       |
+|  top_right    | +     | ┐       |
+|  bottom       | -     | ─       |
+|  bottom_mid   | +     | ┴       |
+|  bottom_left  | +     | └       |
+|  bottom_right | +     | ┘       |
+|  mid          | -     | ─       |
+|  mid_mid      | +     | ┼       |
+|  mid_left     | +     | ├       |
+|  mid_right    | +     | ┤       |
+|  left         | |     | │       |
+|  center       | |     | │       |
+|  right        | |     | │       |
+
+If you want to introduce slight modifications to the predefined border types, you can use table `border` helper like so:
+
+```ruby
+table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
+table.render do |renderer|
+  renderer.border do
+    mid          '='
+    mid_mid      ' '
+  end
+end
+# =>
+  header1 header2
+  ======= =======
+  a1      a2
+  b1      b2
+```
+
+#### 3.5.2 Custom
+
 You can also create your own custom border by subclassing `TTY::Table::Border` and implementing the `def_border` method using internal DSL methods like so:
 
 ```ruby
@@ -436,22 +477,7 @@ table.render_with MyBorder
   *       *       *
 ```
 
-Finally, if you want to introduce slight modifications to the predefined border types, you can use table `border` helper like so
-
-```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
-table.render do |renderer|
-  renderer.border do
-    mid          '='
-    mid_mid      ' '
-  end
-end
-# =>
-  header1 header2
-  ======= =======
-  a1      a2
-  b1      b2
-```
+#### 3.5.3 Separator
 
 In addition to specifying border characters you can force table to render separator line on each row like:
 
@@ -469,6 +495,8 @@ end
   |b1     |b2     |
   +-------+-------+
 ```
+
+#### 3.5.4
 
 Also to change the display color of your border do:
 
