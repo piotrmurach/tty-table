@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'necromancer', '~> 0.3'
   spec.add_dependency 'pastel',      '~> 0.4'
   spec.add_dependency 'tty-screen',  '~> 0.1'
-  spec.add_dependency 'verse',       '~> 0.2.1'
+  spec.add_dependency 'verse',       '~> 0.3'
   spec.add_dependency 'unicode_utils','~> 1.4.0'
 
   spec.add_development_dependency 'bundler', '~> 1.5'
