@@ -42,6 +42,16 @@ module TTY
         BORDER_WIDTH * (table.columns_size - 1) + outside_border_size
       end
 
+      # Measure total padding size for a table
+      #
+      # @return [Integer]
+      #
+      # @api public
+      def padding_size
+        padding = renderer.padding
+        (padding.left + padding.right) * (table.columns_size - 1)
+      end
+
       # Estimate minimum table width to be able to display content
       #
       # @return [Integer]
@@ -57,7 +67,7 @@ module TTY
       #
       # @api public
       def natural_width
-        renderer.column_widths.inject(0, &:+) + border_size
+        renderer.column_widths.inject(0, &:+) + border_size + padding_size
       end
 
       # Return the constrained column widths.
@@ -68,10 +78,6 @@ module TTY
       # @api public
       def enforce
         assert_minimum_width
-
-        unless renderer.padding.empty?
-          renderer.column_widths = adjust_padding
-        end
 
         if natural_width <= renderer.width
           renderer.column_widths = expand if renderer.resize
@@ -90,18 +96,6 @@ module TTY
       attr_reader :table
 
       attr_reader :renderer
-
-      # Adjust column widths to account for padding whitespace
-      #
-      # @api private
-      def adjust_padding
-        padding     =  renderer.padding
-        column_size = table.columns_size
-
-        (0...column_size).reduce([]) do |lengths, col|
-          lengths + [padding.left + renderer.column_widths[col] + padding.right]
-        end
-      end
 
       # Rotate table to vertical orientation and print information to stdout
       #
@@ -159,6 +153,7 @@ module TTY
       # @api private
       def distribute_extra_width(widths)
         column_size     = table.columns_size
+        # TODO - add padding size to fully check extra width
         extra_width     = renderer.width - (widths.reduce(:+) + border_size)
         per_field_width = extra_width / column_size
         remaining_width = extra_width % column_size
