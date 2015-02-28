@@ -182,8 +182,7 @@ module TTY
       def row_height_line(row, line_index, line)
         line.left + row.fields.each_with_index.map do |field, index|
           direction     = field.alignment || :left
-          field_content = field.lines[line_index]
-          field_content = EMPTY_CHAR if field_content.to_s.empty?
+          field_content = field.lines[line_index] || SPACE_CHAR * field.length
           Verse.align(field_content, widths[index], direction)
         end.join(line.center) + line.right
       end

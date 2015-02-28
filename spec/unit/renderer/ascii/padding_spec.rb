@@ -45,16 +45,43 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'padding' do
     let(:options) { {padding: [1,1,1,1], multiline: true} }
 
     it 'pads each field' do
-      expect(renderer.render).to eql <<-EOS.chomp
-+-------+---------+------+-----+---------+-------+
-|       |         |      |     |         |       |
-| Field | Type    | Null | Key | Default | Extra |
-|       |         |      |     |         |       |
-+-------+---------+------+-----+---------+-------+
-|       |         |      |     |         |       |
-| id    | int(11) | YES  | nil | NULL    |       |
-|       |         |      |     |         |       |
-+-------+---------+------+-----+---------+-------+
+      expect(renderer.render).to eql <<-EOS.normalize
+        +-------+---------+------+-----+---------+-------+
+        |       |         |      |     |         |       |
+        | Field | Type    | Null | Key | Default | Extra |
+        |       |         |      |     |         |       |
+        +-------+---------+------+-----+---------+-------+
+        |       |         |      |     |         |       |
+        | id    | int(11) | YES  | nil | NULL    |       |
+        |       |         |      |     |         |       |
+        +-------+---------+------+-----+---------+-------+
+      EOS
+    end
+  end
+
+  context "with multiline content padding" do
+    it "pads around fields" do
+      padding = [1,2,1,2]
+      table = TTY::Table.new header: ['header1', 'header2']
+      table << ["a1\na1\na1",'a2']
+      table << ["b1","b2\nb2"]
+      renderer = described_class.new(table, padding: padding, multiline: true)
+      expect(renderer.render).to eql <<-EOS.normalize
+        +-----------+-----------+
+        |           |           |
+        |  header1  |  header2  |
+        |           |           |
+        +-----------+-----------+
+        |           |           |
+        |  a1       |  a2       |
+        |  a1       |           |
+        |  a1       |           |
+        |           |           |
+        |           |           |
+        |  b1       |  b2       |
+        |           |  b2       |
+        |           |           |
+        +-----------+-----------+
       EOS
     end
   end
