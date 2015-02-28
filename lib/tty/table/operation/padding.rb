@@ -1,12 +1,12 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
 
 module TTY
   class Table
     module Operation
-
       # A class responsible for padding field with whitespace
+      #
+      # Used internally by {Table::Renderer}
       class Padding
-
         attr_reader :padding_top
 
         attr_reader :padding_right
@@ -17,20 +17,18 @@ module TTY
 
         attr_reader :padding_width
 
-        attr_reader :multiline
+        attr_reader :widths
 
         # Initialize a Padding operation
         #
-        # @param [TTY::Table::Padder]
+        # @param [TTY::Table::Padder] padding
+        #
+        # @param [Array[Integer]] widths
         #
         # @api public
-        def initialize(padding, multiline)
-          @padding_top    = "\n" * padding.top
-          @padding_right  = ' '  * padding.right
-          @padding_bottom = "\n" * padding.bottom
-          @padding_left   = ' '  * padding.left
-          @padding_width  = padding.left + padding.right
-          @multiline      = multiline
+        def initialize(padding, widths)
+          @padding = padding
+          @widths  = widths
         end
 
         # Apply padding to a field
@@ -48,9 +46,16 @@ module TTY
         #
         # @api public
         def call(field, row, col)
-          text = field.content
-          text = multiline ?  pad_multi_line(text) : pad_single_line(text)
-          text.insert(0, padding_top).insert(-1, padding_bottom)
+          column_width = widths[col]
+          elements = []
+          if @padding.top > 0
+            elements << (' ' * column_width + "\n") * @padding.top
+          end
+          elements << field.content
+          if @padding.bottom > 0
+            elements << (' ' * column_width + "\n") * @padding.bottom
+          end
+          elements.map { |el| pad_multi_line(el) }.join("\n")
         end
 
         # Apply padding to multi line text
@@ -61,18 +66,7 @@ module TTY
         #
         # @api private
         def pad_multi_line(text)
-          text.split("\n", -1).map { |part| pad_around(part) }.join("\n")
-        end
-
-        # Apply padding to single line text
-        #
-        # @param [String] text
-        #
-        # @return [String]
-        #
-        # @api private
-        def pad_single_line(text)
-          pad_around(text.strip)
+          text.split("\n").map { |part| pad_around(part) }
         end
 
         # Apply padding to left and right side of string
@@ -83,7 +77,7 @@ module TTY
         #
         # @api private
         def pad_around(text)
-          text.insert(0, padding_left).insert(-1, padding_right)
+          text.insert(0, ' ' * @padding.left).insert(-1, ' ' * @padding.right)
         end
       end # Padding
     end # Operation
