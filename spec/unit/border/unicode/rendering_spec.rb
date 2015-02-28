@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe TTY::Table::Border::Unicode, '#rendering' do
 
-  subject { described_class.new(column_widths) }
+  subject { described_class.new(column_widths, [0,0,0,0]) }
 
   context 'with empty row' do
     let(:row) { TTY::Table::Row.new([]) }

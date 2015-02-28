@@ -211,12 +211,15 @@ module TTY
       # Generate a border string
       #
       # @param [String] line
+      #   the line character
       #
       # @return [String]
       #
       # @api private
       def render_line(line, left, right, intersection)
-        left + widths.map { |width| line * width }.join(intersection) + right
+        left + widths.map do |width|
+          line * (padding.left + width + padding.right)
+        end.join(intersection) + right
       end
     end # Border
   end # Table
