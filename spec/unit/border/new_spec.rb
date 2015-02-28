@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe TTY::Table::Border, '#new' do
   let(:row) { [] }
 
-  subject(:instance) { klass.new row }
+  subject(:instance) { klass.new row, [0,0,0,0] }
 
   context 'when abstract' do
     let(:klass) { described_class }
@@ -16,7 +16,7 @@ RSpec.describe TTY::Table::Border, '#new' do
   context 'when concrete' do
     let(:klass) {
       Class.new do
-        def initialize(row); end
+        def initialize(row, padding); end
       end
     }
 
