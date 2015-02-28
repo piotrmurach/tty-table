@@ -52,12 +52,16 @@ Or install it yourself as:
     * [3.1.3 Unicode renderer](#313-unicode-renderer)
   * [3.3 Options](#33-options)
   * [3.4 Alignment](#34-alignment)
-
-* [2.3 Multiline](#23-multiline)
-* [2.4 Border](#24-border)
-* [2.6 Padding](#26-padding)
-* [2.7 Filter](#27-filter)
-* [2.8 Width](#28-width)
+  * [3.5 Border](#35-border)
+    * [3.5.1 Parts](#351-parts)
+    * [3.5.2 Custom](#351-custom)
+    * [3.5.3 Separator](#35-border)
+    * [3.5.4 Style](#35-border)
+  * [3.6 Filter](#36-filter)
+  * [3.7 Multiline](#37-multiline)
+  * [3.8 Padding](#38-padding)
+  * [3.9 Resize](#39-resize)
+  * [3.10 Width](#310-width)
 
 ## 1. Usage
 
@@ -67,10 +71,10 @@ First, provide **TTY::Table** with headers and data:
 table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
 ```
 
-Then simply call `render` or `to_s` on the instance:
+Then simply call `render` on the instance with with border type as first argument:
 
 ```ruby
-table.render
+table.render(:ascii)
 # =>
   +-------+-------+
   |header1|header2|
@@ -389,38 +393,7 @@ table.render(:ascii)
   +-------+-------+
 ```
 
-
-### 2.3 Multiline
-
-Renderer options may include `multiline` parameter. The `true` value will cause the table fields wrap at their natural line breaks or in case when the column widths are set the content will wrap.
-
-```ruby
-table = TTY::Table.new [ ["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
-table.render :ascii, multiline: true
-# =>
-  +-------+-+
-  |First  |1|
-  |Multi  |2|
-  |Line   | |
-  |Content| |
-  |Third  |3|
-  +-------+-+
-```
-
-When the `false` option is specified all the special characters will be escaped and if the column widths are set the content will be truncated like so
-
-```ruby
-table = TTY::Table.new [ ["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
-table.render :ascii, multiline: false
-# =>
-  +------------------+-+
-  |First             |1|
-  |Multiline\nContent|2|
-  |Third             |3|
-  +------------------+-+
-```
-
-### 2.4 Border
+### 3.5 Border
 
 To print border around data table you need to specify `renderer` type out of `basic`, `ascii`, `unicode`. By default `basic` is used. For instance, to output unicode border:
 
@@ -505,42 +478,7 @@ table.render do |renderer|
 end
 ```
 
-
-#### 2.6 Padding
-
-By default padding is not applied. You can add `padding` to table fields like so
-
-```ruby
-header = ['Field', 'Type', 'Null', 'Key', 'Default', 'Extra']
-rows  = [['id', 'int(11)', 'YES', 'nil', 'NULL', '']]
-table = TTY::Table.new(header, rows)
-table.render { |renderer| renderer.padding= [0,1,0,1] }
-# =>
-  +-------+---------+------+-----+---------+-------+
-  | Field | Type    | Null | Key | Default | Extra |
-  +-------+---------+------+-----+---------+-------+
-  | id    | int(11) | YES  | nil | NULL    |       |
-  +-------+---------+------+-----+---------+-------+
-```
-
-or you can set specific padding using `right`, `left`, `top`, `bottom` helpers. However, when adding top or bottom padding a `multiline` option needs to be set to `true` to allow for rows to span multiple lines. For example
-
-```ruby
-table.render { |renderer|
-  renderer.multiline = true
-  renderer.padding.top = 1
-}
-# =>
-  +-----+-------+----+---+-------+-----+
-  |     |       |    |   |       |     |
-  |Field|Type   |Null|Key|Default|Extra|
-  +-----+-------+----+---+-------+-----+
-  |     |       |    |   |       |     |
-  |id   |int(11)|YES |nil|NULL   |     |
-  +-----+-------+----+---+-------+-----+
-```
-
-### 2.7 Filter
+### 3.6 Filter
 
 You can define filters that will modify individual table fields value before they are rendered. A filter can be a callable such as proc. Here's an example that formats
 
@@ -575,7 +513,99 @@ table.render do |renderer|
 end
 ```
 
-### 2.8 Width
+### 3.7 Multiline
+
+Renderer options may include `multiline` parameter. When set to `true`, table fields will wrap at their natural line breaks or the column widths(if provided).
+
+```ruby
+table = TTY::Table.new [ ["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
+table.render :ascii, multiline: true
+# =>
+  +-------+-+
+  |First  |1|
+  |Multi  |2|
+  |Line   | |
+  |Content| |
+  |Third  |3|
+  +-------+-+
+```
+
+When `multiline` is set to `false`, all line break characters will be escaped. In cases when the column widths are set, the content will be truncated.
+
+```ruby
+table = TTY::Table.new [["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
+table.render :ascii, multiline: false
+# =>
+  +------------------+-+
+  |First             |1|
+  |Multiline\nContent|2|
+  |Third             |3|
+  +------------------+-+
+```
+
+### 3.8 Padding
+
+Renderer also accepts `padding` option which accepts array with arguments similar to CSS padding.
+
+```ruby
+[2,2,2,2]  # => pad left and right with 2 characters, add 2 lines above and below
+[1,2]      # => pad left and right with 2 characters, add 1 line above and below
+1          # => pad left and right with 1 character, and 1 lines above and below
+```
+
+Therefore, to apply padding to the example table do:
+
+```ruby
+table.render(:ascii, padding: [1,2,1,2])
+# =>
+  +---------+---------+
+  |         |         |
+  | header1 | header2 |
+  |         |         |
+  +---------+---------+
+  |         |         |
+  | a1      | a2      |
+  |         |         |
+  |         |         |
+  | b1      | b2      |
+  |         |         |
+  +---------+---------+
+```
+
+However, when adding top or bottom padding to content with line breaks, the `multiline` option needs to be set to `true` to allow for rows to span multiple lines. For example:
+
+```ruby
+table = TTY::Table.new header: ['head1', 'head2']
+table << ["Multi\nLine", "Text\nthat\nwraps"]
+table << ["Some\nother\ntext", 'Simple']
+```
+
+would render as:
+
+```ruby
+table.render :ascii, multiline: true, padding: [1,2,1,2]
+# =>
+  +---------+----------+
+  |         |          |
+  |  h1     |  head2   |
+  |         |          |
+  +---------+----------+
+  |         |          |
+  |  Multi  |  Text    |
+  |  Line   |  that    |
+  |         |  wraps   |
+  |         |          |
+  |         |          |
+  |  Some   |  Simple  |
+  |  other  |          |
+  |  text   |          |
+  |         |          |
+  +---------+----------+
+```
+
+### 3.9 Resize
+
+### 3.10 Width
 
 To control table's column sizes pass `width`, `resize` options. By default table's natural column widths are calculated from the content. If the total table width does not fit in terminal window then the table is rotated vertically to preserve content.
 
