@@ -20,7 +20,7 @@ RSpec.describe TTY::Table::Operations, '#new' do
   before { subject.add(:alignment, instance) }
 
   it 'stores away operations' do
-    expect(subject.operations[:alignment]).to include(instance)
+    expect(subject[:alignment]).to include(instance)
   end
 
   it 'runs selected operations' do

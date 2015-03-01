@@ -6,19 +6,6 @@ module TTY
     #
     # @api private
     class Operations
-      # The table
-      #
-      # @api private
-      attr_reader :table
-      private :table
-
-      # Available operations
-      #
-      # @return [Hash]
-      #
-      # @api public
-      attr_reader :operations
-
       # Initialize Operations
       #
       # @param [TTY::Table] table
@@ -46,6 +33,18 @@ module TTY
         operations[operation_type] << object
       end
 
+      # Lookup operation
+      #
+      # @param [Symbol] operation
+      #
+      # @return [Object]
+      #   the operation
+      #
+      # @api public
+      def [](operation)
+        operations[operation]
+      end
+
       # Apply operations to a table data
       #
       # @param [Array[Symbol]] types
@@ -59,15 +58,30 @@ module TTY
       def run_operations(*args)
         operation_types = args
         table.data.each_with_index do |row, row_i|
-          row.fields.each_with_index do |val, col_i|
+          row.fields.each_with_index do |field, col_i|
             operation_types.each do |type|
               operations[type].each do |operation|
-                val.content = operation.call(val, row_i, col_i)
+                field.content = operation.call(field, row_i, col_i)
               end
             end
           end
         end
       end
+
+      private
+
+      # The table
+      #
+      # @api private
+      attr_reader :table
+      private :table
+
+      # Available operations
+      #
+      # @return [Hash]
+      #
+      # @api public
+      attr_reader :operations
     end # Operations
   end # Table
 end # TTY
