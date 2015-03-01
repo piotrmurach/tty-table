@@ -156,13 +156,6 @@ module TTY
           @indentation.indentation = value
         end
 
-        # Return column contraints
-        #
-        # @api private
-        def columns_constraints
-          TTY::Table::Columns.new(table, self)
-        end
-
         # Sets the output padding,
         #
         # @param [Integer] value
@@ -188,7 +181,8 @@ module TTY
 
           operations.add(:escape, Operation::Escape.new)
           operations.run_operations(:escape) unless multiline
-          @column_widths = columns_constraints.enforce
+          column_constraint = ColumnConstraint.new(table, self)
+          @column_widths = column_constraint.enforce
           add_operations
           ops = [:alignment]
           multiline ? ops << :wrapping : ops << :truncation
