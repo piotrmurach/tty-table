@@ -94,7 +94,6 @@ module TTY
           @table         = assert_table_type(table)
           @multiline     = options.fetch(:multiline) { false }
           @operations    = TTY::Table::Operations.new(table)
-          @operations.add(:escape, Operation::Escape.new)
           @border        = TTY::Table::BorderOptions.from(options.delete(:border))
           @column_widths = options.fetch(:column_widths, nil)
           alignment      = Array(options[:alignment]) * table.columns_size
@@ -187,8 +186,9 @@ module TTY
         def render
           return if table.empty?
 
+          operations.add(:escape, Operation::Escape.new)
           operations.run_operations(:escape) unless multiline
-          columns_constraints.enforce
+          @column_widths = columns_constraints.enforce
           add_operations
           ops = [:alignment]
           multiline ? ops << :wrapping : ops << :truncation
