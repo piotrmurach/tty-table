@@ -80,13 +80,12 @@ module TTY
         assert_minimum_width
 
         if natural_width <= renderer.width
-          renderer.column_widths = expand if renderer.resize
+          renderer.resize ? expand : renderer.column_widths
         else
           if renderer.resize
-            renderer.column_widths = shrink
+            shrink
           else
             rotate
-            renderer.column_widths = ColumnSet.widths_from(table)
           end
         end
       end
@@ -106,6 +105,7 @@ module TTY
                    'orientation.'
         table.orientation = :vertical
         table.rotate
+        ColumnSet.widths_from(table)
       end
 
       # Expand column widths to match the requested width
