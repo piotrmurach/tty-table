@@ -90,15 +90,18 @@ module TTY
         options
       end
 
+      # Reset to original value
+      #
+      # @api public
+      def reset!
+        @content = @value.to_s
+      end
+
       # The content width
       #
       # @api public
       def width
         @width || UnicodeUtils.display_width(@content)
-      end
-
-      def value_height
-        @height
       end
 
       # Return number of lines this value spans.
