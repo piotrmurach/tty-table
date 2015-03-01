@@ -74,7 +74,6 @@ module TTY
       #
       # @api private
       attr_reader :table
-      private :table
 
       # Available operations
       #

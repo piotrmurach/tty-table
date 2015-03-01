@@ -93,7 +93,6 @@ module TTY
         def initialize(table, options = {})
           @table         = assert_table_type(table)
           @multiline     = options.fetch(:multiline) { false }
-          @operations    = TTY::Table::Operations.new(table)
           @border        = TTY::Table::BorderOptions.from(options.delete(:border))
           @column_widths = options.fetch(:column_widths, nil)
           alignment      = Array(options[:alignment]) * table.columns_size
@@ -135,17 +134,6 @@ module TTY
           @border
         end
 
-        # Initialize and add operations
-        #
-        # @api private
-        def add_operations
-          operations.add(:alignment,  Operation::Alignment.new(alignments, column_widths))
-          operations.add(:filter,     Operation::Filter.new(filter))
-          operations.add(:truncation, Operation::Truncation.new(column_widths))
-          operations.add(:wrapping,   Operation::Wrapped.new(column_widths))
-          operations.add(:padding,    Operation::Padding.new(padding, column_widths))
-        end
-
         # Change the value of indentation
         #
         # @param [Integer]
@@ -179,18 +167,30 @@ module TTY
         def render
           return if table.empty?
 
-          operations.add(:escape, Operation::Escape.new)
-          operations.run_operations(:escape) unless multiline
+          @operations = TTY::Table::Operations.new(table)
+          @operations.add(:escape, Operation::Escape.new)
+          @operations.run_operations(:escape) unless multiline
           column_constraint = ColumnConstraint.new(table, self)
           @column_widths = column_constraint.enforce
-          add_operations
+          add_operations(@column_widths)
           ops = [:alignment]
           multiline ? ops << :wrapping : ops << :truncation
           ops << :padding
           ops << :filter
-          operations.run_operations(*ops)
+          @operations.run_operations(*ops)
 
           render_data.compact.join("\n")
+        end
+
+        # Initialize and add operations
+        #
+        # @api private
+        def add_operations(widths)
+          @operations.add(:alignment,  Operation::Alignment.new(alignments, widths))
+          @operations.add(:filter,     Operation::Filter.new(filter))
+          @operations.add(:truncation, Operation::Truncation.new(widths))
+          @operations.add(:wrapping,   Operation::Wrapped.new(widths))
+          @operations.add(:padding,    Operation::Padding.new(padding, widths))
         end
 
         private
@@ -201,11 +201,6 @@ module TTY
         #
         # @api public
         attr_reader :table
-
-        # The table operations applied to rows
-        #
-        # @api public
-        attr_reader :operations
 
         # Initializes indentation
         #
