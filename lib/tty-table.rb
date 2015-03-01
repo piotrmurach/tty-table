@@ -30,7 +30,7 @@ require 'tty/table/renderer'
 
 require 'tty/table/alignment_set'
 require 'tty/table/column_set'
-require 'tty/table/columns'
+require 'tty/table/column_constraint'
 require 'tty/table/orientation'
 require 'tty/table/orientation/horizontal'
 require 'tty/table/orientation/vertical'

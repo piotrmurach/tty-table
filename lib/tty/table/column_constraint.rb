@@ -7,7 +7,7 @@ module TTY
     # Used internally by {Renderer::Basic} to enforce correct column widths.
     #
     # @api private
-    class Columns
+    class ColumnConstraint
       MIN_WIDTH = 1
 
       BORDER_WIDTH = 1
@@ -163,6 +163,6 @@ module TTY
           width + per_field_width + extra[index]
         end
       end
-    end # Columns
+    end # ColumnConstraint
   end # Table
 end # TTY

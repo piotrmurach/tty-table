@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe TTY::Table::Columns, '#enforce' do
+RSpec.describe TTY::Table::ColumnConstraint, '#enforce' do
   let(:header) { ['h1', 'h2', 'h3', 'h4'] }
   let(:rows)   { [['a1', 'a2', 'a3', 'a4'], ['b1', 'b2', 'b3', 'b4']] }
   let(:table)  { TTY::Table.new(header, rows) }
