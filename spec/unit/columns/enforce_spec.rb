@@ -51,8 +51,8 @@ RSpec.describe TTY::Table::Columns, '#enforce' do
         allow(Kernel).to receive(:warn)
         expect(renderer.column_widths).to eql([2,2,2,2])
         expect(table.orientation.name).to eql(:horizontal)
-        columns.enforce
-        expect(renderer.column_widths).to eq([2,2])
+        column_widths = columns.enforce
+        expect(column_widths).to eq([2,2])
         expect(table.orientation.name).to eql(:vertical)
       end
     end
