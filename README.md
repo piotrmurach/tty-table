@@ -214,6 +214,20 @@ table.render(:basic)
 
 This will use so called `:basic` renderer with default options. The other renderers are `:ascii` and `:unicode`.
 
+The `render` method can accept as a second argument the [rendering options](#33-options) either as hash value:
+
+```ruby
+table.render(:basic, alignments: [:left, :center])
+```
+
+or inside a block:
+
+```ruby
+table.render(:basic) do |renderer|
+  renderer.alignments= [:left, :center]
+end
+```
+
 ### 3.2 Renderer
 
 **TTY::Table** has a definition of `TTY::Table::Renderer` which allows you to provide different view for your tabular data. It comes with few initial renderers built in such as `TTY::Table::Renderer::Basic`, `TTY::Table::Renderer::ASCII` and `TTY::Table::Renderer:Unicode`.
@@ -342,6 +356,20 @@ width          # constrain the table total width, by default dynamically
                # calculated based on content and terminal size
 ```
 
+The `render` method can accept as a second argument the above options either as hash value:
+
+```ruby
+table.render(:basic, alignments: [:left, :center])
+```
+
+or inside a block:
+
+```ruby
+table.render(:basic) do |renderer|
+  renderer.alignments= [:left, :center]
+end
+```
+
 ### 3.4 Alignment
 
 By default all columns are `:left` aligned.
@@ -409,13 +437,20 @@ table.render :unicode
   └───────┴───────┘
 ```
 
+or by creating unicode renderer:
+
+```ruby
+renderer = TTY::Table::Renderer::Unicode.new(table)
+renderer.render
+```
+
 #### 3.5.1 Parts
 
 The following are available border parts:
 
 | Part          | ASCII | Unicode |
 | ------------- |:-----:|:-------:|
-|  top          | -     | ─       |
+|  top          | `-`   | ─       |
 |  top_mid      | +     | ┬       |
 |  top_left     | +     | ┌       |
 |  top_right    | +     | ┐       |
@@ -427,11 +462,11 @@ The following are available border parts:
 |  mid_mid      | +     | ┼       |
 |  mid_left     | +     | ├       |
 |  mid_right    | +     | ┤       |
-|  left         | |     | │       |
+|  left         | `|`   | │       |
 |  center       | |     | │       |
 |  right        | |     | │       |
 
-If you want to introduce slight modifications to the predefined border types, you can use table `border` helper like so:
+Using the above border parts you can create your own border with the `border` helper:
 
 ```ruby
 table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
@@ -496,15 +531,17 @@ end
   +-------+-------+
 ```
 
-#### 3.5.4
+#### 3.5.4 Style
 
-Also to change the display color of your border do:
+If you want to change the display color of your border do:
 
 ```ruby
 table.render do |renderer|
-  renderer.border.style = :red
+  renderer.border.style = :green
 end
 ```
+
+All [supported colors](https://github.com/peter-murach/pastel#3-supported-colors) are provided by the **Pastel** dependency.
 
 ### 3.6 Filter
 
