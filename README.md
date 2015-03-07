@@ -16,9 +16,11 @@
 
 ## Features
 
-* Create table once and render using custom view renderers [see](#3-rendering)
-* Supports multibyte character encodings
 * Table behaves like an array with familiar API [see](#2-interface)
+* Create table once and render using custom view renderers [see](#3-rendering)
+* Rendering provides many display options [see](#33-options)
+* Easy custom border creation [see](#352-custom)
+* Supports multibyte character encodings
 
 ## Installation
 
@@ -450,21 +452,21 @@ The following are available border parts:
 
 | Part          | ASCII | Unicode |
 | ------------- |:-----:|:-------:|
-|  top          | `-`   | ─       |
-|  top_mid      | +     | ┬       |
-|  top_left     | +     | ┌       |
-|  top_right    | +     | ┐       |
-|  bottom       | -     | ─       |
-|  bottom_mid   | +     | ┴       |
-|  bottom_left  | +     | └       |
-|  bottom_right | +     | ┘       |
-|  mid          | -     | ─       |
-|  mid_mid      | +     | ┼       |
-|  mid_left     | +     | ├       |
-|  mid_right    | +     | ┤       |
-|  left         | `|`   | │       |
-|  center       | |     | │       |
-|  right        | |     | │       |
+|  top          | `-`   | `─`     |
+|  top_mid      | `+`   | `┬`     |
+|  top_left     | `+`   | `┌`     |
+|  top_right    | `+`   | `┐`     |
+|  bottom       | `-`   | `─`     |
+|  bottom_mid   | `+`   | `┴`     |
+|  bottom_left  | `+`   | `└`     |
+|  bottom_right | `+`   | `┘`     |
+|  mid          | `-`   | `─`     |
+|  mid_mid      | `+`   | `┼`     |
+|  mid_left     | `+`   | `├`     |
+|  mid_right    | `+`   | `┤`     |
+|  left         | `|`   | `│`     |
+|  center       | `|`   | `│`     |
+|  right        | `|`   | `│`     |
 
 Using the above border parts you can create your own border with the `border` helper:
 
