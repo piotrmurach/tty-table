@@ -123,7 +123,9 @@ module TTY
       #
       # @api public
       def length
-        display_width(lines.max_by { |line| display_width(line) } || '')
+        (lines.map do |line|
+          display_width(self.class.color.strip(line))
+        end << 0).max
       end
 
       # Extract the number of lines this value spans
@@ -148,6 +150,12 @@ module TTY
         content
       end
 
+      # @api public
+      def self.color
+        @color ||= Pastel.new(enabled: true)
+      end
+
+      # @api public
       def display_width(string)
         UnicodeUtils.display_width(string)
       end
