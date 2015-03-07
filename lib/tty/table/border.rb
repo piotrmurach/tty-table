@@ -136,7 +136,13 @@ module TTY
       #
       # @api public
       def set_color(color, *strings)
-        strings.map { |string| @color.decorate(string, color) }
+        strings.map do |string|
+          if string.gsub(/\s+/, '').empty?
+            string
+          else
+            @color.decorate(string, color)
+          end
+        end
       end
 
       protected
@@ -209,10 +215,8 @@ module TTY
                            self["#{type}_right"] || border_char,
                            self["#{type}_mid"])
 
-        if color? && !line.empty?
-          line = set_color(border_options.style, line)
-        end
-        line
+        return line unless color?
+        set_color(border_options.style, line).join
       end
 
       # Generate a border string

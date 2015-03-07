@@ -33,40 +33,4 @@ RSpec.describe TTY::Table::Renderer, 'with style' do
       EOS
     end
   end
-
-  context 'when ascii renderer' do
-    let(:type)  { :ascii }
-    let(:red)   { "\e[31m" }
-    let(:clear) { "\e[0m" }
-
-    it "renders border in color" do
-      renderer.border.style= :red
-      expect(renderer.render).to eq <<-EOS.normalize
-        #{red}+--+--+--+#{clear}
-        #{red}|#{clear}h1#{red}|#{clear}h2#{red}|#{clear}h3#{red}|#{clear}
-        #{red}+--+--+--+#{clear}
-        #{red}|#{clear}a1#{red}|#{clear}a2#{red}|#{clear}a3#{red}|#{clear}
-        #{red}|#{clear}b1#{red}|#{clear}b2#{red}|#{clear}b3#{red}|#{clear}
-        #{red}+--+--+--+#{clear}
-      EOS
-    end
-  end
-
-  context 'when unicode renderer' do
-    let(:type)  { :unicode }
-    let(:red)   { "\e[31m" }
-    let(:clear) { "\e[0m" }
-
-    it "renders each row" do
-      renderer.border.style= :red
-      expect(renderer.render).to eq <<-EOS.normalize
-        #{red}┌──┬──┬──┐#{clear}
-        #{red}│#{clear}h1#{red}│#{clear}h2#{red}│#{clear}h3#{red}│#{clear}
-        #{red}├──┼──┼──┤#{clear}
-        #{red}│#{clear}a1#{red}│#{clear}a2#{red}│#{clear}a3#{red}│#{clear}
-        #{red}│#{clear}b1#{red}│#{clear}b2#{red}│#{clear}b3#{red}│#{clear}
-        #{red}└──┴──┴──┘#{clear}
-      EOS
-    end
-  end
 end

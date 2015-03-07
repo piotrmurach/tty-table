@@ -133,6 +133,7 @@ module TTY
           end
           @border
         end
+        alias_method :border=, :border
 
         # Change the value of indentation
         #
