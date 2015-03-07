@@ -66,7 +66,11 @@ module TTY
       # @api private
       def [](type)
         characters = self.class.characters
-        chars = border_options.nil? ? characters : characters.merge(border_options.characters)
+        chars = if border_options.nil?
+                  characters
+                else
+                  characters.merge(border_options.characters)
+                end
         chars[type] || EMPTY_CHAR
       end
 
@@ -77,19 +81,6 @@ module TTY
       # @api public
       def color?
         border_options && border_options.style
-      end
-
-      # Set color on characters
-      #
-      # @param [Symbol] color
-      #
-      # @param [Array[String]] array of strings
-      #
-      # @return [Array[String]]
-      #
-      # @api public
-      def set_color(color, *strings)
-        strings.map { |string| @color.decorate(string, color) }
       end
 
       # A line spanning all columns marking top of a table.
@@ -133,6 +124,19 @@ module TTY
 
         result = row_heights(row, line)
         result.empty? ? EMPTY_CHAR : result
+      end
+
+      # Set color on characters
+      #
+      # @param [Symbol] color
+      #
+      # @param [Array[String]] array of strings
+      #
+      # @return [Array[String]]
+      #
+      # @api public
+      def set_color(color, *strings)
+        strings.map { |string| @color.decorate(string, color) }
       end
 
       protected
