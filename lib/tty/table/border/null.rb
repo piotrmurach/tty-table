@@ -14,22 +14,22 @@ module TTY
         #
         # @api private
         def top_line
-          border ? super : nil
+          border_options ? super : nil
         end
 
         # A stub separator line
         #
         # @api private
         def separator
-          return [] if border.separator == EACH_ROW
-          border ? super : nil
+          return [] if border_options.separator == EACH_ROW
+          border_options ? super : nil
         end
 
         # A stub bottom line
         #
         # @api private
         def bottom_line
-          border ? super : nil
+          border_options ? super : nil
         end
       end # Null
     end # Border

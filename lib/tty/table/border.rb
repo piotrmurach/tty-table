@@ -13,19 +13,6 @@ module TTY
       # Represent a separtor on each row
       EACH_ROW = :each_row
 
-      # The row field widths
-      #
-      # @api private
-      attr_reader :widths
-      private :widths
-
-      # The table custom border characters
-      attr_reader :border
-
-      attr_reader :padding
-
-      # The table
-
       class << self
         # Store characters for border
         #
@@ -49,7 +36,7 @@ module TTY
         else
           @widths = column_widths
           @padding = Verse::Padder.parse(padding)
-          @border = TTY::Table::BorderOptions.from options
+          @border_options = TTY::Table::BorderOptions.from options
           @color  = Pastel.new
         end
       end
@@ -69,7 +56,7 @@ module TTY
         self.characters = dsl.characters
       end
 
-      # Retrive individula character by type
+      # Retrive individual character by type
       #
       # @param [String] type
       #   the character type
@@ -79,7 +66,7 @@ module TTY
       # @api private
       def [](type)
         characters = self.class.characters
-        chars = border.nil? ? characters : characters.merge(border.characters)
+        chars = border_options.nil? ? characters : characters.merge(border_options.characters)
         chars[type] || EMPTY_CHAR
       end
 
@@ -89,7 +76,7 @@ module TTY
       #
       # @api public
       def color?
-        border && border.style
+        border_options && border_options.style
       end
 
       # Set color on characters
@@ -142,11 +129,28 @@ module TTY
       # @api public
       def row_line(row)
         line = RowLine.new(self['left'], self['center'], self['right'])
-        line.colorize(self, border.style) if color?
+        line.colorize(self, border_options.style) if color?
 
         result = row_heights(row, line)
         result.empty? ? EMPTY_CHAR : result
       end
+
+      protected
+
+      # The row field widths
+      #
+      # @api private
+      attr_reader :widths
+
+      # The table custom border options including styling
+      #
+      # @api private
+      attr_reader :border_options
+
+      # The padding to apply to each field
+      #
+      # @api private
+      attr_reader :padding
 
       # Separate multiline string into individual rows with border.
       #
@@ -202,7 +206,7 @@ module TTY
                            self["#{type}_mid"])
 
         if color? && !line.empty?
-          line = set_color(border.style, line)
+          line = set_color(border_options.style, line)
         end
         line
       end
