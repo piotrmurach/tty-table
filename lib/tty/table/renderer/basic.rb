@@ -173,8 +173,10 @@ module TTY
           column_constraint = ColumnConstraint.new(table, self)
           @column_widths = column_constraint.enforce
           add_operations(@column_widths)
-          ops = [:alignment]
-          multiline ? ops << :wrapping : ops << :truncation
+          ops = []
+          ops << :escape unless multiline
+          ops << :alignment
+          ops << (multiline ? :wrapping : :truncation)
           ops << :padding
           ops << :filter
           @operations.run_operations(*ops)

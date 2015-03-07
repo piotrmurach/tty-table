@@ -59,6 +59,7 @@ module TTY
         operation_types = args
         table.data.each_with_index do |row, row_i|
           row.fields.each_with_index do |field, col_i|
+            field.reset!
             operation_types.each do |type|
               operations[type].each do |operation|
                 field.content = operation.call(field, row_i, col_i)
