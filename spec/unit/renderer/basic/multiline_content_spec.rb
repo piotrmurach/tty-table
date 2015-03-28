@@ -2,134 +2,70 @@
 
 require 'spec_helper'
 
-RSpec.describe TTY::Table::Renderer::Basic, 'with multiline content' do
-  let(:header) { nil }
-  let(:object) { described_class }
-  let(:table) { TTY::Table.new header, rows }
-
-  subject(:renderer) { object.new table }
-
+RSpec.describe TTY::Table::Renderer::Basic, 'multiline content' do
   context 'with escaping' do
-    let(:rows) { [ ["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']] }
-
-    context 'without border' do
-      it "renders single line" do
-        expect(table.render(multiline: false)).to eq <<-EOS.normalize
-          First              1
-          Multiline\\nContent 2
-          Third              3
-        EOS
-      end
+    it "renders multiline as single line" do
+      rows = [ ["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
+      table = TTY::Table.new rows
+      renderer = described_class.new(table, multiline: false)
+      expect(renderer.render).to eq <<-EOS.normalize
+        First              1
+        Multiline\\nContent 2
+        Third              3
+      EOS
     end
 
-    context 'with column widths' do
-      it "renders single line" do
-        expect(table.render(multiline: false, column_widths: [8,1])).to eq <<-EOS.normalize
-          First    1
-          Multil…  2
-          Third    3
-        EOS
-      end
-    end
-
-    context 'with border' do
-      it "renders single line" do
-        expect(table.render(:ascii, multiline: false)).to eq <<-EOS.normalize
-         +------------------+-+
-         |First             |1|
-         |Multiline\\nContent|2|
-         |Third             |3|
-         +------------------+-+
-        EOS
-      end
-    end
-
-    context 'with header' do
-      let(:header) { ["Multi\nHeader", "header2"] }
-
-      it "renders header" do
-        expect(table.render(:ascii, multiline: false)).to eq <<-EOS.normalize
-         +------------------+-------+
-         |Multi\\nHeader     |header2|
-         +------------------+-------+
-         |First             |1      |
-         |Multiline\\nContent|2      |
-         |Third             |3      |
-         +------------------+-------+
-        EOS
-      end
+    it "truncates multiline content" do
+      rows = [ ["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
+      table = TTY::Table.new rows
+      renderer = described_class.new(table, multiline: false, column_widths: [8,1])
+      expect(renderer.render).to eq <<-EOS.normalize
+        First    1
+        Multil…  2
+        Third    3
+      EOS
     end
   end
 
   context 'without escaping' do
-    let(:rows) { [ ["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']] }
-
-    context 'without border' do
-      it "renders every line" do
-        expect(table.render(multiline: true)).to eq <<-EOS.normalize
-          First   1
-          Multi   2
-          Line     
-          Content  
-          Third   3
-        EOS
-      end
+    it "renders every line" do
+      rows = [["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
+      table = TTY::Table.new rows
+      renderer = described_class.new(table, multiline: true)
+      expect(renderer.render).to eq <<-EOS.normalize
+        First   1
+        Multi   2
+        Line     
+        Content  
+        Third   3
+      EOS
     end
 
-    context 'with column widths' do
-      it "renders multiline" do
-        expect(table.render(multiline: true, column_widths: [8,1])).to eq <<-EOS.normalize
-          First    1
-          Multi    2
-          Line      
-          Content   
-          Third    3
-        EOS
-      end
-
-      it 'wraps multi line' do
-        expect(table.render(multiline: true, column_widths: [5,1])).to eq <<-EOS.normalize
-          First 1
-          Multi 2
-          Line   
-          Conte  
-          nt     
-          Third 3
-        EOS
-      end
+    it "renders multiline with column widths" do
+      rows = [["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
+      table = TTY::Table.new rows
+      renderer = described_class.new(table, multiline: true, column_widths: [8,1])
+      expect(renderer.render).to eq <<-EOS.normalize
+        First    1
+        Multi    2
+        Line      
+        Content   
+        Third    3
+      EOS
     end
 
-    context 'with border' do
-      it "renders every line" do
-        expect(table.render(:ascii, multiline: true)).to eq <<-EOS.normalize
-         +-------+-+
-         |First  |1|
-         |Multi  |2|
-         |Line   | |
-         |Content| |
-         |Third  |3|
-         +-------+-+
-        EOS
-      end
-    end
-
-    context 'with header' do
-      let(:header) { ["Multi\nHeader", "header2"] }
-
-      it "renders header" do
-        expect(table.render(:ascii, multiline: true)).to eq <<-EOS.normalize
-         +-------+-------+
-         |Multi  |header2|
-         |Header |       |
-         +-------+-------+
-         |First  |1      |
-         |Multi  |2      |
-         |Line   |       |
-         |Content|       |
-         |Third  |3      |
-         +-------+-------+
-        EOS
-      end
+    it 'wraps multi line' do
+      rows = [["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
+      table = TTY::Table.new rows
+      renderer = described_class.new(table, multiline: true, column_widths: [5,1])
+      expect(renderer.render).to eq <<-EOS.normalize
+        First 1
+        Multi 2
+        Line   
+        Conte  
+        nt     
+        Third 3
+      EOS
     end
   end
 end
