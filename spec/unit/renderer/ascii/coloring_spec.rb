@@ -28,6 +28,43 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'coloring' do
   end
 
   context 'when content' do
+    it "colors individual field" do
+      header = [color.yellow('header1'), 'header2']
+      table = TTY::Table.new header: header
+      table << [color.green.on_blue('a1'), 'a2']
+      table << ['b1', color.red.on_yellow('b2')]
+      renderer = described_class.new(table)
 
+      expect(renderer.render).to eq <<-EOS.normalize
+        +-------+-------+
+        |#{color.yellow('header1')}|header2|
+        +-------+-------+
+        |#{color.green.on_blue('a1')}     |a2     |
+        |b1     |#{color.red.on_yellow('b2')}     |
+        +-------+-------+
+      EOS
+    end
+
+    it "colors multiline content" do
+      header = [color.yellow("Multi\nHeader"), 'header2']
+      table = TTY::Table.new header: header
+      table << [color.green.on_blue("Multi\nLine\nContent"), 'a2']
+      table << ['b1', color.red.on_yellow("Multi\nLine\nContent")]
+      renderer = described_class.new(table, multiline: true)
+
+      expect(renderer.render).to eq <<-EOS.normalize
+        +-------+-------+
+        |#{color.yellow('Multi  ')}|header2|
+        |#{color.yellow('Header')} |       |
+        +-------+-------+
+        |#{color.green.on_blue('Multi  ')}|a2     |
+        |#{color.green.on_blue('Line   ')}|       |
+        |#{color.green.on_blue('Content')}|       |
+        |b1     |#{color.red.on_yellow("Multi  ")}|
+        |       |#{color.red.on_yellow("Line   ")}|
+        |       |#{color.red.on_yellow("Content")}|
+        +-------+-------+
+      EOS
+    end
   end
 end
