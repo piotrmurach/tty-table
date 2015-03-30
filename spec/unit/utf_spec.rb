@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe TTY::Table, 'unicode support' do
   it "measures utf characters correctly for :basic" do
     table = TTY::Table[['こんにちは', 'a2'], ['b1','選択']]
-    expect(table.render(:basic)).to eq <<-EOS.normalize
+    expect(table.render(:basic)).to eq unindent(<<-EOS)
       こんにちは a2  
       b1         選択
     EOS
@@ -13,7 +13,7 @@ RSpec.describe TTY::Table, 'unicode support' do
 
   it "measure utf characters correctly for :ascii" do
     table = TTY::Table[['こんにちは', 'a2'], ['b1','選択']]
-    expect(table.render(:ascii)).to eq <<-EOS.normalize
+    expect(table.render(:ascii)).to eq unindent(<<-EOS)
      +----------+----+
      |こんにちは|a2  |
      |b1        |選択|
@@ -23,7 +23,7 @@ RSpec.describe TTY::Table, 'unicode support' do
 
   it "measure utf characters correctly for :unicode" do
     table = TTY::Table[['こんにちは', 'a2'], ['b1','選択']]
-    expect(table.render(:unicode)).to eq <<-EOS.normalize
+    expect(table.render(:unicode)).to eq unindent(<<-EOS)
      ┌──────────┬────┐
      │こんにちは│a2  │
      │b1        │選択│
