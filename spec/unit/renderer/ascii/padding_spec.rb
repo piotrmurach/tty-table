@@ -45,7 +45,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'padding' do
     let(:options) { {padding: [1,1,1,1], multiline: true} }
 
     it 'pads each field' do
-      expect(renderer.render).to eql <<-EOS.normalize
+      expect(renderer.render).to eql unindent(<<-EOS)
         +-------+---------+------+-----+---------+-------+
         |       |         |      |     |         |       |
         | Field | Type    | Null | Key | Default | Extra |
@@ -66,7 +66,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'padding' do
       table << ["a1\na1\na1",'a2']
       table << ["b1","b2\nb2"]
       renderer = described_class.new(table, padding: padding, multiline: true)
-      expect(renderer.render).to eql <<-EOS.normalize
+      expect(renderer.render).to eql unindent(<<-EOS)
         +-----------+-----------+
         |           |           |
         |  header1  |  header2  |

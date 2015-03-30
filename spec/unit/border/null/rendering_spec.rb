@@ -56,7 +56,7 @@ RSpec.describe TTY::Table::Border::Null, '#rendering' do
       let(:row) { TTY::Table::Row.new(["a1\nb1\nc1", 'a2', 'a3']) }
 
       it 'draws row line' do
-        expect(subject.row_line(row)).to eq <<-EOS.normalize
+        expect(subject.row_line(row)).to eq unindent(<<-EOS)
           a1 a2 a3
           b1      
           c1      

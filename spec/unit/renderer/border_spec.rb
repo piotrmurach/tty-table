@@ -31,7 +31,7 @@ RSpec.describe TTY::Table::Renderer, '#border' do
         mid_mid      ' '
       end
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         h1 h2 h3
         == == ==
         a1 a2 a3
@@ -51,7 +51,7 @@ RSpec.describe TTY::Table::Renderer, '#border' do
         mid_right    '='
       end
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +--+--+--+
         |h1|h2|h3|
         ==========
@@ -69,7 +69,7 @@ RSpec.describe TTY::Table::Renderer, '#border' do
         'mid_right' => '=',
       }})
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +--+--+--+
         |h1|h2|h3|
         ==========
@@ -91,7 +91,7 @@ RSpec.describe TTY::Table::Renderer, '#border' do
         mid_right    '='
       end
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         ┌──┬──┬──┐
         │h1│h2│h3│
         ==========

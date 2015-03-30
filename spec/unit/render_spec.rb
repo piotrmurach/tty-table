@@ -35,7 +35,7 @@ RSpec.describe TTY::Table, '#render' do
       result = table.render :ascii do |renderer|
         renderer.border.style = :red
       end
-      expect(result).to eq <<-EOS.normalize
+      expect(result).to eq unindent(<<-EOS)
         \e[31m+--+--+\e[0m
         \e[31m|\e[0mh1\e[31m|\e[0mh2\e[31m|\e[0m
         \e[31m+--+--+\e[0m

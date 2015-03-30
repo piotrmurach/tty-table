@@ -14,7 +14,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
       let(:options) { {width: 16, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
           h1    h2    h3  
           a1    a2    a3  
           b1    b2    b3  
@@ -28,7 +28,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
       let(:options) { {width: 21, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
           h1    h2    h3   h4  
           a1    a2    a3   a4  
           b1    b2    b3   b4  
@@ -42,7 +42,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
       let(:options) { {width: 32, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
           h1        h2       h3           
           aaa1      aa2      aaaaaaa3     
           b1        b2       b3           
@@ -59,7 +59,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
       let(:options) { {width: 8, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
           he…  h… 
           aa…  a… 
           bb…  b… 
@@ -71,7 +71,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
       let(:options) { {width: 9, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
           he…  he… 
           aa…  aa… 
           bb…  bb… 
@@ -85,7 +85,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
       let(:options) { {width: 16, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
           he…  he…  head3 
           aaa1 aa2  aaaa… 
           b1   b2   b3    

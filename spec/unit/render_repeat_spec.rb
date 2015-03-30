@@ -9,7 +9,7 @@ RSpec.describe TTY::Table, 'render repeat' do
     table << ['a1', 'a2']
     table << ['b1', 'b2']
     options = {padding: [1,1,1,1], alignments: [:right, :center]}
-    expect(table.render(:ascii, options)).to eq <<-EOS.normalize
+    expect(table.render(:ascii, options)).to eq unindent(<<-EOS)
       +---------+---------+
       |         |         |
       | header1 | header2 |
@@ -24,7 +24,7 @@ RSpec.describe TTY::Table, 'render repeat' do
       +---------+---------+
     EOS
 
-    expect(table.render(:ascii, options)).to eq <<-EOS.normalize
+    expect(table.render(:ascii, options)).to eq unindent(<<-EOS)
       +---------+---------+
       |         |         |
       | header1 | header2 |

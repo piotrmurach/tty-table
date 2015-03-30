@@ -53,7 +53,7 @@ RSpec.describe TTY::Table::Border::Unicode, '#rendering' do
     let(:column_widths) { [2,2,2] }
 
     it 'draws row line' do
-      expect(border.row_line(row)).to eq <<-EOS.normalize
+      expect(border.row_line(row)).to eq unindent(<<-EOS)
         │a1│a2│a3│
         │b1│  │  │
         │c1│  │  │

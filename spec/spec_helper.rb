@@ -48,9 +48,3 @@ def unindent(string)
   prefix = string.scan(/^[ \t]+(?=\S)/).min
   string.gsub(/^#{prefix}/, '').chomp
 end
-
-class String
-  def normalize
-    gsub(/^[ \t]*/, '').chomp
-  end
-end

@@ -10,7 +10,7 @@ RSpec.describe TTY::Table, '#to_s' do
 
   context 'without renderer' do
     it 'displayes basic table' do
-      expect(table.render(:basic)).to eq <<-EOS.normalize
+      expect(table.render(:basic)).to eq unindent(<<-EOS)
         h1 h2 h3
         a1 a2 a3
         b1 b2 b3
@@ -20,7 +20,7 @@ RSpec.describe TTY::Table, '#to_s' do
 
   context 'without border' do
     it 'displays table' do
-      expect(table.to_s).to eq <<-EOS.normalize
+      expect(table.to_s).to eq unindent(<<-EOS)
         h1 h2 h3
         a1 a2 a3
         b1 b2 b3
@@ -30,7 +30,7 @@ RSpec.describe TTY::Table, '#to_s' do
 
   context 'with ascii border' do
     it 'displays table' do
-      expect(table.render(:ascii)).to eq <<-EOS.normalize
+      expect(table.render(:ascii)).to eq unindent(<<-EOS)
         +--+--+--+
         |h1|h2|h3|
         +--+--+--+
@@ -43,7 +43,7 @@ RSpec.describe TTY::Table, '#to_s' do
 
   context 'with unicode border' do
     it 'displays table' do
-      expect(table.render(:unicode)).to eq <<-EOS.normalize
+      expect(table.render(:unicode)).to eq unindent(<<-EOS)
         ┌──┬──┬──┐
         │h1│h2│h3│
         ├──┼──┼──┤

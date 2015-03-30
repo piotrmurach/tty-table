@@ -14,7 +14,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
       let(:options) { {width: 16, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
         +----+----+----+
         |h1  |h2  |h3  |
         +----+----+----+
@@ -31,7 +31,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
       let(:options) { {width: 21, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
          +----+----+----+----+
          |h1  |h2  |h3  |h4  |
          +----+----+----+----+
@@ -48,7 +48,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
       let(:options) { {width: 32, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
         +---------+-------+------------+
         |h1       |h2     |h3          |
         +---------+-------+------------+
@@ -68,7 +68,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
       let(:options) { {width: 9, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
          +---+---+
          |h… |h… |
          +---+---+
@@ -83,7 +83,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
       let(:options) { {width: 10, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
          +----+---+
          |he… |h… |
          +----+---+
@@ -100,7 +100,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
       let(:options) { {width: 15, resize: true} }
 
       it 'resizes each column' do
-        expect(renderer.render).to eql <<-EOS.normalize
+        expect(renderer.render).to eql unindent(<<-EOS)
          +---+---+-----+
          |h… |h… |head3|
          +---+---+-----+

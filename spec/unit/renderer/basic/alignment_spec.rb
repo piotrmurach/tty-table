@@ -16,7 +16,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
     let(:alignments) { nil }
 
     it 'aligns left by default' do
-      expect(renderer.render).to eql <<-EOS.normalize
+      expect(renderer.render).to eql unindent(<<-EOS)
         h1    h2   
         aaaaa a    
         b     bbbbb
@@ -29,7 +29,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
     let(:alignments) { [:left, :center, :right] }
 
     it 'aligns headers' do
-      expect(renderer.render).to eql <<-EOS.normalize
+      expect(renderer.render).to eql unindent(<<-EOS)
         header1 head2 h3
         a1       a2   a3
         b1       b2   b3
@@ -43,7 +43,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
     let(:alignments) { [:left, :right] }
 
     it 'aligns table rows' do
-      expect(renderer.render.to_s).to eql <<-EOS.normalize
+      expect(renderer.render.to_s).to eql unindent(<<-EOS)
         aaaaa     a
         b     bbbbb
       EOS
@@ -63,7 +63,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
     }
 
     it "takes individual fields over global aligns" do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         header1 header2 header3
         a1        a2         a3
         b1           b2      b3
@@ -78,7 +78,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'alignment' do
     let(:options) { { renderer: :basic } }
 
     it "aligns headres" do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         h1        h2  h3 
         aaaaa1 a2    aaa3
         b1     bbbb2 bb3 

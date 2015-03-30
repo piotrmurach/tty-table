@@ -30,7 +30,7 @@ RSpec.describe TTY::Table, 'orientation' do
 
     context 'without border' do
       it 'displays table' do
-        expect(subject.to_s).to eq <<-EOS.normalize
+        expect(subject.to_s).to eq unindent(<<-EOS)
           h1 h2 h3
           a1 a2 a3
           b1 b2 b3
@@ -42,7 +42,7 @@ RSpec.describe TTY::Table, 'orientation' do
       let(:renderer) { :ascii }
 
       it 'diplays table' do
-        expect(subject.render(renderer)).to eq <<-EOS.normalize
+        expect(subject.render(renderer)).to eq unindent(<<-EOS)
          +--+--+--+
          |h1|h2|h3|
          +--+--+--+
@@ -71,7 +71,7 @@ RSpec.describe TTY::Table, 'orientation' do
 
       context 'without border' do
         it 'displays table' do
-          expect(subject.to_s).to eq <<-EOS.normalize
+          expect(subject.to_s).to eq unindent(<<-EOS)
             h1 a1
             h2 a2
             h3 a3
@@ -86,7 +86,7 @@ RSpec.describe TTY::Table, 'orientation' do
         let(:renderer) { :ascii }
 
         it 'diplays table' do
-          expect(subject.render(renderer)).to eq <<-EOS.normalize
+          expect(subject.render(renderer)).to eq unindent(<<-EOS)
           +--+--+
           |h1|a1|
           |h2|a2|
@@ -113,7 +113,7 @@ RSpec.describe TTY::Table, 'orientation' do
 
       context 'without border' do
         it 'displays table' do
-          expect(subject.to_s).to eq <<-EOS.normalize
+          expect(subject.to_s).to eq unindent(<<-EOS)
             1 a1
             2 a2
             3 a3
@@ -128,7 +128,7 @@ RSpec.describe TTY::Table, 'orientation' do
         let(:renderer) { :ascii }
 
         it 'diplays table' do
-          expect(subject.render(renderer)).to eq <<-EOS.normalize
+          expect(subject.render(renderer)).to eq unindent(<<-EOS)
           +-+--+
           |1|a1|
           |2|a2|

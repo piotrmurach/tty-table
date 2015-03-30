@@ -13,7 +13,7 @@ RSpec.describe TTY::Table::Renderer::Unicode, 'indentation' do
 
   context 'when default' do
     it 'indents by value' do
-      expect(renderer.render).to eql <<-EOS.chomp
+      expect(renderer.render).to eq <<-EOS.chomp
   ┌──┬──┬──┐
   │h1│h2│h3│
   ├──┼──┼──┤

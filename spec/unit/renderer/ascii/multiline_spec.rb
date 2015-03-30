@@ -8,7 +8,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'multiline content' do
       rows = [["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
       table = TTY::Table.new rows
       renderer = described_class.new(table, multiline: false)
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +------------------+-+
         |First             |1|
         |Multiline\\nContent|2|
@@ -21,7 +21,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'multiline content' do
       rows = [["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
       table = TTY::Table.new rows
       renderer = described_class.new(table, multiline: false, column_widths: [8,1])
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +--------+-+
         |First   |1|
         |Multil… |2|
@@ -35,7 +35,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'multiline content' do
       rows = [["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
       table = TTY::Table.new header, rows
       renderer = described_class.new(table, multiline: false)
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +------------------+-------+
         |Multi\\nHeader     |header2|
         +------------------+-------+
@@ -52,7 +52,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'multiline content' do
       rows = [["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
       table = TTY::Table.new rows
       renderer = described_class.new(table, multiline: true)
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +-------+-+
         |First  |1|
         |Multi  |2|
@@ -67,7 +67,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'multiline content' do
       rows = [["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
       table = TTY::Table.new rows
       renderer = described_class.new(table, multiline: true, column_widths: [5,1])
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +-----+-+
         |First|1|
         |Multi|2|
@@ -84,7 +84,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'multiline content' do
       rows = [["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
       table = TTY::Table.new header, rows
       renderer = described_class.new(table, multiline: true)
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +-------+-------+
         |Multi  |header2|
         |Header |       |

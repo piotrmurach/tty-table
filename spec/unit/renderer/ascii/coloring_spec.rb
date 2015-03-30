@@ -16,7 +16,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'coloring' do
       renderer = described_class.new(table)
       renderer.border.style = :green
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         #{color.green('+-------+-------+')}
         #{color.green('|')}header1#{color.green('|')}header2#{color.green('|')}
         #{color.green('+-------+-------+')}
@@ -35,7 +35,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'coloring' do
       table << ['b1', color.red.on_yellow('b2')]
       renderer = described_class.new(table)
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +-------+-------+
         |#{color.yellow('header1')}|header2|
         +-------+-------+
@@ -52,7 +52,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'coloring' do
       table << ['b1', color.red.on_yellow("Multi\nLine\nContent")]
       renderer = described_class.new(table, multiline: true)
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         +-------+-------+
         |#{color.yellow('Multi  ')}|header2|
         |#{color.yellow('Header')} |       |

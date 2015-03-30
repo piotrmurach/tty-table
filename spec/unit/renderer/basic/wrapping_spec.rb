@@ -13,7 +13,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'wrapping' do
     let(:options) { {multiline: true} }
 
     it "doesn't wrap the fields" do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         header1  head2    h3      
         a1111111 a222     a3333333
         b111     b2222222 b333333 
@@ -25,7 +25,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'wrapping' do
     let(:options) { { column_widths: [3, 5, 7], multiline: true} }
 
     it 'wraps the fields' do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         hea head2 h3     
         der              
         1                

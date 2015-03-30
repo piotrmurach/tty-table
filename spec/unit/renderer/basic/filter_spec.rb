@@ -17,7 +17,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'filter' do
       }
 
       it 'filters only rows' do
-        expect(renderer.render).to eq <<-EOS.normalize
+        expect(renderer.render).to eq unindent(<<-EOS)
           h1 h2 h3
           a1 A2 a3
           b1 B2 b3
@@ -29,7 +29,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'filter' do
       let(:filter) { Proc.new { |val, row, col| col == 1 ? val.capitalize : val }}
 
       it 'filters only rows' do
-        expect(renderer.render).to eq <<-EOS.normalize
+        expect(renderer.render).to eq unindent(<<-EOS)
           h1 H2 h3
           a1 A2 a3
           b1 B2 b3
@@ -44,7 +44,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'filter' do
     let(:filter) { Proc.new { |val, row, col| col == 1 ?  val.capitalize : val } }
 
     it 'filters only rows' do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         a1 A2 a3
         b1 B2 b3
       EOS

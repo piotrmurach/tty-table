@@ -55,7 +55,7 @@ RSpec.describe TTY::Table::Border::ASCII, '#rendering' do
       let(:row) { TTY::Table::Row.new(["a1\nb1\nc1", 'a2', 'a3']) }
 
       it 'draws row line' do
-        expect(border.row_line(row)).to eq <<-EOS.normalize
+        expect(border.row_line(row)).to eq unindent(<<-EOS)
           |a1|a2|a3|
           |b1|  |  |
           |c1|  |  |
@@ -67,7 +67,7 @@ RSpec.describe TTY::Table::Border::ASCII, '#rendering' do
       let(:row) { TTY::Table::Row.new(["a1\n\n", "\na2\n", "\n\na3"]) }
 
       it 'draws row line' do
-        expect(border.row_line(row)).to eq <<-EOS.normalize
+        expect(border.row_line(row)).to eq unindent(<<-EOS)
           |a1|  |  |
           |  |a2|  |
           |  |  |a3|
@@ -79,7 +79,7 @@ RSpec.describe TTY::Table::Border::ASCII, '#rendering' do
       let(:row) { TTY::Table::Row.new(["\na1\n", "\na2\n", "\na3\n"]) }
 
       it 'draws row line' do
-        expect(border.row_line(row)).to eq <<-EOS.normalize
+        expect(border.row_line(row)).to eq unindent(<<-EOS)
           |  |  |  |
           |a1|a2|a3|
           |  |  |  |

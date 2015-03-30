@@ -46,7 +46,7 @@ RSpec.describe TTY::Table, '#render_with' do
     }
 
     it 'displays custom border' do
-      expect(table.render_with(MyBorder)).to eq <<-EOS.normalize
+      expect(table.render_with(MyBorder)).to eq unindent(<<-EOS)
         *==*==*==*
         $h1$h2$h3$
         *==*==*==*
@@ -73,7 +73,7 @@ RSpec.describe TTY::Table, '#render_with' do
     }
 
     it 'displays border' do
-      expect(table.render_with(MyBorder)).to eq <<-EOS.normalize
+      expect(table.render_with(MyBorder)).to eq unindent(<<-EOS)
         $h1$h2$h3$
         $a1$a2$a3$
         $b1$b2$b3$
@@ -96,7 +96,7 @@ RSpec.describe TTY::Table, '#render_with' do
       result = table.render_with MyBorder do |renderer|
         renderer.border.style = :red
       end
-      expect(result).to eq <<-EOS.normalize
+      expect(result).to eq unindent(<<-EOS)
         \e[31m|\e[0mh1h2h3\e[31m|\e[0m
         \e[31m|\e[0ma1a2a3\e[31m|\e[0m
         \e[31m|\e[0mb1b2b3\e[31m|\e[0m

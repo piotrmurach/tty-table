@@ -13,12 +13,12 @@ RSpec.describe TTY::Table::Renderer::Unicode, 'padding' do
     let(:options) { {padding: [0,1,0,1]} }
 
     it 'pads each field' do
-      expect(renderer.render).to eql <<-EOS.chomp
-┌───────┬─────────┬──────┬─────┬─────────┬───────┐
-│ Field │ Type    │ Null │ Key │ Default │ Extra │
-├───────┼─────────┼──────┼─────┼─────────┼───────┤
-│ id    │ int(11) │ YES  │ nil │ NULL    │       │
-└───────┴─────────┴──────┴─────┴─────────┴───────┘
+      expect(renderer.render).to eql unindent(<<-EOS)
+        ┌───────┬─────────┬──────┬─────┬─────────┬───────┐
+        │ Field │ Type    │ Null │ Key │ Default │ Extra │
+        ├───────┼─────────┼──────┼─────┼─────────┼───────┤
+        │ id    │ int(11) │ YES  │ nil │ NULL    │       │
+        └───────┴─────────┴──────┴─────┴─────────┴───────┘
       EOS
     end
   end
@@ -27,16 +27,16 @@ RSpec.describe TTY::Table::Renderer::Unicode, 'padding' do
     let(:options) { {padding: [1,0,1,0], multiline: true} }
 
     it 'pads each field' do
-      expect(renderer.render).to eql <<-EOS.chomp
-┌─────┬───────┬────┬───┬───────┬─────┐
-│     │       │    │   │       │     │
-│Field│Type   │Null│Key│Default│Extra│
-│     │       │    │   │       │     │
-├─────┼───────┼────┼───┼───────┼─────┤
-│     │       │    │   │       │     │
-│id   │int(11)│YES │nil│NULL   │     │
-│     │       │    │   │       │     │
-└─────┴───────┴────┴───┴───────┴─────┘
+      expect(renderer.render).to eql unindent(<<-EOS)
+        ┌─────┬───────┬────┬───┬───────┬─────┐
+        │     │       │    │   │       │     │
+        │Field│Type   │Null│Key│Default│Extra│
+        │     │       │    │   │       │     │
+        ├─────┼───────┼────┼───┼───────┼─────┤
+        │     │       │    │   │       │     │
+        │id   │int(11)│YES │nil│NULL   │     │
+        │     │       │    │   │       │     │
+        └─────┴───────┴────┴───┴───────┴─────┘
       EOS
     end
   end
@@ -45,16 +45,16 @@ RSpec.describe TTY::Table::Renderer::Unicode, 'padding' do
     let(:options) { {padding: [1,1,1,1], multiline: true} }
 
     it 'pads each field' do
-      expect(renderer.render).to eql <<-EOS.chomp
-┌───────┬─────────┬──────┬─────┬─────────┬───────┐
-│       │         │      │     │         │       │
-│ Field │ Type    │ Null │ Key │ Default │ Extra │
-│       │         │      │     │         │       │
-├───────┼─────────┼──────┼─────┼─────────┼───────┤
-│       │         │      │     │         │       │
-│ id    │ int(11) │ YES  │ nil │ NULL    │       │
-│       │         │      │     │         │       │
-└───────┴─────────┴──────┴─────┴─────────┴───────┘
+      expect(renderer.render).to eql unindent(<<-EOS)
+        ┌───────┬─────────┬──────┬─────┬─────────┬───────┐
+        │       │         │      │     │         │       │
+        │ Field │ Type    │ Null │ Key │ Default │ Extra │
+        │       │         │      │     │         │       │
+        ├───────┼─────────┼──────┼─────┼─────────┼───────┤
+        │       │         │      │     │         │       │
+        │ id    │ int(11) │ YES  │ nil │ NULL    │       │
+        │       │         │      │     │         │       │
+        └───────┴─────────┴──────┴─────┴─────────┴───────┘
       EOS
     end
   end

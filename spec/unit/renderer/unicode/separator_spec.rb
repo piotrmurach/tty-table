@@ -13,7 +13,7 @@ RSpec.describe TTY::Table::Renderer::Unicode, 'with separator' do
 
   it "renders each row" do
     renderer.border.separator= :each_row
-    expect(renderer.render).to eq <<-EOS.normalize
+    expect(renderer.render).to eq unindent(<<-EOS)
       ┌──┬──┬──┐
       │h1│h2│h3│
       ├──┼──┼──┤

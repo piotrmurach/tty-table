@@ -11,7 +11,7 @@ RSpec.describe TTY::Table, 'padding' do
     expect(table.render(:ascii) { |renderer|
       renderer.padding.right = 2
       renderer.padding.top  = 1
-    }).to eq <<-EOS.normalize
+    }).to eq unindent(<<-EOS)
       +----+----+----+
       |    |    |    |
       |h1  |h2  |h3  |
@@ -27,7 +27,7 @@ RSpec.describe TTY::Table, 'padding' do
   it 'sets padding for all' do
     expect(table.render(:ascii) { |renderer|
       renderer.padding= [1,2,1,2]
-    }).to eq <<-EOS.normalize
+    }).to eq unindent(<<-EOS)
       +------+------+------+
       |      |      |      |
       |  h1  |  h2  |  h3  |
@@ -50,7 +50,7 @@ RSpec.describe TTY::Table, 'padding' do
       expect(table.render(:ascii) { |renderer|
         renderer.column_widths = column_widths
         renderer.padding= [1,2,1,2]
-      }).to eq <<-EOS.normalize
+      }).to eq unindent(<<-EOS)
         +--------+--------+--------+
         |        |        |        |
         |  h1    |  h2    |  h3    |
@@ -77,7 +77,7 @@ RSpec.describe TTY::Table, 'padding' do
         expect(table.render(:ascii) { |renderer|
           renderer.multiline = true
           renderer.padding= [1,2,1,2]
-        }).to eq <<-EOS.normalize
+        }).to eq unindent(<<-EOS)
           +---------+----------+
           |         |          |
           |  h1     |  head2   |
@@ -103,7 +103,7 @@ RSpec.describe TTY::Table, 'padding' do
         expect(table.render(:ascii) { |renderer|
           renderer.multiline = false
           renderer.padding= [0,2,0,2]
-        }).to eq <<-EOS.normalize
+        }).to eq unindent(<<-EOS)
           +---------------------+---------------------+
           |  h1                 |  head2              |
           +---------------------+---------------------+

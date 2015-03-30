@@ -13,7 +13,7 @@ RSpec.describe TTY::Table::Renderer::Unicode, '#render' do
     let(:table) { TTY::Table.new rows }
 
     it 'display table rows' do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         ┌──┬──┬──┐
         │a1│a2│a3│
         │b1│b2│b3│
@@ -24,7 +24,7 @@ RSpec.describe TTY::Table::Renderer::Unicode, '#render' do
 
   context 'with header' do
     it 'displays table with header' do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         ┌──┬──┬──┐
         │h1│h2│h3│
         ├──┼──┼──┤
@@ -40,7 +40,7 @@ RSpec.describe TTY::Table::Renderer::Unicode, '#render' do
     let(:rows)   { [['aaa1', 'a2'], ['b1', 'bb1']] }
 
     it 'displays table according to widths' do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         ┌────┬───┐
         │h1  │h2 │
         ├────┼───┤
@@ -55,7 +55,7 @@ RSpec.describe TTY::Table::Renderer::Unicode, '#render' do
     let(:header) { ['header1', 'header2', 'header3'] }
 
     it 'header greater than row sizes' do
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         ┌───────┬───────┬───────┐
         │header1│header2│header3│
         ├───────┼───────┼───────┤

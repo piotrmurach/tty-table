@@ -16,7 +16,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'coloring' do
       renderer = described_class.new(table)
       renderer.border = {style: :green}
 
-      expect(renderer.render).to eql <<-EOS.normalize
+      expect(renderer.render).to eql unindent(<<-EOS)
         header1 header2
         a1      a2     
         b1      b2     
@@ -32,7 +32,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'coloring' do
       table << ['b1', color.red.on_yellow('b2')]
       renderer = described_class.new(table)
 
-      expect(renderer.render).to eq <<-EOS.normalize
+      expect(renderer.render).to eq unindent(<<-EOS)
         #{color.green('header1')} header2
         #{color.green.on_blue('a1')}      a2     
         b1      #{color.red.on_yellow('b2')}     
