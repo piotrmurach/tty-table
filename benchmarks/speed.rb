@@ -2,35 +2,40 @@
 
 # Benchmark speed of table operations
 
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
 require 'tty-table'
 require 'benchmark'
 require 'benchmark/ips'
 
-header        = [:name, :color]
-rows          = (1..100).map { |n| ["row#{n}", "red"] }
-table         = TTY::Table.new(header, rows)
-table_ascii   = TTY::Table.new(header, rows, :renderer => :ascii)
-table_unicode = TTY::Table.new(header, rows, :renderer => :unicode)
-table_color   = TTY::Table.new(header, rows, :renderer => :ascii, :border => { :style => :red })
+header = [:name, :color]
+rows   = (1..100).map { |n| ["row#{n}", "red"] }
+table  = TTY::Table.new(header, rows)
 
 Benchmark.ips do |r|
   r.report("Ruby #to_s") do
     rows.to_s
   end
 
-  r.report("TTY #to_s") do
-    table.to_s
+  r.report("TTY #render") do
+    table.render
   end
 
-  r.report("TTY ASCII #to_s") do
-    table_ascii.to_s
+  r.report("TTY #render ASCII") do
+    table.render(:ascii)
   end
 
-  r.report("TTY Unicode #to_s") do
-    table_unicode.to_s
+  r.report("TTY #render Unicode") do
+    table.render(:unicode)
   end
 
-  r.report("TTY Color #to_s") do
-    table_color.to_s
+  r.report("TTY #render Color") do
+    table.render(:ascii, border: {style: :red})
   end
 end
+
+#          Ruby #to_s     2588.6 (±12.2%) i/s -      12948 in   5.084883s
+#         TTY #render       20.8 (±9.6%) i/s  -        104 in   5.030159s
+#   TTY #render ASCII       18.1 (±16.5%) i/s -         89 in   5.041230s
+# TTY #render Unicode       18.0 (±16.7%) i/s -         88 in   5.029868s
+#   TTY #render Color       11.7 (±17.1%) i/s -         58 in   5.071654s
