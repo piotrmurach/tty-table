@@ -1,16 +1,18 @@
 # TTY::Table
 
-[![Gem Version](https://badge.fury.io/rb/tty-table.png)][gem]
-[![Build Status](https://secure.travis-ci.org/peter-murach/tty-table.png?branch=master)][travis]
-[![Code Climate](https://codeclimate.com/github/peter-murach/tty-table.png)][codeclimate]
-[![Coverage Status](https://coveralls.io/repos/peter-murach/tty-table/badge.png)][coverage]
+[![Gem Version](https://badge.fury.io/rb/tty-table.svg)][gem]
+[![Build Status](https://secure.travis-ci.org/peter-murach/tty-table.svg?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/peter-murach/tty-table/badges/gpa.svg)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/peter-murach/tty-table/badge.svg?branch=master)][coverage]
+[![Inline docs](http://inch-ci.org/github/peter-murach/tty-table.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/tty-table
 [travis]: http://travis-ci.org/peter-murach/tty-table
 [codeclimate]: https://codeclimate.com/github/peter-murach/tty-table
 [coverage]: https://coveralls.io/r/peter-murach/tty-table
+[inchpages]: http://inch-ci.org/github/peter-murach/tty-table
 
-> A flexible and intuitive table generator.
+> A flexible and intuitive table formatting.
 
 **TTY::Table** provides independent table formatting component for [TTY](https://github.com/peter-murach/tty) toolkit.
 
