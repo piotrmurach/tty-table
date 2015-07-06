@@ -1,3 +1,8 @@
+0.3.0 (July 6, 2015)
+
+* Change benchmarks to reflect API
+* Change dependency on tty-screen
+
 0.2.0 (Mar 30, 2015)
 
 * Add UTF-8 support for operations
