@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = [""]
   spec.summary       = %q{A flexible and intuitive table generator}
   spec.description   = %q{A flexible and intuitive table generator}
-  spec.homepage      = "https://github.com/peter-murach/tty-table"
+  spec.homepage      = "http://peter-murach.github.io/tty/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,11 +18,11 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'equatable',   '~> 0.5'
-  spec.add_dependency 'necromancer', '~> 0.3'
-  spec.add_dependency 'pastel',      '~> 0.4'
-  spec.add_dependency 'tty-screen',  '~> 0.2'
-  spec.add_dependency 'verse',       '~> 0.4'
+  spec.add_dependency 'equatable',    '~> 0.5.0'
+  spec.add_dependency 'necromancer',  '~> 0.3.0'
+  spec.add_dependency 'pastel',       '~> 0.5.1'
+  spec.add_dependency 'tty-screen',   '~> 0.4.0'
+  spec.add_dependency 'verse',        '~> 0.4.0'
   spec.add_dependency 'unicode_utils','~> 1.4.0'
 
   spec.add_development_dependency 'bundler', '~> 1.5'
