@@ -1,3 +1,7 @@
+0.4.0 (Sept 20, 2015)
+
+* Update dependencies on tty-screen and pastel
+
 0.3.0 (July 6, 2015)
 
 * Change benchmarks to reflect API
