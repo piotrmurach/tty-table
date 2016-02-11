@@ -13,7 +13,7 @@ module TTY
 
     # A set of header elements that correspond to values in each row
     class Header
-      include Equatable, Enumerable
+      include Enumerable
       extend Forwardable
 
       def_delegators :@attributes, :join, :map, :map!
