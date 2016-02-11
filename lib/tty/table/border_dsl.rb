@@ -15,7 +15,7 @@ module TTY
       # @return [Table::BorderOptions]
       attr_reader :options
 
-      def_delegators :@options, :characters, :style
+      def_delegators :@options, :characters
 
       # Initialize a BorderDSL
       #
@@ -39,7 +39,8 @@ module TTY
       # @return [undefined]
       #
       # @api public
-      def style(value)
+      def style(value = (not_set = true))
+        return options.style if not_set
         options.style = value
       end
 
