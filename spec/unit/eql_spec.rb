@@ -9,7 +9,7 @@ RSpec.describe TTY::Table, '#eql?' do
   subject { object.eql?(other) }
 
   describe '#inspect' do
-    it { expect(object.inspect).to match /#<TTY::Table/ }
+    it { expect(object.inspect).to match(/#<TTY::Table/) }
   end
 
   context 'with the same object' do
