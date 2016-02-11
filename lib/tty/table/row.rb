@@ -18,7 +18,7 @@ module TTY
     #
     # @api private
     class Row
-      include Enumerable, Equatable
+      include Enumerable
       extend Forwardable
 
       # The row attributes that describe each element
