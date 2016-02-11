@@ -4,6 +4,10 @@
 
 ### Changed
 * Upgrade pastel & tty-screen dependencies
+* Remove unused parameters from Operations::Padding
+
+### Fixed
+* Fix all warnings
 
 ## [v0.4.0] - 2015-09-20
 
