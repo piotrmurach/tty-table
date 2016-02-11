@@ -7,19 +7,15 @@ module TTY
       #
       # Used internally by {Table::Renderer}
       class Padding
-
-        attr_reader :widths
-
         # Initialize a Padding operation
         #
-        # @param [TTY::Table::Padder] padding
+        # @param [Verse::Padder] padding
         #
         # @param [Array[Integer]] widths
         #
         # @api public
-        def initialize(padding, widths)
+        def initialize(padding)
           @padding = padding
-          @widths  = widths
         end
 
         # Apply padding to a field
@@ -36,10 +32,13 @@ module TTY
         # @return [TTY::Table::Field]
         #
         # @api public
-        def call(field, row, col)
-          column_width = widths[col]
-          Verse.pad(field.content, @padding)
+        def call(field, *)
+          Verse.pad(field.content, padding)
         end
+
+        protected
+
+        attr_reader :padding
       end # Padding
     end # Operation
   end # Table
