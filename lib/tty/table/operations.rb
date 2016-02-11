@@ -69,7 +69,7 @@ module TTY
         end
       end
 
-      private
+      protected
 
       # The table
       #

@@ -12,6 +12,10 @@ module TTY
 
       BORDER_WIDTH = 1
 
+      attr_reader :table
+
+      attr_reader :renderer
+
       # Initialize a Columns
       #
       # @param [TTY::Table] table
@@ -91,10 +95,6 @@ module TTY
       end
 
       private
-
-      attr_reader :table
-
-      attr_reader :renderer
 
       # Rotate table to vertical orientation and print information to stdout
       #

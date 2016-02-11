@@ -196,7 +196,7 @@ module TTY
           @operations.add(:padding,    Operation::Padding.new(padding))
         end
 
-        private
+        protected
 
         # Table to be rendered
         #

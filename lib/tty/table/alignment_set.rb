@@ -65,7 +65,7 @@ module TTY
         to_ary
       end
 
-      private
+      protected
 
       attr_reader :alignments
     end # AlignmentSet
