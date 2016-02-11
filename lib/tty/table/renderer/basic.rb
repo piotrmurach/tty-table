@@ -193,7 +193,7 @@ module TTY
           @operations.add(:filter,     Operation::Filter.new(filter))
           @operations.add(:truncation, Operation::Truncation.new(widths))
           @operations.add(:wrapping,   Operation::Wrapped.new(widths))
-          @operations.add(:padding,    Operation::Padding.new(padding, widths))
+          @operations.add(:padding,    Operation::Padding.new(padding))
         end
 
         private
