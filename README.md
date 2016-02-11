@@ -704,4 +704,4 @@ table.render width: 80, resize: true
 
 ## Copyright
 
-Copyright (c) 2015 Piotr Murach. See LICENSE for further details.
+Copyright (c) 2015-2016 Piotr Murach. See LICENSE for further details.
