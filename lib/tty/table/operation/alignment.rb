@@ -29,7 +29,7 @@ module TTY
           align_field(field, col)
         end
 
-        private
+        protected
 
         attr_reader :alignments
 
