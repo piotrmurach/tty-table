@@ -575,9 +575,11 @@ end
 To color even fields red on green background add filter like so
 
 ```ruby
+pastel = Pastel.new
+
 table.render do |renderer|
   renderer.filter = proc do |val, row_index, col_index|
-    col_index % 2 == 1 ? TTY.color.set(val, :red, :on_green) : val
+    col_index % 2 == 1 ? pastel.red.on_green(val) : val
   end
 end
 ```
