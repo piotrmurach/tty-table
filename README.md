@@ -1,20 +1,20 @@
 # TTY::Table
 
 [![Gem Version](https://badge.fury.io/rb/tty-table.svg)][gem]
-[![Build Status](https://secure.travis-ci.org/peter-murach/tty-table.svg?branch=master)][travis]
-[![Code Climate](https://codeclimate.com/github/peter-murach/tty-table/badges/gpa.svg)][codeclimate]
-[![Coverage Status](https://coveralls.io/repos/peter-murach/tty-table/badge.svg?branch=master)][coverage]
-[![Inline docs](http://inch-ci.org/github/peter-murach/tty-table.svg?branch=master)][inchpages]
+[![Build Status](https://secure.travis-ci.org/piotrmurach/tty-table.svg?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/piotrmurach/tty-table/badges/gpa.svg)][codeclimate]
+[![Coverage Status](https://coveralls.io/repos/github/piotrmurach/tty-table/badge.svg?branch=master)][coverage]
+[![Inline docs](http://inch-ci.org/github/piotrmurach/tty-table.svg?branch=master)][inchpages]
 
 [gem]: http://badge.fury.io/rb/tty-table
-[travis]: http://travis-ci.org/peter-murach/tty-table
-[codeclimate]: https://codeclimate.com/github/peter-murach/tty-table
-[coverage]: https://coveralls.io/r/peter-murach/tty-table
-[inchpages]: http://inch-ci.org/github/peter-murach/tty-table
+[travis]: http://travis-ci.org/piotrmurach/tty-table
+[codeclimate]: https://codeclimate.com/github/piotrmurach/tty-table
+[coverage]: https://coveralls.io/github/piotrmurach/tty-table
+[inchpages]: http://inch-ci.org/github/piotrmurach/tty-table
 
 > A flexible and intuitive table formatting.
 
-**TTY::Table** provides independent table formatting component for [TTY](https://github.com/peter-murach/tty) toolkit.
+**TTY::Table** provides independent table formatting component for [TTY](https://github.com/piotrmurach/tty) toolkit.
 
 ## Features
 
@@ -545,7 +545,7 @@ table.render do |renderer|
 end
 ```
 
-All [supported colors](https://github.com/peter-murach/pastel#3-supported-colors) are provided by the **Pastel** dependency.
+All [supported colors](https://github.com/piotrmurach/pastel#3-supported-colors) are provided by the **Pastel** dependency.
 
 ### 3.6 Filter
 
@@ -696,7 +696,7 @@ table.render width: 80, resize: true
 
 ## Contributing
 
-1. Fork it ( https://github.com/[my-github-username]/tty-table/fork )
+1. Fork it ( https://github.com/piotrmurach/tty-table/fork )
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
