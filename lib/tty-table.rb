@@ -6,7 +6,7 @@ require 'necromancer'
 require 'verse'
 require 'tty-screen'
 require 'pastel'
-require 'unicode_utils'
+require 'unicode_utils/display_width'
 
 require 'tty/table/header'
 require 'tty/table/row'
