@@ -3,6 +3,7 @@
 ## [v0.6.0] - 2016-10-26
 
 ### Changed
+* Change to use unicode-display_width dependency
 * Upgrade verse dependency
 
 ## [v0.5.0] - 2016-02-11
