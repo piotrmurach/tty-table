@@ -18,12 +18,12 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency 'equatable',    '~> 0.5.0'
-  spec.add_dependency 'necromancer',  '~> 0.3.0'
-  spec.add_dependency 'pastel',       '~> 0.6.0'
-  spec.add_dependency 'tty-screen',   '~> 0.5.0'
-  spec.add_dependency 'verse',        '~> 0.5.0'
-  spec.add_dependency 'unicode_utils','~> 1.4.0'
+  spec.add_dependency 'equatable',   '~> 0.5.0'
+  spec.add_dependency 'necromancer', '~> 0.3.0'
+  spec.add_dependency 'pastel',      '~> 0.6.0'
+  spec.add_dependency 'tty-screen',  '~> 0.5.0'
+  spec.add_dependency 'verse',       '~> 0.5.0'
+  spec.add_dependency 'unicode-display_width','~> 1.1.0'
 
   spec.add_development_dependency 'bundler', '>= 1.5.0', '< 2.0'
   spec.add_development_dependency 'rake'

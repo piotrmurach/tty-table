@@ -68,7 +68,7 @@ module TTY
       #
       # @api private
       def initialize(value)
-        options  = extract_options(value)
+        @value, options = extract_options(value)
         @content = @value.to_s
         @width   = options[:width]
         @alignment = options.fetch(:alignment) { nil }
@@ -80,14 +80,13 @@ module TTY
       #
       # @api private
       def extract_options(value)
-        if value.class <= Hash
+        if value.is_a?(Hash)
           options = value
-          @value = options.fetch(:value)
+          value = options.fetch(:value)
         else
-          @value = value
           options = {}
         end
-        options
+        [value, options]
       end
 
       # Reset to original value
@@ -101,7 +100,7 @@ module TTY
       #
       # @api public
       def width
-        @width || UnicodeUtils.display_width(@content)
+        @width || display_width(@content)
       end
 
       # Return number of lines this value spans.
@@ -157,7 +156,7 @@ module TTY
 
       # @api public
       def display_width(string)
-        UnicodeUtils.display_width(string)
+        Unicode::DisplayWidth.of(string)
       end
     end # Field
   end # Table
