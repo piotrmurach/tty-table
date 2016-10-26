@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 gemspec
 
 group :tools do
-  gem 'rspec',   '~> 3.4.0'
+  gem 'rspec',   '~> 3.5.0'
   gem 'yard',    '~> 0.8.7'
 end
 
