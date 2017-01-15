@@ -1,5 +1,8 @@
 # encoding: utf-8
 
+require 'equatable'
+require 'pastel'
+
 module TTY
   class Table
     # A class that represents a unique element in a table.

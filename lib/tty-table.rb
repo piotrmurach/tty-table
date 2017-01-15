@@ -1,8 +1,6 @@
 # coding: utf-8
 
-require 'equatable'
 require 'tty-screen'
-require 'pastel'
 require 'unicode/display_width'
 
 require 'tty/table/header'

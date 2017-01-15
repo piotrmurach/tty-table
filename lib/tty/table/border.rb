@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+require 'equatable'
+require 'pastel'
+require 'verse'
+
 module TTY
   class Table
     # Abstract base class that is responsible for building the table border.
