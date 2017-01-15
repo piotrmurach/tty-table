@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'necromancer'
+
 module TTY
   class Table
     # A class responsible for column alignments
