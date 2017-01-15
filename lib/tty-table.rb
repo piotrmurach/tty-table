@@ -1,13 +1,7 @@
 # coding: utf-8
 
-require 'tty-screen'
-require 'unicode/display_width'
-
-require 'tty/table/header'
-require 'tty/table/row'
-require 'tty/table/field'
-require 'tty/table/version'
 require 'tty/table/error'
+require 'tty/table/version'
 
 require 'tty/table/border'
 require 'tty/table/border_dsl'

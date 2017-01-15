@@ -1,5 +1,6 @@
 # encoding: utf-8
 
+require 'tty-screen'
 require 'verse'
 
 require 'tty/table/operations'
@@ -9,6 +10,7 @@ require 'tty/table/operation/wrapped'
 require 'tty/table/operation/filter'
 require 'tty/table/operation/escape'
 require 'tty/table/operation/padding'
+require 'tty/table/header'
 require 'tty/table/validatable'
 
 module TTY

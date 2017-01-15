@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'forwardable'
+require 'tty/table/field'
 
 module TTY
   class Table

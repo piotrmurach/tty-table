@@ -2,6 +2,7 @@
 
 require 'equatable'
 require 'pastel'
+require 'unicode/display_width'
 
 module TTY
   class Table

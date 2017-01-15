@@ -3,6 +3,9 @@
 require 'equatable'
 require 'forwardable'
 require 'necromancer'
+
+require 'tty/table/header'
+require 'tty/table/row'
 require 'tty/table/renderer'
 require 'tty/table/validatable'
 
