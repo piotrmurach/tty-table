@@ -1,5 +1,8 @@
 # encoding: utf-8
 
+require 'tty/table/border/ascii'
+require 'tty/table/renderer/basic'
+
 module TTY
   class Table
     class Renderer

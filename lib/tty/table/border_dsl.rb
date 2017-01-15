@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 require 'forwardable'
+require 'tty/table/border_options'
 
 module TTY
   class Table

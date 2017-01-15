@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'tty/table/border'
+
 module TTY
   class Table
     class Border

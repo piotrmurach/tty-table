@@ -3,6 +3,14 @@
 require 'tty-screen'
 require 'verse'
 
+require 'tty/table/alignment_set'
+require 'tty/table/border_dsl'
+require 'tty/table/border_options'
+require 'tty/table/border/null'
+require 'tty/table/column_constraint'
+require 'tty/table/column_set'
+require 'tty/table/header'
+require 'tty/table/indentation'
 require 'tty/table/operations'
 require 'tty/table/operation/alignment'
 require 'tty/table/operation/truncation'
@@ -10,7 +18,6 @@ require 'tty/table/operation/wrapped'
 require 'tty/table/operation/filter'
 require 'tty/table/operation/escape'
 require 'tty/table/operation/padding'
-require 'tty/table/header'
 require 'tty/table/validatable'
 
 module TTY

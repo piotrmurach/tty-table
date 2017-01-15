@@ -1,5 +1,8 @@
 # encoding: utf-8
 
+require 'tty/table/column_set'
+require 'tty/table/border/null'
+
 module TTY
   class Table
     # A class responsible for enforcing column constraints.

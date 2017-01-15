@@ -4,9 +4,12 @@ require 'equatable'
 require 'forwardable'
 require 'necromancer'
 
+require 'tty/table/column_set'
 require 'tty/table/header'
+require 'tty/table/orientation'
 require 'tty/table/row'
 require 'tty/table/renderer'
+require 'tty/table/transformation'
 require 'tty/table/validatable'
 
 module TTY

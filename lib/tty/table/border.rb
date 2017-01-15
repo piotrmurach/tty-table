@@ -4,6 +4,10 @@ require 'equatable'
 require 'pastel'
 require 'verse'
 
+require 'tty/table/border_options'
+require 'tty/table/border_dsl'
+require 'tty/table/border/row_line'
+
 module TTY
   class Table
     # Abstract base class that is responsible for building the table border.
