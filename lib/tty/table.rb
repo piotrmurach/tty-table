@@ -1,5 +1,7 @@
 # coding: utf-8
 
+require 'tty/table/renderer'
+
 module TTY
   # A core class intended for storing data in a structured, tabular form.
   # Once the data is stored in a TTY::Table various operations can be performed

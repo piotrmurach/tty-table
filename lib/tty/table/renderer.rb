@@ -1,5 +1,9 @@
 # encoding: utf-8
 
+require 'tty/table/renderer/basic'
+require 'tty/table/renderer/ascii'
+require 'tty/table/renderer/unicode'
+
 module TTY
   class Table
     # A class responsible for rendering tabular data
