@@ -1,5 +1,7 @@
 # coding: utf-8
 
+require 'verse'
+
 module TTY
   class Table
     module Operation

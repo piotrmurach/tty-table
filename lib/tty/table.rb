@@ -1,6 +1,7 @@
 # coding: utf-8
 
 require 'tty/table/renderer'
+require 'tty/table/validatable'
 
 module TTY
   # A core class intended for storing data in a structured, tabular form.
