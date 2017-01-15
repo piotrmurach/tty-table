@@ -1,5 +1,11 @@
 # Change log
 
+## [v0.7.0] - 2017-01-15
+
+### Changed
+* Change loading of dependencies and required files
+* Change pastel dependency version
+
 ## [v0.6.0] - 2016-10-26
 
 ### Changed
@@ -57,6 +63,7 @@
 
 * Initial implementation and release
 
+[v0.7.0]: https://github.com/piotrmurach/tty-table/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/piotrmurach/tty-table/compare/v0.5.0...v0.6.0
 [v0.5.0]: https://github.com/piotrmurach/tty-table/compare/v0.4.0...v0.5.0
 [v0.4.0]: https://github.com/piotrmurach/tty-table/compare/v0.3.0...v0.4.0
