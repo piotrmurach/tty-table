@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'forwardable'
+
 module TTY
   class Table
     # A class responsible for bulding and modifying border

@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require 'forwardable'
+
 module TTY
   class Table
     # Convert an Array row into Header

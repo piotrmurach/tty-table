@@ -1,5 +1,6 @@
 # coding: utf-8
 
+require 'forwardable'
 require 'tty/table/renderer'
 require 'tty/table/validatable'
 

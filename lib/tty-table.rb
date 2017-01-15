@@ -1,7 +1,6 @@
 # coding: utf-8
 
 require 'equatable'
-require 'forwardable'
 require 'necromancer'
 require 'tty-screen'
 require 'pastel'
