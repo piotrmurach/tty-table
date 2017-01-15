@@ -81,13 +81,13 @@ Then simply call `render` on the instance with with border type as first argumen
 ```ruby
 table.render(:ascii)
 # =>
-  +-------+-------+
-  |header1|header2|
-  +-------+-------+
-  |a1     |a2     |
-  +-------+-------+
-  |b1     |b2     |
-  +-------+-------+
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |a1     |a2     |
+#  +-------+-------+
+#  |b1     |b2     |
+#  +-------+-------+
 ```
 
 ## 2. Interface
@@ -212,9 +212,9 @@ Once you have an instance of `TTY::Table` you can decorate the content using the
 ```ruby
 table.render(:basic)
 # =>
-  header1 header2
-  a1      a2
-  b1      b2
+#  header1 header2
+#  a1      a2
+#  b1      b2
 ```
 
 This will use so called `:basic` renderer with default options. The other renderers are `:ascii` and `:unicode`.
@@ -268,9 +268,9 @@ renderer = TTY::Table::Renderer::Basic.new(table)
 ```ruby
 renderer.render
 # =>
-  header1 header2
-  a1      a2
-  b1      b2
+#  header1 header2
+#  a1      a2
+#  b1      b2
 ```
 
 This is the same as calling `render` directly on table:
@@ -294,12 +294,12 @@ and then call `render` to get the formatted data:
 ```ruby
 renderer.render
 # =>
-  +-------+-------+
-  |header1|header2|
-  +-------+-------+
-  |a1     |a2     |
-  |b1     |b2     |
-  +-------+-------+
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |a1     |a2     |
+#  |b1     |b2     |
+#  +-------+-------+
 ```
 
 This is the same as calling `render` directly on table instance with `:ascii` as the first argument:
@@ -323,12 +323,12 @@ and then call `render` to get the formatted data:
 ```ruby
 renderer.render
 # =>
-  ┌───────┬───────┐
-  │header1│header2│
-  ├───────┼───────┤
-  │a1     │a2     │
-  │b1     │b2     │
-  └───────┴───────┘
+#  ┌───────┬───────┐
+#  │header1│header2│
+#  ├───────┼───────┤
+#  │a1     │a2     │
+#  │b1     │b2     │
+#  └───────┴───────┘
 ```
 
 This is the same as calling `render` directly on table instance with `:unicode` as the first argument:
@@ -384,12 +384,12 @@ You can align each column individuall by passing `alignments` option to table re
 ```ruby
 table.render :ascii, alignments: [:center, :right]
 # =>
-  +-------+-------+
-  |header1|header2|
-  +-------+-------+
-  |  a1   |     a2|
-  |  b1   |     b2|
-  +-------+-------+
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |  a1   |     a2|
+#  |  b1   |     b2|
+#  +-------+-------+
 ```
 
 Alternatively you can align all columns with `alignment` option:
@@ -397,12 +397,12 @@ Alternatively you can align all columns with `alignment` option:
 ```ruby
 table.render :ascii, alignment: [:center]
 # =>
-  +-------+-------+
-  |header1|header2|
-  +-------+-------+
-  |  a1   |  a2   |
-  |  b1   |  b2   |
-  +-------+-------+
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |  a1   |  a2   |
+#  |  b1   |  b2   |
+#  +-------+-------+
 ```
 
 If you require a more granular alignment you can align individual fields in a row by passing `:alignment` option like so:
@@ -418,12 +418,12 @@ and then simply render:
 ```ruby
 table.render(:ascii)
 # =>
-  +-------+-------+
-  |header1|header2|
-  +-------+-------+
-  |     a1|a2     |
-  |b1     |  b2   |
-  +-------+-------+
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |     a1|a2     |
+#  |b1     |  b2   |
+#  +-------+-------+
 ```
 
 ### 3.5 Border
@@ -434,12 +434,12 @@ To print border around data table you need to specify `renderer` type out of `ba
 table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
 table.render :unicode
 # =>
-  ┌───────┬───────┐
-  │header1│header2│
-  ├───────┼───────┤
-  │a1     │a2     │
-  │b1     │b2     │
-  └───────┴───────┘
+#  ┌───────┬───────┐
+#  │header1│header2│
+#  ├───────┼───────┤
+#  │a1     │a2     │
+#  │b1     │b2     │
+#  └───────┴───────┘
 ```
 
 or by creating unicode renderer:
@@ -482,10 +482,10 @@ table.render do |renderer|
   end
 end
 # =>
-  header1 header2
-  ======= =======
-  a1      a2
-  b1      b2
+#  header1 header2
+#  ======= =======
+#  a1      a2
+#  b1      b2
 ```
 
 #### 3.5.2 Custom
@@ -512,9 +512,9 @@ Next pass the border class to your table instance `render_with` method
 table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
 table.render_with MyBorder
 # =>
-  $header1$header2$
-  $a1     $a2     $
-  *       *       *
+#  $header1$header2$
+#  $a1     $a2     $
+#  *       *       *
 ```
 
 #### 3.5.3 Separator
@@ -527,13 +527,13 @@ table.render do |renderer|
   renderer.border.separator = :each_row
 end
 # =>
-  +-------+-------+
-  |header1|header2|
-  +-------+-------+
-  |a1     |a2     |
-  +-------+-------+
-  |b1     |b2     |
-  +-------+-------+
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |a1     |a2     |
+#  +-------+-------+
+#  |b1     |b2     |
+#  +-------+-------+
 ```
 
 #### 3.5.4 Style
@@ -564,13 +564,13 @@ table.render do |renderer|
   end
 end
 # =>
-  +-------+-------+
-  |header1|header2|
-  +-------+-------+
-  |a1     |A2     |
-  +-------+-------+
-  |b1     |B2     |
-  +-------+-------+
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |a1     |A2     |
+#  +-------+-------+
+#  |b1     |B2     |
+#  +-------+-------+
 ```
 
 To color even fields red on green background add filter like so
@@ -593,13 +593,13 @@ Renderer options may include `multiline` parameter. When set to `true`, table fi
 table = TTY::Table.new [ ["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
 table.render :ascii, multiline: true
 # =>
-  +-------+-+
-  |First  |1|
-  |Multi  |2|
-  |Line   | |
-  |Content| |
-  |Third  |3|
-  +-------+-+
+#  +-------+-+
+#  |First  |1|
+#  |Multi  |2|
+#  |Line   | |
+#  |Content| |
+#  |Third  |3|
+#  +-------+-+
 ```
 
 When `multiline` is set to `false`, all line break characters will be escaped. In cases when the column widths are set, the content will be truncated.
@@ -608,11 +608,11 @@ When `multiline` is set to `false`, all line break characters will be escaped. I
 table = TTY::Table.new [["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
 table.render :ascii, multiline: false
 # =>
-  +------------------+-+
-  |First             |1|
-  |Multiline\nContent|2|
-  |Third             |3|
-  +------------------+-+
+#  +------------------+-+
+#  |First             |1|
+#  |Multiline\nContent|2|
+#  |Third             |3|
+#  +------------------+-+
 ```
 
 ### 3.8 Padding
@@ -630,18 +630,18 @@ Therefore, to apply padding to the example table do:
 ```ruby
 table.render(:ascii, padding: [1,2,1,2])
 # =>
-  +---------+---------+
-  |         |         |
-  | header1 | header2 |
-  |         |         |
-  +---------+---------+
-  |         |         |
-  | a1      | a2      |
-  |         |         |
-  |         |         |
-  | b1      | b2      |
-  |         |         |
-  +---------+---------+
+#  +---------+---------+
+#  |         |         |
+#  | header1 | header2 |
+#  |         |         |
+#  +---------+---------+
+#  |         |         |
+#  | a1      | a2      |
+#  |         |         |
+#  |         |         |
+#  | b1      | b2      |
+#  |         |         |
+#  +---------+---------+
 ```
 
 However, when adding top or bottom padding to content with line breaks, the `multiline` option needs to be set to `true` to allow for rows to span multiple lines. For example:
@@ -657,22 +657,22 @@ would render as:
 ```ruby
 table.render :ascii, multiline: true, padding: [1,2,1,2]
 # =>
-  +---------+----------+
-  |         |          |
-  |  h1     |  head2   |
-  |         |          |
-  +---------+----------+
-  |         |          |
-  |  Multi  |  Text    |
-  |  Line   |  that    |
-  |         |  wraps   |
-  |         |          |
-  |         |          |
-  |  Some   |  Simple  |
-  |  other  |          |
-  |  text   |          |
-  |         |          |
-  +---------+----------+
+#  +---------+----------+
+#  |         |          |
+#  |  h1     |  head2   |
+#  |         |          |
+#  +---------+----------+
+#  |         |          |
+#  |  Multi  |  Text    |
+#  |  Line   |  that    |
+#  |         |  wraps   |
+#  |         |          |
+#  |         |          |
+#  |  Some   |  Simple  |
+#  |  other  |          |
+#  |  text   |          |
+#  |         |          |
+#  +---------+----------+
 ```
 
 ### 3.9 Resize
@@ -689,12 +689,12 @@ rows   = [['aaa1', 'aa2', 'aaaaaaa3'], ['b1', 'b2', 'b3']]
 table = TTY::Table.new header, rows
 table.render width: 80, resize: true
 # =>
-  +---------+-------+------------+
-  |h1       |h2     |h3          |
-  +---------+-------+------------+
-  |aaa1     |aa2    |aaaaaaa3    |
-  |b1       |b2     |b3          |
-  +---------+-------+------------+
+#  +---------+-------+------------+
+#  |h1       |h2     |h3          |
+#  +---------+-------+------------+
+#  |aaa1     |aa2    |aaaaaaa3    |
+#  |b1       |b2     |b3          |
+#  +---------+-------+------------+
 ```
 
 ## Contributing
@@ -705,6 +705,8 @@ table.render width: 80, resize: true
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
 
+This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
+
 ## Copyright
 
-Copyright (c) 2015-2016 Piotr Murach. See LICENSE for further details.
+Copyright (c) 2015-2017 Piotr Murach. See LICENSE for further details.
