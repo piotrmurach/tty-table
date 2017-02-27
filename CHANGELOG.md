@@ -4,6 +4,7 @@
 
 ### Changed
 * Change necromancer dependency to fix Ruby 2.4.0
+* Change to use relative paths to load files
 
 ## [v0.7.0] - 2017-01-15
 
