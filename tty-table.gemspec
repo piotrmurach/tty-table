@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = [""]
   spec.summary       = %q{A flexible and intuitive table generator}
   spec.description   = %q{A flexible and intuitive table generator}
-  spec.homepage      = "http://piotrmurach.github.io/tty/"
+  spec.homepage      = "https://piotrmurach.github.io/tty/"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
