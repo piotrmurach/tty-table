@@ -19,8 +19,7 @@ module TTY
       #
       # @api private
       def initialize(alignments)
-        @converter = Necromancer.new
-        @alignments = @converter.convert(alignments).to(:array).map(&:to_sym)
+        @alignments = Necromancer.convert(alignments).to(:array).map(&:to_sym)
       end
 
       # Iterate over each element in the alignment set

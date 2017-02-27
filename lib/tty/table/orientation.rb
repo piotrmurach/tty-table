@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-require 'tty/table/orientation/horizontal'
-require 'tty/table/orientation/vertical'
+require_relative 'orientation/horizontal'
+require_relative 'orientation/vertical'
 
 module TTY
   class Table

@@ -1,8 +1,9 @@
 # encoding: utf-8
 
-require 'tty/table/renderer/basic'
-require 'tty/table/renderer/ascii'
-require 'tty/table/renderer/unicode'
+require_relative 'error'
+require_relative 'renderer/basic'
+require_relative 'renderer/ascii'
+require_relative 'renderer/unicode'
 
 module TTY
   class Table

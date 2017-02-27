@@ -4,9 +4,10 @@ require 'equatable'
 require 'pastel'
 require 'verse'
 
-require 'tty/table/border_options'
-require 'tty/table/border_dsl'
-require 'tty/table/border/row_line'
+require_relative 'border_options'
+require_relative 'border_dsl'
+require_relative 'border/row_line'
+require_relative 'error'
 
 module TTY
   class Table

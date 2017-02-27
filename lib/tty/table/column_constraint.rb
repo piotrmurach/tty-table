@@ -1,7 +1,8 @@
 # encoding: utf-8
 
-require 'tty/table/column_set'
-require 'tty/table/border/null'
+require_relative 'border/null'
+require_relative 'column_set'
+require_relative 'error'
 
 module TTY
   class Table

@@ -1,5 +1,7 @@
 # encoding: utf-8
 
+require_relative 'error'
+
 module TTY
   class Table
     # Mixin to provide validation for {Table}.

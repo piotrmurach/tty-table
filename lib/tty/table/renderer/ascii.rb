@@ -1,7 +1,7 @@
 # encoding: utf-8
 
-require 'tty/table/border/ascii'
-require 'tty/table/renderer/basic'
+require_relative '../border/ascii'
+require_relative '../renderer/basic'
 
 module TTY
   class Table

@@ -4,13 +4,13 @@ require 'equatable'
 require 'forwardable'
 require 'necromancer'
 
-require 'tty/table/column_set'
-require 'tty/table/header'
-require 'tty/table/orientation'
-require 'tty/table/row'
-require 'tty/table/renderer'
-require 'tty/table/transformation'
-require 'tty/table/validatable'
+require_relative 'table/column_set'
+require_relative 'table/header'
+require_relative 'table/orientation'
+require_relative 'table/row'
+require_relative 'table/renderer'
+require_relative 'table/transformation'
+require_relative 'table/validatable'
 
 module TTY
   # A core class intended for storing data in a structured, tabular form.

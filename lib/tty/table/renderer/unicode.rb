@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'tty/table/border/unicode'
+require_relative '../border/unicode'
 
 module TTY
   class Table

@@ -4,7 +4,6 @@ require 'delegate'
 
 module TTY
   class Table
-
     # Structure for holding table options with indifferent access
     class Options < DelegateClass(Hash)
 
@@ -25,6 +24,5 @@ module TTY
       end
 
     end # Options
-
   end # Table
 end # TTY

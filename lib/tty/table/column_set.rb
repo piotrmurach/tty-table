@@ -2,6 +2,8 @@
 
 require 'equatable'
 
+require_relative 'error'
+
 module TTY
   class Table
     # A class that represents table column properties.
