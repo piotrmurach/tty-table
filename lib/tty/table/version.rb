@@ -2,6 +2,6 @@
 
 module TTY
   class Table
-    VERSION = "0.7.0"
-  end
+    VERSION = "0.8.0"
+  end # Table
 end # TTY
