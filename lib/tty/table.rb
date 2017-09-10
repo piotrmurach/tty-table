@@ -4,7 +4,7 @@ require 'equatable'
 require 'forwardable'
 require 'necromancer'
 
-require_relative 'table/column_set'
+require_relative 'table/columns'
 require_relative 'table/header'
 require_relative 'table/orientation'
 require_relative 'table/row'
@@ -370,7 +370,7 @@ module TTY
     #
     # @api public
     def width
-      ColumnSet.new(self).total_width
+      Columns.new(self).total_width
     end
 
     # Return true if this is an empty table, i.e. if the number of

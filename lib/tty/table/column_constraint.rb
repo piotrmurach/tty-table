@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 require_relative 'border/null'
-require_relative 'column_set'
+require_relative 'columns'
 require_relative 'error'
 
 module TTY
@@ -109,7 +109,7 @@ module TTY
                    'orientation.'
         table.orientation = :vertical
         table.rotate
-        ColumnSet.widths_from(table)
+        Columns.widths_from(table)
       end
 
       # Expand column widths to match the requested width

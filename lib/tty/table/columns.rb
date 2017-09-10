@@ -11,10 +11,10 @@ module TTY
     # Used by {Table} to manage column sizing.
     #
     # @api private
-    class ColumnSet
+    class Columns
       include Equatable
 
-      # Initialize a ColumnSet
+      # Initialize Columns
       #
       # @param [Array[Array[Object]]] data
       #

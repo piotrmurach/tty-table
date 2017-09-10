@@ -8,7 +8,7 @@ require_relative '../border_dsl'
 require_relative '../border_options'
 require_relative '../border/null'
 require_relative '../column_constraint'
-require_relative '../column_set'
+require_relative '../columns'
 require_relative '../header'
 require_relative '../indentation'
 require_relative '../operations'
@@ -132,7 +132,7 @@ module TTY
         #
         # @api public
         def column_widths
-          @column_widths = ColumnSet.widths_from(table, @column_widths)
+          @column_widths = Columns.widths_from(table, @column_widths)
         end
 
         # Store border characters, style and separator for the table rendering
