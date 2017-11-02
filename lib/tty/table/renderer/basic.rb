@@ -118,6 +118,9 @@ module TTY
           alignment      = Array(options[:alignment]) * table.columns_size
           @alignments    = TTY::Table::AlignmentSet.new(options[:alignments] || alignment)
           @filter        = options.fetch(:filter) { proc { |val, _| val } }
+
+          puts "DEFAULT WIDTH >>> #{TTY::Screen.width}"
+
           @width         = options.fetch(:width) { TTY::Screen.width }
           @border_class  = options.fetch(:border_class) { Border::Null }
           @indent        = options.fetch(:indent) { 0 }

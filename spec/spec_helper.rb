@@ -1,6 +1,6 @@
 # coding: utf-8
 
-if RUBY_VERSION > '1.9' and (ENV['COVERAGE'] || ENV['TRAVIS'])
+if ENV['COVERAGE'] || ENV['TRAVIS']
   require 'simplecov'
   require 'coveralls'
 
@@ -16,6 +16,21 @@ if RUBY_VERSION > '1.9' and (ENV['COVERAGE'] || ENV['TRAVIS'])
 end
 
 require 'tty-table'
+require 'tty-screen'
+
+puts "#################################"
+puts "TTY::Screen::VERSION = #{TTY::Screen::VERSION}"
+puts "#size = #{TTY::Screen.size}"
+puts "#size_from_java = #{TTY::Screen.size_from_java}"
+puts "#size_from_win_api = #{TTY::Screen.size_from_win_api}"
+puts "#size_from_ioctl = #{TTY::Screen.size_from_ioctl}"
+puts "#size_from_io_console = #{TTY::Screen.size_from_io_console}"
+puts "#size_from_readline = #{TTY::Screen.size_from_readline}"
+puts "#size_from_tput = #{TTY::Screen.size_from_tput}"
+puts "#size_from_stty = #{TTY::Screen.size_from_stty}"
+puts "#size_from_env = #{TTY::Screen.size_from_env}"
+puts "#size_from_ansicon = #{TTY::Screen.size_from_ansicon}"
+puts "#################################"
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
