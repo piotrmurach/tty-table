@@ -1,5 +1,12 @@
 # Change log
 
+## [v0.9.0] - 2017-11-02
+
+### Changed
+* Change ColumnSet class to Columns
+* Change gemset to require Ruby >= 2.0.0
+* Change to update tty-screen dependency
+
 ## [v0.8.0] - 2017-02-27
 
 ### Changed
@@ -69,6 +76,7 @@
 
 * Initial implementation and release
 
+[v0.9.0]: https://github.com/piotrmurach/tty-table/compare/v0.8.0...v0.9.0
 [v0.8.0]: https://github.com/piotrmurach/tty-table/compare/v0.7.0...v0.8.0
 [v0.7.0]: https://github.com/piotrmurach/tty-table/compare/v0.6.0...v0.7.0
 [v0.6.0]: https://github.com/piotrmurach/tty-table/compare/v0.5.0...v0.6.0
