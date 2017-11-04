@@ -1,6 +1,6 @@
 # Change log
 
-## [v0.9.0] - 2017-11-02
+## [v0.9.0] - 2017-11-04
 
 ### Changed
 * Change ColumnSet class to Columns
