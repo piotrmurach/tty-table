@@ -2,6 +2,8 @@ source 'https://rubygems.org'
 
 gemspec
 
+gem 'tty-screen', git: 'https://github.com/piotrmurach/tty-screen.git'
+
 group :tools do
   gem 'yard',    '~> 0.8.7'
 end
