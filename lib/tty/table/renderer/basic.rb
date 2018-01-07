@@ -1,7 +1,7 @@
 # encoding: utf-8
 
 require 'tty-screen'
-require 'verse'
+require 'strings'
 
 require_relative '../alignment_set'
 require_relative '../border_dsl'
@@ -122,7 +122,7 @@ module TTY
           @border_class  = options.fetch(:border_class) { Border::Null }
           @indent        = options.fetch(:indent) { 0 }
           @resize        = options.fetch(:resize) { false }
-          @padding       = Verse::Padder.parse(options[:padding])
+          @padding       = Strings::Padder.parse(options[:padding])
         end
 
         # Parses supplied column widths, if not present
@@ -172,7 +172,7 @@ module TTY
         #
         # @api public
         def padding=(value)
-          @padding = Verse::Padder.parse(value)
+          @padding = Strings::Padder.parse(value)
         end
 
         # Renders table as string with border

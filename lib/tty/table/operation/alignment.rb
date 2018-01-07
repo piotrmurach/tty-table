@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'verse'
+require 'strings'
 
 module TTY
   class Table
@@ -53,7 +53,7 @@ module TTY
         def align_field(field, col)
           column_width = widths[col]
           direction    = field.alignment || alignments[col] || DEFAULT
-          Verse.align(field.content, column_width, direction)
+          Strings.align(field.content, column_width, direction: direction)
         end
       end # Alignment
     end # Operation

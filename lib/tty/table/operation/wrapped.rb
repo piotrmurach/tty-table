@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'verse'
+require 'strings'
 
 module TTY
   class Table
@@ -34,7 +34,7 @@ module TTY
         # @api public
         def call(field, row, col)
           width = widths[col] || field.width
-          Verse.wrap(field.content, width)
+          Strings.wrap(field.content, width)
         end
       end # Wrapped
     end # Operation

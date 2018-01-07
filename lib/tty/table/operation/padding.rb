@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require 'verse'
+require 'strings'
 
 module TTY
   class Table
@@ -11,7 +11,7 @@ module TTY
       class Padding
         # Initialize a Padding operation
         #
-        # @param [Verse::Padder] padding
+        # @param [Strings::Padder] padding
         #
         # @param [Array[Integer]] widths
         #
@@ -35,7 +35,7 @@ module TTY
         #
         # @api public
         def call(field, *)
-          Verse.pad(field.content, padding)
+          Strings.pad(field.content, padding)
         end
 
         protected

@@ -2,7 +2,7 @@
 
 require 'equatable'
 require 'pastel'
-require 'verse'
+require 'strings'
 
 require_relative 'border_options'
 require_relative 'border_dsl'
@@ -44,7 +44,7 @@ module TTY
           fail NotImplementedError, "#{self} is an abstract class"
         else
           @widths = column_widths
-          @padding = Verse::Padder.parse(padding)
+          @padding = Strings::Padder.parse(padding)
           @border_options = TTY::Table::BorderOptions.from options
           @color  = Pastel.new
         end
@@ -206,7 +206,7 @@ module TTY
         line.left + row.fields.each_with_index.map do |field, index|
           direction     = field.alignment || :left
           field_content = field.lines[line_index] || SPACE_CHAR * field.length
-          Verse.align(field_content, widths[index], direction)
+          Strings.align(field_content, widths[index], direction: direction)
         end.join(line.center) + line.right
       end
 
