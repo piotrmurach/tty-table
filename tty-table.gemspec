@@ -25,7 +25,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'pastel',      '~> 0.7.0'
   spec.add_dependency 'tty-screen',  '~> 0.6.0'
   spec.add_dependency 'strings',     '~> 0.1.0'
-  spec.add_dependency 'unicode-display_width','~> 1.3.0'
 
   spec.add_development_dependency 'bundler', '>= 1.5.0', '< 2.0'
   spec.add_development_dependency 'rake'
