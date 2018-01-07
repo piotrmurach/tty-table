@@ -2,7 +2,7 @@
 
 require 'equatable'
 require 'pastel'
-require 'unicode/display_width'
+require 'strings'
 
 module TTY
   class Table
@@ -104,7 +104,7 @@ module TTY
       #
       # @api public
       def width
-        @width || display_width(@content)
+        @width || Strings::Align.display_width(@content)
       end
 
       # Return number of lines this value spans.
@@ -127,7 +127,7 @@ module TTY
       # @api public
       def length
         (lines.map do |line|
-          display_width(self.class.color.strip(line))
+          Strings::Align.display_width(line)
         end << 0).max
       end
 
@@ -151,16 +151,6 @@ module TTY
       # @api public
       def to_s
         content
-      end
-
-      # @api public
-      def self.color
-        @color ||= Pastel.new(enabled: true)
-      end
-
-      # @api public
-      def display_width(string)
-        Unicode::DisplayWidth.of(string)
       end
     end # Field
   end # Table
