@@ -190,7 +190,7 @@ module TTY
 
           @operations = TTY::Table::Operations.new
           @operations.add(:escape, Operation::Escape.new)
-          @operations.run_operations(table, :escape) unless multiline
+          @operations.apply_to(table, :escape) unless multiline
           column_constraint = ColumnConstraint.new(table, self)
           @column_widths = column_constraint.enforce
           add_operations(@column_widths)
@@ -200,7 +200,7 @@ module TTY
           ops << (multiline ? :wrapping : :truncation)
           ops << :padding
           ops << :filter
-          @operations.run_operations(table, *ops)
+          @operations.apply_to(table, *ops)
 
           render_data.compact.join("\n")
         end

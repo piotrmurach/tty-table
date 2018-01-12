@@ -49,7 +49,7 @@ module TTY
       # @return [TTY::Table]
       #
       # @api public
-      def run_operations(table, *args)
+      def apply_to(table, *args)
         operation_types = args
         table.data.each_with_index do |row, row_i|
           row.fields.each_with_index do |field, col_i|

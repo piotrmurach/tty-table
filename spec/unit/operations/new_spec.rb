@@ -21,8 +21,8 @@ RSpec.describe TTY::Table::Operations, '#new' do
     expect(subject[:alignment]).to include(instance)
   end
 
-  it 'runs selected operations' do
-    subject.run_operations(table, :alignment)
+  it 'applies selected operations' do
+    subject.apply_to(table, :alignment)
     expect(table.data[0]).to eql([2,3,4])
   end
 end
