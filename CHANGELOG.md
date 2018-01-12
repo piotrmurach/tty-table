@@ -1,5 +1,12 @@
 # Change log
 
+## [v0.10.0] - 2018-01-xx
+
+### Changed
+* Change to limit Ruby version to 2.0
+* Change to use strings instead of verse
+* Change Field to rely on Strings#display_width
+
 ## [v0.9.0] - 2017-11-04
 
 ### Changed
