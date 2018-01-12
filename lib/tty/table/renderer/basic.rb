@@ -188,9 +188,9 @@ module TTY
         def render
           return if table.empty?
 
-          @operations = TTY::Table::Operations.new(table)
+          @operations = TTY::Table::Operations.new
           @operations.add(:escape, Operation::Escape.new)
-          @operations.run_operations(:escape) unless multiline
+          @operations.run_operations(table, :escape) unless multiline
           column_constraint = ColumnConstraint.new(table, self)
           @column_widths = column_constraint.enforce
           add_operations(@column_widths)
@@ -200,7 +200,7 @@ module TTY
           ops << (multiline ? :wrapping : :truncation)
           ops << :padding
           ops << :filter
-          @operations.run_operations(*ops)
+          @operations.run_operations(table, *ops)
 
           render_data.compact.join("\n")
         end

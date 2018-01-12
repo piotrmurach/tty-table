@@ -8,14 +8,8 @@ module TTY
     class Operations
       # Initialize Operations
       #
-      # @param [TTY::Table] table
-      #   the table to perform operations on
-      #
-      # @return [Object]
-      #
       # @api public
-      def initialize(table)
-        @table      = table
+      def initialize
         @operations = Hash.new { |hash, key| hash[key] = [] }
       end
 
@@ -55,7 +49,7 @@ module TTY
       # @return [TTY::Table]
       #
       # @api public
-      def run_operations(*args)
+      def run_operations(table, *args)
         operation_types = args
         table.data.each_with_index do |row, row_i|
           row.fields.each_with_index do |field, col_i|
@@ -70,11 +64,6 @@ module TTY
       end
 
       protected
-
-      # The table
-      #
-      # @api private
-      attr_reader :table
 
       # Available operations
       #

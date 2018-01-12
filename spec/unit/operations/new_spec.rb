@@ -1,7 +1,5 @@
 # coding: utf-8
 
-require 'spec_helper'
-
 RSpec.describe TTY::Table::Operations, '#new' do
   let(:object) { described_class }
   let(:row)    { [1,2,3] }
@@ -15,7 +13,7 @@ RSpec.describe TTY::Table::Operations, '#new' do
   }
   let(:instance) { callable.new }
 
-  subject { object.new table }
+  subject { object.new }
 
   before { subject.add(:alignment, instance) }
 
@@ -24,7 +22,7 @@ RSpec.describe TTY::Table::Operations, '#new' do
   end
 
   it 'runs selected operations' do
-    subject.run_operations(:alignment)
+    subject.run_operations(table, :alignment)
     expect(table.data[0]).to eql([2,3,4])
   end
 end
