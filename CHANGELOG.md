@@ -6,6 +6,8 @@
 * Change to limit Ruby version to 2.0
 * Change to use strings instead of verse
 * Change Field to rely on Strings#display_width
+* Change Operations to stop accepting table at initialization
+* Change Operations#run_operations to #apply_to
 
 ## [v0.9.0] - 2017-11-04
 
