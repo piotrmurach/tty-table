@@ -432,7 +432,7 @@ table.render(:ascii)
 To print border around data table you need to specify `renderer` type out of `basic`, `ascii`, `unicode`. By default `basic` is used. For instance, to output unicode border:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
+table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']]
 table.render :unicode
 # =>
 #  ┌───────┬───────┐
@@ -554,7 +554,7 @@ All [supported colors](https://github.com/piotrmurach/pastel#3-supported-colors)
 You can define filters that will modify individual table fields value before they are rendered. A filter can be a callable such as proc. Here's an example that formats
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
+table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']]
 table.render do |renderer|
   renderer.filter = Proc.new do |val, row_index, col_index|
     if col_index == 1 and !(row_index == 0)
