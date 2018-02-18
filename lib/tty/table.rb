@@ -339,6 +339,7 @@ module TTY
     def columns_size
       rows.size > 0 ? rows[0].size : 0
     end
+    alias columns_count columns_size
 
     # Return the number of rows
     #
