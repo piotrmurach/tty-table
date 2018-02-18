@@ -1,8 +1,8 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-require 'tty-table'
+require_relative '../lib/tty-table'
 
-table = TTY::Table.new header: ['header1', 'header2', 'header3']
+table = TTY::Table.new header: ['right align', 'center align', 'left align']
 table << ['a1', 'a2', 'a3']
 table << ['b1','b2', 'b3']
 table << ['c1', 'c2', 'c3']
