@@ -22,7 +22,7 @@ require_relative '../validatable'
 
 module TTY
   class Table
-    class Renderer
+    module Renderer
       # Renders table without any border styles.
       #
       # @api private

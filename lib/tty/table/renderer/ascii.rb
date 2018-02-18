@@ -5,7 +5,7 @@ require_relative '../renderer/basic'
 
 module TTY
   class Table
-    class Renderer
+    module Renderer
       class ASCII < Basic
         # Create ASCII renderer
         #

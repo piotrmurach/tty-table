@@ -4,7 +4,7 @@ require_relative '../border/unicode'
 
 module TTY
   class Table
-    class Renderer
+    module Renderer
       # Unicode representation of table renderer
       #
       # @api private
