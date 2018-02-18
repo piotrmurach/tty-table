@@ -1,6 +1,6 @@
 # Change log
 
-## [v0.10.0] - 2018-02-xx
+## [v0.10.0] - 2018-02-18
 
 ### Changed
 * Change to limit Ruby version to 2.0
@@ -9,8 +9,10 @@
 * Change Operations to stop accepting table at initialization
 * Change Operations#run_operations to #apply_to
 * Change Border to remove padding configuration
+* Change ColumnSet class to Columns stateless module
+* Change Indentation class to stateless module
 
-### Fied
+### Fixed
 * Fix :resize option to honour :padding values
 
 ## [v0.9.0] - 2017-11-04
