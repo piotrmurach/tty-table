@@ -39,12 +39,11 @@ module TTY
       # @return [Object]
       #
       # @api private
-      def initialize(column_widths, padding, options = nil)
+      def initialize(column_widths, options = nil)
         if self.class == Border
           fail NotImplementedError, "#{self} is an abstract class"
         else
           @widths = column_widths
-          @padding = Strings::Padder.parse(padding)
           @border_options = TTY::Table::BorderOptions.from options
           @color  = Pastel.new
         end
@@ -166,11 +165,6 @@ module TTY
       # @api private
       attr_reader :border_options
 
-      # The padding to apply to each field
-      #
-      # @api private
-      attr_reader :padding
-
       # Separate multiline string into individual rows with border.
       #
       # @param [TTY::Table::Row] row
@@ -237,9 +231,7 @@ module TTY
       #
       # @api private
       def render_line(line, left, right, intersection)
-        left + widths.map do |width|
-          line * (padding.left + width + padding.right)
-        end.join(intersection) + right
+        left + widths.map { |width| line * width }.join(intersection) + right
       end
     end # Border
   end # Table
