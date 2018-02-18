@@ -34,8 +34,8 @@ module TTY
         #
         # @api public
         def call(field, row, col)
-          width = widths[col] || field.width
-          Strings.truncate(field.content, width)
+          column_width = widths[col] || field.width
+          Strings.truncate(field.content, column_width)
         end
       end # Truncation
     end # Operation

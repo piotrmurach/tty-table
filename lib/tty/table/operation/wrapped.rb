@@ -33,8 +33,8 @@ module TTY
         #
         # @api public
         def call(field, row, col)
-          width = widths[col] || field.width
-          Strings.wrap(field.content, width)
+          column_width = widths[col] || field.width
+          Strings.wrap(field.content, column_width)
         end
       end # Wrapped
     end # Operation
