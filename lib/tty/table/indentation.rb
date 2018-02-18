@@ -1,36 +1,24 @@
 # encoding: utf-8
+# frozen_string_literal: true
 
 module TTY
   class Table
-    # A class responsible for indenting table representation
-    class Indentation
-      # The amount of indentation
-      #
-      # @api public
-      attr_accessor :indentation
-
-      # Initialize an Indentation
-      #
-      # @api public
-      def initialize(indentation)
-        @indentation = indentation
-      end
-
+    # A module responsible for indenting table representation
+    module Indentation
       # Return a table part with indentation inserted
       #
       # @param [#map, #to_s] part
       #   the rendered table part
       #
       # @api public
-      def indent(part)
+      def indent(part, indentation)
         if part.respond_to?(:to_a)
-          part.map { |line| insert_indentation(line) }
+          part.map { |line| insert_indentation(line, indentation) }
         else
-          insert_indentation(part)
+          insert_indentation(part, indentation)
         end
       end
-
-      private
+      module_function :indent
 
       # Insert indentation into a table renderd line
       #
@@ -38,10 +26,11 @@ module TTY
       #   the rendered table line
       #
       # @api public
-      def insert_indentation(line)
+      def insert_indentation(line, indentation)
         line = line.is_a?(Array) ? line[0] : line
         line.insert(0, ' ' * indentation) if line
       end
+      module_function :insert_indentation
     end # Indentation
   end # Table
 end # TTY

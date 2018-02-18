@@ -162,7 +162,7 @@ module TTY
         #
         # @api public
         def indent=(value)
-          @indentation.indentation = value
+          @indent = value
         end
 
         # Sets the output padding,
@@ -241,22 +241,6 @@ module TTY
         # @api public
         attr_reader :table
 
-        # Initializes indentation
-        #
-        # @return [TTY::Table::Indentation]
-        #
-        # @api private
-        def indentation
-          @indentation ||= TTY::Table::Indentation.new(indent)
-        end
-
-        # Delegate indentation insertion
-        #
-        # @api public
-        def insert_indent(line)
-          indentation.indent(line)
-        end
-
         # Render table data
         #
         # @api private
@@ -267,7 +251,7 @@ module TTY
           rows_with_border = render_rows(data_border)
           bottom_line      = data_border.bottom_line
 
-          insert_indent(bottom_line) if bottom_line
+          Indentation.indent(bottom_line, @indent) if bottom_line
 
           [header, rows_with_border, bottom_line].compact
         end
@@ -287,7 +271,7 @@ module TTY
           top_line = data_border.top_line
           if row.is_a?(TTY::Table::Header)
             header = [top_line, data_border.row_line(row), data_border.separator]
-            insert_indent(header.compact)
+            Indentation.indent(header.compact, @indent)
           else
             top_line
           end
@@ -325,10 +309,11 @@ module TTY
           row_line  = data_border.row_line(row)
 
           if (border.separator == TTY::Table::Border::EACH_ROW) && is_last_row
-            insert_indent([row_line, separator])
+            line = [row_line, separator]
           else
-            insert_indent(row_line)
+            line = row_line
           end
+          Indentation.indent(line, @indent)
         end
       end # Basic
     end # Renderer
