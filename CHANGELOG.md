@@ -1,6 +1,6 @@
 # Change log
 
-## [v0.10.0] - 2018-01-xx
+## [v0.10.0] - 2018-02-xx
 
 ### Changed
 * Change to limit Ruby version to 2.0
@@ -8,6 +8,10 @@
 * Change Field to rely on Strings#display_width
 * Change Operations to stop accepting table at initialization
 * Change Operations#run_operations to #apply_to
+* Change Border to remove padding configuration
+
+### Fied
+* Fix :resize option to honour :padding values
 
 ## [v0.9.0] - 2017-11-04
 
@@ -85,6 +89,7 @@
 
 * Initial implementation and release
 
+[v0.10.0]: https://github.com/piotrmurach/tty-table/compare/v0.9.0...v0.10.0
 [v0.9.0]: https://github.com/piotrmurach/tty-table/compare/v0.8.0...v0.9.0
 [v0.8.0]: https://github.com/piotrmurach/tty-table/compare/v0.7.0...v0.8.0
 [v0.7.0]: https://github.com/piotrmurach/tty-table/compare/v0.6.0...v0.7.0
