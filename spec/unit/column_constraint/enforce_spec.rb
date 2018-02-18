@@ -25,9 +25,9 @@ RSpec.describe TTY::Table::ColumnConstraint, '#enforce' do
     let(:options) { { width: 11, resize: true }}
 
     it 'raises error when table width is too small' do
-      allow(columns).to receive(:expand)
+      allow(columns).to receive(:expand_column_widths)
       columns.enforce
-      expect(columns).to have_received(:expand)
+      expect(columns).to have_received(:expand_column_widths)
     end
   end
 
