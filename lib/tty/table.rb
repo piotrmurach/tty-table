@@ -371,7 +371,7 @@ module TTY
     #
     # @api public
     def width
-      Columns.new(self).total_width
+      Columns.total_width(data)
     end
 
     # Return true if this is an empty table, i.e. if the number of
