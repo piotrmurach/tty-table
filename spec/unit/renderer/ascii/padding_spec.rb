@@ -85,4 +85,33 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'padding' do
       EOS
     end
   end
+
+  context "with resize option" do
+    it "pads fields correctly" do
+      table = TTY::Table.new(header: [ "Column 1", "Column 2", "Column 3"]) do |t|
+        t << [ "11", "12", "13" ]
+        t << [ "21", "22", "23" ]
+        t << [ "31", "32", "33" ]
+      end
+
+      renderer = TTY::Table::Renderer::ASCII.new(table, padding: [1,1,1,1], resize: true, width: 50)
+      expect(renderer.render).to eql unindent(<<-EOS)
+        +----------------+---------------+---------------+
+        |                |               |               |
+        | Column 1       | Column 2      | Column 3      |
+        |                |               |               |
+        +----------------+---------------+---------------+
+        |                |               |               |
+        | 11             | 12            | 13            |
+        |                |               |               |
+        |                |               |               |
+        | 21             | 22            | 23            |
+        |                |               |               |
+        |                |               |               |
+        | 31             | 32            | 33            |
+        |                |               |               |
+        +----------------+---------------+---------------+
+      EOS
+    end
+  end
 end

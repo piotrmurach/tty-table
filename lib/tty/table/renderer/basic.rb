@@ -193,7 +193,10 @@ module TTY
           @operations.apply_to(table, :escape) unless multiline
           column_constraint = ColumnConstraint.new(table, self)
           @column_widths = column_constraint.enforce
-          add_operations(@column_widths)
+          widths_without_padding = @column_widths.map do |_width|
+                                    _width - padding.left - padding.right
+                                  end
+          add_operations(widths_without_padding)
           ops = []
           ops << :escape unless multiline
           ops << :alignment
