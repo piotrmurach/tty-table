@@ -188,35 +188,48 @@ module TTY
         def render
           return if table.empty?
 
-          @operations = TTY::Table::Operations.new
-          @operations.add(:escape, Operation::Escape.new)
-          @operations.apply_to(table, :escape) unless multiline
+          operations = TTY::Table::Operations.new
+          operations.add(:escape, Operation::Escape.new)
+          operations.apply_to(table, :escape) unless multiline
+
           column_constraint = ColumnConstraint.new(table, self)
           @column_widths = column_constraint.enforce
           widths_without_padding = @column_widths.map do |_width|
                                     _width - padding.left - padding.right
                                   end
-          add_operations(widths_without_padding)
+          create_operations(widths_without_padding).each do |op|
+            operations.add(*op)
+          end
+          operations.apply_to(table, *select_operations)
+
+          render_data.compact.join("\n")
+        end
+
+        # Select applicable operations for this table
+        #
+        # @api private
+        def select_operations
           ops = []
           ops << :escape unless multiline
           ops << :alignment
           ops << (multiline ? :wrapping : :truncation)
           ops << :padding
           ops << :filter
-          @operations.apply_to(table, *ops)
-
-          render_data.compact.join("\n")
         end
 
-        # Initialize and add operations
+        # Initialize operations
+        #
+        # @return [Array[String, Operation]]
         #
         # @api private
-        def add_operations(widths)
-          @operations.add(:alignment,  Operation::Alignment.new(alignments, widths))
-          @operations.add(:filter,     Operation::Filter.new(filter))
-          @operations.add(:truncation, Operation::Truncation.new(widths))
-          @operations.add(:wrapping,   Operation::Wrapped.new(widths))
-          @operations.add(:padding,    Operation::Padding.new(padding))
+        def create_operations(widths)
+          [
+            [:alignment,  Operation::Alignment.new(alignments, widths)],
+            [:filter,     Operation::Filter.new(filter)],
+            [:truncation, Operation::Truncation.new(widths)],
+            [:wrapping,   Operation::Wrapped.new(widths)],
+            [:padding,    Operation::Padding.new(padding)]
+          ]
         end
 
         protected

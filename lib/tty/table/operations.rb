@@ -56,7 +56,7 @@ module TTY
             field.reset!
             operation_types.each do |type|
               operations[type].each do |operation|
-                field.content = operation.call(field, row_i, col_i)
+                field.content = operation.(field, row_i, col_i)
               end
             end
           end
