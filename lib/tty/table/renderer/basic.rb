@@ -70,7 +70,7 @@ module TTY
         # @api public
         attr_reader :indent
 
-        # The table totabl width
+        # The table total width
         #
         # @return [Integer]
         #
@@ -246,7 +246,7 @@ module TTY
         # @api private
         def render_data
           first_row        = table.first
-          data_border      = border_class.new(column_widths, padding, border)
+          data_border      = border_class.new(column_widths, border)
           header           = render_header(first_row, data_border)
           rows_with_border = render_rows(data_border)
           bottom_line      = data_border.bottom_line
