@@ -1,4 +1,9 @@
+<div align="center">
+  <a href="https://piotrmurach.github.io/tty" target="_blank"><img width="130" src="https://github.com/piotrmurach/tty/blob/master/images/tty.png" alt="tty logo" /></a>
+</div>
+
 # TTY::Table [![Gitter](https://badges.gitter.im/Join%20Chat.svg)][gitter]
+
 [![Gem Version](https://badge.fury.io/rb/tty-table.svg)][gem]
 [![Build Status](https://secure.travis-ci.org/piotrmurach/tty-table.svg?branch=master)][travis]
 [![Build status](https://ci.appveyor.com/api/projects/status/8fxrbawbyomqd979?svg=true)][appveyor]
@@ -710,4 +715,4 @@ This project is intended to be a safe, welcoming space for collaboration, and co
 
 ## Copyright
 
-Copyright (c) 2015-2018 Piotr Murach. See LICENSE for further details.
+Copyright (c) 2015 Piotr Murach. See LICENSE for further details.
