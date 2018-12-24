@@ -1,4 +1,3 @@
-# encoding: utf-8
 # frozen_string_literal: true
 
 module TTY
@@ -27,8 +26,8 @@ module TTY
       #
       # @api public
       def insert_indentation(line, indentation)
-        line = line.is_a?(Array) ? line[0] : line
-        line.insert(0, ' ' * indentation) if line
+        line = Array(line)[0]
+        ' ' * indentation + line.to_s if line
       end
       module_function :insert_indentation
     end # Indentation

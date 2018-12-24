@@ -251,7 +251,7 @@ module TTY
           rows_with_border = render_rows(data_border)
           bottom_line      = data_border.bottom_line
 
-          Indentation.indent(bottom_line, @indent) if bottom_line
+          bottom_line = Indentation.indent(bottom_line, @indent) if bottom_line
 
           [header, rows_with_border, bottom_line].compact
         end
