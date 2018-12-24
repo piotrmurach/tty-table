@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Row, '#to_ary' do
   let(:object) { described_class.new data }

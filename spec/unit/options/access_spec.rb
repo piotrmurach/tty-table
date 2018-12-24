@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 # describe TTY::Table::Options, 'options' do
 #   let(:object) { described_class }

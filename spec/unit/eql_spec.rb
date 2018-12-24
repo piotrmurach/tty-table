@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table, '#eql?' do
   let(:rows)   { [['a1', 'a2'], ['b1', 'b2']] }

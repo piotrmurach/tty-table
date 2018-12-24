@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Columns, '#widths_from' do
   let(:header) { ['h1', 'h2', 'h3'] }

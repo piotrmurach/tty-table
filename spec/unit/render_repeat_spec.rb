@@ -1,9 +1,6 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table, 'render repeat' do
-
   it "renders consistently" do
     table = TTY::Table.new header: ['header1', 'header2']
     table << ['a1', 'a2']

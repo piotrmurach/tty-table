@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Renderer::Basic, 'wrapping' do
   let(:header) { ['header1', 'head2', 'h3'] }

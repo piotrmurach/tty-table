@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::AlignmentSet, '#each' do
   let(:alignments) { [:left, :center, :right] }

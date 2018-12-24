@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::ColumnConstraint, '#enforce' do
   let(:header) { ['h1', 'h2', 'h3', 'h4'] }

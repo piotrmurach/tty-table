@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Operation::Wrapped, '#call' do
   let(:text)   { 'ラドクリフ、マラソン五輪代表に1万m出場にも含み' }

@@ -1,9 +1,6 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Header, '#new' do
-
   it "is empty without arguments" do
     header = TTY::Table::Header.new
     expect(header).to be_empty

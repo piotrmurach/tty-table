@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Renderer::Basic, 'padding' do
   let(:header) { ['Field', 'Type', 'Null', 'Key', 'Default', 'Extra'] }

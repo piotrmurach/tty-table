@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Operations, '#new' do
   let(:object) { described_class }

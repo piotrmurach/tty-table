@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Renderer::Basic, '#column_widths' do
   let(:rows)   { [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3']] }

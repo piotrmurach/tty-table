@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Operation::Truncation, '#call' do
   let(:text)   { '太丸ゴシック体' }

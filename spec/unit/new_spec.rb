@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table, '#new' do
   it { is_expected.to be_kind_of(Enumerable) }

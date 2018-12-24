@@ -1,6 +1,4 @@
-# coding: utf-8
-
-require 'spec_helper'
+# frozen_string_literal: true
 
 RSpec.describe TTY::Table::Validatable, '#validate_options!' do
   let(:described_class) { Class.new { include TTY::Table::Validatable } }
