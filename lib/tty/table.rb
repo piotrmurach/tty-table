@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 require 'equatable'
 require 'forwardable'
@@ -11,6 +11,7 @@ require_relative 'table/row'
 require_relative 'table/renderer'
 require_relative 'table/transformation'
 require_relative 'table/validatable'
+require_relative 'table/version'
 
 module TTY
   # A core class intended for storing data in a structured, tabular form.

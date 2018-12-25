@@ -1,6 +1,5 @@
-# encoding: utf-8
+# frozen_string_literal: true
 
-#require 'tty/table/border'
 require_relative '../border'
 
 module TTY
