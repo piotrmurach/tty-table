@@ -48,6 +48,20 @@ module TTY
         end
         hash
       end
+
+      # return true if there should be a separator AFTER this line
+      #
+      # @param [Integer] line
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def separator?(line)
+        return true if separator == TTY::Table::Border::EACH_ROW
+        return separator.include?(line) if separator.is_a? Array
+        return separator.call(line) if separator.is_a? Proc
+        false
+      end
     end # BorderOptions
   end # Table
 end # TTY

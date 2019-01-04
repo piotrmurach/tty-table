@@ -157,7 +157,7 @@ table.each_with_index  { |row, index| ... }    # iterate over rows with an index
 
 ### 2.3 Access
 
-In order to referene the row at `index` do:
+In order to reference the row at `index` do:
 
 ```ruby
 table = TTY::Table.new [['a1','a2'], ['b1','b2']]
@@ -525,7 +525,7 @@ table.render_with MyBorder
 
 #### 3.5.3 Separator
 
-In addition to specifying border characters you can force table to render separator line on each row like:
+In addition to specifying border characters you can force the table to render a separator line on each row like:
 
 ```ruby
 table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']]
@@ -539,6 +539,65 @@ end
 #  |a1     |a2     |
 #  +-------+-------+
 #  |b1     |b2     |
+#  +-------+-------+
+```
+
+If you want more control you can provide an array of rows *after* which a separator will be added:
+
+```ruby
+table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2'], ['c1', 'c2']]
+table.render do |renderer|
+  renderer.border.separator = [0, 2]
+end
+# =>
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |a1     |a2     |
+#  |b1     |b2     |
+#  +-------+-------+
+#  |c1     |c2     |
+#  +-------+-------+
+```
+
+**Note:** if you supply a detailed list of rows to separate, then the separator between the header and the rows
+will not be automatically added.
+
+You can also give the separator option a proc to control where the separators are:
+
+```ruby
+table = TTY::Table.new ['header1', 'header2'],
+                       [['a1', 'a2'], ['b1', 'b2'], ['c1', 'c2'], ['d1', 'd2']]
+table.render do |renderer|
+  renderer.border.separator = ->(row) { row == 0 || (row+1) % 2 == 0} # separate every two rows
+end
+# =>
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |a1     |a2     |
+#  |b1     |b2     |
+#  +-------+-------+
+#  |c1     |c2     |
+#  |d1     |d2     |
+#  +-------+-------+
+```
+
+Finally you can also position a separator using the `:separator` key word in place of a row:
+
+```ruby
+table = TTY::Table.new ['header1', 'header2'],
+                       [:separator, ['a1', 'a2'], ['b1', 'b2']]
+table << :separator << ['c1', 'c2']  # you can push separators on too!
+table.render
+# =>
+#  +-------+-------+
+#  |header1|header2|
+#  +-------+-------+
+#  |a1     |a2     |
+#  |b1     |b2     |
+#  +-------+-------+
+#  |c1     |c2     |
 #  +-------+-------+
 ```
 
