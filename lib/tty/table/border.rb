@@ -22,6 +22,9 @@ module TTY
       # Represent a separtor on each row
       EACH_ROW = :each_row
 
+      # specify a separator as a row
+      SEPARATOR = :separator
+
       class << self
         # Store characters for border
         #

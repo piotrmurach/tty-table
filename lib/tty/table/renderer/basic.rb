@@ -151,6 +151,7 @@ module TTY
           elsif !not_set
             @border = TTY::Table::BorderOptions.from(options)
           end
+          @border.separator ||= @table.separators unless @table.separators.empty?
           @border
         end
         alias_method :border=, :border
@@ -269,12 +270,10 @@ module TTY
         # @api private
         def render_header(row, data_border)
           top_line = data_border.top_line
-          if row.is_a?(TTY::Table::Header)
-            header = [top_line, data_border.row_line(row), data_border.separator]
-            Indentation.indent(header.compact, @indent)
-          else
-            top_line
-          end
+          return top_line unless row.is_a?(TTY::Table::Header)
+          separator = data_border.separator if !border.separator || border.separator?(0)
+          header = [top_line, data_border.row_line(row), separator]
+          Indentation.indent(header.compact, @indent)
         end
 
         # Format the rows
@@ -288,8 +287,9 @@ module TTY
         def render_rows(data_border)
           rows = table.rows
           size = rows.size
+          offset = table.first.is_a?(TTY::Table::Header) ? 1 : 0
           rows.each_with_index.map do |row, index|
-            render_row(row, data_border, size != (index += 1))
+            render_row(row, index+offset, data_border, size != (index + 1))
           end
         end
 
@@ -301,18 +301,17 @@ module TTY
         # @param [TTY::Table::Border] data_boder
         #   the border for this table
         #
-        # @param [Boolean] is_last_row
+        # @param [Boolean] is_not_last_row
         #
         # @api private
-        def render_row(row, data_border, is_last_row)
+        def render_row(row, index, data_border, is_not_last_row)
           separator = data_border.separator
           row_line  = data_border.row_line(row)
-
-          if (border.separator == TTY::Table::Border::EACH_ROW) && is_last_row
-            line = [row_line, separator]
-          else
-            line = row_line
-          end
+          line = if border.separator?(index) && is_not_last_row
+                   [row_line, separator]
+                 else
+                   row_line
+                 end
           Indentation.indent(line, @indent)
         end
       end # Basic

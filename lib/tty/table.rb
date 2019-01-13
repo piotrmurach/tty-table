@@ -127,6 +127,15 @@ module TTY
       yield_or_eval(&block) if block_given?
     end
 
+    # Provides a list of rows to have separations applied
+    #
+    # @return [Array]
+    #
+    # @api public
+    def separators
+      @separators ||= []
+    end
+
     # Provides access to all table data
     #
     # @return [Array]
@@ -286,9 +295,13 @@ module TTY
     #
     # @api public
     def <<(row)
-      rows_copy = rows.dup
-      assert_row_sizes rows_copy << row
-      rows << to_row(row)
+      if row == Border::SEPARATOR
+        separators << columns_size - (header ? 0 : 2)
+      else
+        rows_copy = rows.dup
+        assert_row_sizes rows_copy << row
+        rows << to_row(row)
+      end
       self
     end
 
@@ -464,8 +477,15 @@ module TTY
     #
     # @api public
     def coerce(rows)
-      rows = @converter.convert(rows).to(:array)
-      rows.map { |row| to_row(row, header) }
+      coerced_rows = []
+      @converter.convert(rows).to(:array).each do |row|
+        if row == Border::SEPARATOR
+          separators << coerced_rows.length - (header ? 0 : 1)
+        else
+          coerced_rows << to_row(row, header)
+        end
+      end
+      coerced_rows
     end
 
     private
