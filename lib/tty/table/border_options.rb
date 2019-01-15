@@ -57,10 +57,16 @@ module TTY
       #
       # @api public
       def separator?(line)
-        return true if separator == TTY::Table::Border::EACH_ROW
-        return separator.include?(line) if separator.is_a? Array
-        return separator.call(line) if separator.is_a? Proc
-        false
+        case separator
+        when TTY::Table::Border::EACH_ROW
+          true
+        when Array
+          separator.include?(line)
+        when Proc
+          separator.call(line)
+        else
+          false
+        end
       end
     end # BorderOptions
   end # Table
