@@ -1,5 +1,16 @@
 # Change log
 
+## [v0.10.1] - 2019-02-xx
+
+### Add
+* Add ability to specify separator as an Array, Proc value on a border instance
+
+### Changed
+* Change Indentation#indent to stop mutating input
+* Change gemspec to load files directly
+* Change to freeze strings
+* Change to relax constraints on tty-screen & equatable
+
 ## [v0.10.0] - 2018-02-18
 
 ### Changed
