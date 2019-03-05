@@ -19,10 +19,14 @@ module TTY
 
         # Evaluate alignment of the provided row
         #
+        # @param [TTY::Table::Field] field
+        #   the table field
+        #
         # @param [Array] row
         #  the table row
-        # @param [Hash] options
-        #  the table options
+        #
+        # @param [Integer] col
+        #   the table column index
         #
         # @return [TTY::Table::Field]
         #
@@ -42,10 +46,8 @@ module TTY
         # @param [TTY::Table::Field] field
         #   the table field
         #
-        # @param [Integer] co
+        # @param [Integer] col
         #   the table column index
-        #
-        # @param [Hash] options
         #
         # @return [TTY::Table::Field]
         #

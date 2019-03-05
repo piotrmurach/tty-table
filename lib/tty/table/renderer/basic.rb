@@ -262,7 +262,7 @@ module TTY
         # @param [TTY::Table::Row, TTY::Table::Header] row
         #   the first row in the table
         #
-        # @param [TTY::Table::Border] data_boder
+        # @param [TTY::Table::Border] data_border
         #   the border for this table
         #
         # @return [String]
@@ -278,7 +278,7 @@ module TTY
 
         # Format the rows
         #
-        # @param [TTY::Table::Border] data_boder
+        # @param [TTY::Table::Border] data_border
         #   the border for this table
         #
         # @return [Arrays[String]]
@@ -298,7 +298,7 @@ module TTY
         # @param [Array] row
         #   a row to decorate
         #
-        # @param [TTY::Table::Border] data_boder
+        # @param [TTY::Table::Border] data_border
         #   the border for this table
         #
         # @param [Boolean] is_not_last_row

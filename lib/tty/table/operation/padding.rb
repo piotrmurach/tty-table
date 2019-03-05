@@ -13,8 +13,6 @@ module TTY
         #
         # @param [Strings::Padder] padding
         #
-        # @param [Array[Integer]] widths
-        #
         # @api public
         def initialize(padding)
           @padding = padding
@@ -24,12 +22,6 @@ module TTY
         #
         # @param [TTY::Table::Field] field
         #   the table field
-        #
-        # @param [Integer] row
-        #   the field row index
-        #
-        # @param [Integer] col
-        #   the field column index
         #
         # @return [TTY::Table::Field]
         #
