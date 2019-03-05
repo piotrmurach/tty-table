@@ -38,21 +38,21 @@ module TTY
 
     # The table orientation out of :horizontal and :vertical
     #
-    # @reutrn [TTY::Table::Orientation]
+    # @return [TTY::Table::Orientation]
     #
     # @api public
     attr_reader :orientation
 
     # The table original row count
     #
-    # @reutrn [Integer]
+    # @return [Integer]
     #
     # @api public
     attr_reader :original_rows
 
     # The table original column count
     #
-    # @reutrn [Integer]
+    # @return [Integer]
     #
     # @api public
     attr_reader :original_columns
@@ -87,7 +87,7 @@ module TTY
     # @example of parameters passed as hash
     #   Table.new [{'Header1' => ['a1','a2'], 'Header2' => ['b1', 'b2'] }]}
     #
-    # @param [Array[Symbol], Hash] *args
+    # @param [Array[Symbol], Hash] args
     #
     # @api public
     def self.new(*args, &block)
@@ -442,9 +442,11 @@ module TTY
 
     # Render a given table using custom border class.
     #
-    # @param [TTY::Table::Border]
+    # @param [TTY::Table::Border] border_class
     #
     # @param [Symbol] renderer_type
+    #
+    # @param [Hash] options
     #
     # @yield [renderer]
     #
@@ -470,7 +472,7 @@ module TTY
     # This coercion mechanism is used by Table to handle Enumerable types
     # and force them into array type.
     #
-    # @param [Enumerable] object
+    # @param [Enumerable] rows
     #    the object to coerce
     #
     # @return [Array]

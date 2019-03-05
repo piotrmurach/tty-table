@@ -37,7 +37,7 @@ module TTY
 
       # Apply style color to the border
       #
-      # @param [Symbol] style
+      # @param [Symbol] value
       #   the style color for the border
       #
       # @return [undefined]
@@ -50,7 +50,7 @@ module TTY
 
       # Apply table tuple separator
       #
-      # @param [Symbol] separator
+      # @param [Symbol] value
       #   the table tuple separator
       #
       # @return [undefined]

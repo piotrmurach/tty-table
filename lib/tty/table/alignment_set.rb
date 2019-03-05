@@ -39,7 +39,7 @@ module TTY
 
       # Lookup an alignment by index
       #
-      # @param [Integer]
+      # @param [Integer] index
       #
       # @return [Symbol] alignment
       #

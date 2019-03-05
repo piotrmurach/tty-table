@@ -26,7 +26,7 @@ module TTY
 
       # Group hash keys into header and values into rows
       #
-      # @params [Hash] value
+      # @param [Hash] value
       #
       # @api public
       def self.group_header_and_rows(value)

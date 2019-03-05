@@ -141,7 +141,7 @@ module TTY
       #
       # @param [Symbol] color
       #
-      # @param [Array[String]] array of strings
+      # @param [Array[String]] strings array of strings
       #
       # @return [Array[String]]
       #
@@ -191,7 +191,7 @@ module TTY
       # @param [TTY::Table::Row] row
       #   the table row
       #
-      # @param [Integer] line
+      # @param [Integer] line_index
       #  the index for current line inside multiline
       #
       # @param [TTY::Table::Border::RowLine] line

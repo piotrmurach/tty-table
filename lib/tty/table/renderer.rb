@@ -21,11 +21,11 @@ module TTY
 
       # Select renderer class based on string name.
       #
-      # The possible values for renderer are
+      # The possible values for type are
       #   [:basic, :ascii, :unicode]
       #
-      # @param [Symbol] renderer
-      #   the renderer used for displaying table
+      # @param [Symbol] type
+      #   the renderer type used for displaying table
       #
       # @return [TTY::Table::Renderer]
       #

@@ -101,7 +101,7 @@ module TTY
       # Lookup a value in the row given an attribute allowing for Array or
       # Hash like indexing
       #
-      # @exmaple
+      # @example
       #   row[1]
       #   row[:id]
       #   row.call(:id)
