@@ -530,7 +530,7 @@ In addition to specifying border characters you can force the table to render a 
 ```ruby
 table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']]
 table.render do |renderer|
-  renderer.border.separator = :each_row
+  renderer.border.separator = TTY::Table::Border::EACH_ROW
 end
 # =>
 #  +-------+-------+
