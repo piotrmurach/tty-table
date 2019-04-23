@@ -6,7 +6,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'tty-table'
   spec.version       = TTY::Table::VERSION
   spec.authors       = ["Piotr Murach"]
-  spec.email         = [""]
+  spec.email         = ["me@piotrmurach.com"]
   spec.summary       = %q{A flexible and intuitive table generator}
   spec.description   = %q{A flexible and intuitive table generator}
   spec.homepage      = "https://piotrmurach.github.io/tty/"
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 2.0.0'
 
   spec.add_dependency 'equatable',   '~> 0.5'
-  spec.add_dependency 'necromancer', '~> 0.4.0'
+  spec.add_dependency 'necromancer', '~> 0.5'
   spec.add_dependency 'pastel',      '~> 0.7.2'
   spec.add_dependency 'tty-screen',  '~> 0.6'
   spec.add_dependency 'strings',     '~> 0.1.0'
