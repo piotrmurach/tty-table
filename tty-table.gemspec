@@ -11,7 +11,16 @@ Gem::Specification.new do |spec|
   spec.description   = %q{A flexible and intuitive table generator}
   spec.homepage      = "https://piotrmurach.github.io/tty/"
   spec.license       = "MIT"
-
+  if spec.respond_to?(:metadata=)
+    spec.metadata = {
+      "allowed_push_host" => "https://rubygems.org",
+      "bug_tracker_uri"   => "https://github.com/piotrmurach/tty-table/issues",
+      "changelog_uri"     => "https://github.com/piotrmurach/tty-table/blob/master/CHANGELOG.md",
+      "documentation_uri" => "https://www.rubydoc.info/gems/tty-table",
+      "homepage_uri"      => spec.homepage,
+      "source_code_uri"   => "https://github.com/piotrmurach/tty-table"
+    }
+  end
   spec.files         = Dir['{lib,spec,examples}/**/*.rb']
   spec.files        += Dir['{bin,tasks}/*', 'tty-table.gemspec']
   spec.files        += Dir['README.md', 'CHANGELOG.md', 'LICENSE.txt', 'Rakefile']
