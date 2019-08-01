@@ -1,6 +1,6 @@
 # Change log
 
-## [v0.11.0] - 2019-07-xx
+## [v0.11.0] - 2019-08-01
 
 ### Add
 * Add ability to specify border separator as an Array, Proc value by Mitch VanDuyn(@catmando)
@@ -103,6 +103,7 @@
 
 * Initial implementation and release
 
+[v0.11.0]: https://github.com/piotrmurach/tty-table/compare/v0.10.0...v0.11.0
 [v0.10.0]: https://github.com/piotrmurach/tty-table/compare/v0.9.0...v0.10.0
 [v0.9.0]: https://github.com/piotrmurach/tty-table/compare/v0.8.0...v0.9.0
 [v0.8.0]: https://github.com/piotrmurach/tty-table/compare/v0.7.0...v0.8.0
