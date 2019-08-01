@@ -64,5 +64,20 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'coloring' do
         +-------+-------+
       EOS
     end
+
+    xit "colors adjecent content" do
+      hello = color.decorate("hello", :black, :on_green)
+      world = color.decorate("world", :black, :on_red)
+
+      table = TTY::Table.new [:header], [
+        [hello],
+        [world],
+        [hello + world],
+        [hello + ' ' + world],
+      ]
+      renderer = described_class.new(table, column_widths: 6, multiline: true)
+
+      rendered = renderer.render
+    end
   end
 end
