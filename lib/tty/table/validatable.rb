@@ -27,6 +27,22 @@ module TTY
         end
       end
 
+      # Check if table row is the correct size
+      #
+      # @raise [DimensionMismatchError]
+      #   if the row is not the correct length
+      #
+      # @return [nil]
+      #
+      # @api private
+      def assert_row_size(row, rows)
+        return if rows.empty?
+        size = rows.last.size
+        return if row.size == size
+        fail TTY::Table::DimensionMismatchError,
+             "row size differs (#{row.size} should be #{size})"
+      end
+
       # Check if table type is provided
       #
       # @raise [ArgumentRequired]
