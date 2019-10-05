@@ -298,8 +298,7 @@ module TTY
       if row == Border::SEPARATOR
         separators << columns_size - (header ? 0 : 2)
       else
-        rows_copy = rows.dup
-        assert_row_sizes rows_copy << row
+        assert_row_size(row, rows)
         rows << to_row(row)
       end
       self
