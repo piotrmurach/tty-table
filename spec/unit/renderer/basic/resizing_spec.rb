@@ -84,9 +84,9 @@ RSpec.describe TTY::Table::Renderer::Basic, 'resizing' do
 
       it 'resizes each column' do
         expect(renderer.render).to eql unindent(<<-EOS)
-          he…  he…  head3 
-          aaa1 aa2  aaaa… 
-          b1   b2   b3    
+          head1 he…  head3
+          aaa1  aa2  aaa… 
+          b1    b2   b3   
         EOS
       end
     end

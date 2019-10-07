@@ -99,12 +99,12 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'resizing' do
 
       it 'resizes each column' do
         expect(renderer.render).to eql unindent(<<-EOS)
-         +---+---+-----+
-         |h… |h… |head3|
-         +---+---+-----+
-         |a… |aa2|aaa… |
-         |b1 |b2 |b3   |
-         +---+---+-----+
+         +----+----+---+
+         |he… |he… |h… |
+         +----+----+---+
+         |aaa1|aa2 |a… |
+         |b1  |b2  |b3 |
+         +----+----+---+
         EOS
       end
     end
