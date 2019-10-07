@@ -141,7 +141,9 @@ module TTY
         ratio       = ((natural_width - renderer.width) / column_size.to_f).ceil
 
         widths = (0...column_size).reduce([]) do |lengths, col|
-          width = (renderer.column_widths[col] - ratio).clamp(minimum_width, renderer.width)
+          width = (renderer.column_widths[col] - ratio)
+          # basically ruby 2.4 Numeric#clamp
+          width = width < minimum_width ? minimum_width : (width > renderer.width ? renderer.width : width)
           lengths << width
         end
         distribute_extra_width(widths)
