@@ -1,5 +1,13 @@
 # Change log
 
+## [v0.11.1] - 2019-10-xx
+
+### Changed
+* Change to optimize adding rows by Tim Craft(@timcraft)
+
+### Fixed
+* Fix resize option raising an error for small terminal sizes by Katelyn Schiesser(@slowbro)
+
 ## [v0.11.0] - 2019-08-01
 
 ### Add
@@ -103,6 +111,7 @@
 
 * Initial implementation and release
 
+[v0.11.1]: https://github.com/piotrmurach/tty-table/compare/v0.11.0...v0.11.1
 [v0.11.0]: https://github.com/piotrmurach/tty-table/compare/v0.10.0...v0.11.0
 [v0.10.0]: https://github.com/piotrmurach/tty-table/compare/v0.9.0...v0.10.0
 [v0.9.0]: https://github.com/piotrmurach/tty-table/compare/v0.8.0...v0.9.0
