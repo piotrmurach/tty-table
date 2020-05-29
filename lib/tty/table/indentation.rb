@@ -11,7 +11,7 @@ module TTY
       #
       # @api public
       def indent(part, indentation)
-        if part.respond_to?(:to_a)
+        if part.is_a?(Enumerable) && part.respond_to?(:to_a)
           part.map { |line| insert_indentation(line, indentation) }
         else
           insert_indentation(part, indentation)
