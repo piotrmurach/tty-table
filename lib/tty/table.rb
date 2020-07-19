@@ -2,7 +2,6 @@
 
 require 'equatable'
 require 'forwardable'
-require 'necromancer'
 
 require_relative 'table/columns'
 require_relative 'table/header'
@@ -115,7 +114,6 @@ module TTY
     # @api private
     def initialize(options = {}, &block)
       validate_options! options
-      @converter     = Necromancer.new
       @header        = (value = options[:header]) ? Header.new(value) : nil
       @rows          = coerce(options.fetch(:rows) { Row.new([]) })
       @rotated       = false
@@ -479,7 +477,7 @@ module TTY
     # @api public
     def coerce(rows)
       coerced_rows = []
-      @converter.convert(rows).to(:array).each do |row|
+      Array(rows).each do |row|
         if row == Border::SEPARATOR
           separators << coerced_rows.length - (header ? 0 : 1)
         else

@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'necromancer'
-
 module TTY
   class Table
     # A class responsible for column alignments
@@ -19,7 +17,7 @@ module TTY
       #
       # @api private
       def initialize(alignments)
-        @alignments = Necromancer.convert(alignments).to(:array).map(&:to_sym)
+        @alignments = Array(alignments).map(&:to_sym)
       end
 
       # Iterate over each element in the alignment set
