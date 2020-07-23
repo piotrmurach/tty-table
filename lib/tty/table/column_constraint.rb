@@ -112,8 +112,7 @@ module TTY
       # @api private
       def rotate
         Kernel.warn 'The table size exceeds the currently set width.' \
-                   'To avoid error either. Defaulting to vertical ' \
-                   'orientation.'
+                   'Defaulting to vertical orientation.'
         table.orientation = :vertical
         table.rotate
         Columns.widths_from(table)
