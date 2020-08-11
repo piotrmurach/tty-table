@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency "equatable",   "~> 0.6"
   spec.add_dependency "pastel",      "~> 0.8"
   spec.add_dependency "tty-screen",  "~> 0.8"
-  spec.add_dependency "strings",     "~> 0.1.8"
+  spec.add_dependency "strings",     "~> 0.2.0"
 
   spec.add_development_dependency "rake"
   spec.add_development_dependency "rspec", "~> 3.1"
