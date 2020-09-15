@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require 'equatable'
 require 'forwardable'
 
 require_relative 'table/columns'
@@ -17,7 +16,7 @@ module TTY
   # Once the data is stored in a TTY::Table various operations can be performed
   # before the information is dumped into a stdout.
   class Table
-    include Comparable, Enumerable, Validatable, Equatable
+    include Comparable, Enumerable, Validatable
     extend Forwardable
 
     # The table header
@@ -485,6 +484,46 @@ module TTY
         end
       end
       coerced_rows
+    end
+
+    # Compare table for equality of header and rows attributes
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def eql?(other)
+      instance_of?(other.class) &&
+        header.eql?(other.header) && rows.eql?(other.rows)
+    end
+
+    # Compare table for equivalence of header and rows attributes
+    #
+    # @return [Boolean]
+    #
+    # @api public
+    def ==(other)
+      other.is_a?(self.class) &&
+        header == other.header && rows == other.rows
+    end
+
+    # Inspect this instance attributes
+    #
+    # @return [String]
+    #
+    # @api public
+    def inspect
+      "#<#{self.class.name} header=#{header.inspect} rows=#{rows.inspect} " \
+        "original_rows=#{original_rows.inspect} " \
+        "original_columns=#{original_columns.inspect}>"
+    end
+
+    # Hash for this instance and its attributes
+    #
+    # @return [Numeric]
+    #
+    # @api public
+    def hash
+      [self.class, header, rows].hash
     end
 
     private

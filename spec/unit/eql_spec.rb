@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 RSpec.describe TTY::Table, "#eql?" do
+  let(:header) { %w[h1 h2] }
   let(:rows) { [%w[a1 a2], %w[b1 b2]] }
 
   describe "#==" do
@@ -9,8 +10,14 @@ RSpec.describe TTY::Table, "#eql?" do
       expect(object).to eq(object)
     end
 
-    it "is not equivalent with different table" do
-      expect(described_class.new(rows)).to_not eq(described_class.new(rows))
+    it "is equivalent with a table containing same data" do
+      expect(described_class.new(header, rows)).
+        to eq(described_class.new(header, rows))
+    end
+
+    it "is not equivalent with a table containing different data" do
+      expect(described_class.new(%w[h1 h2], rows)).
+        to_not eq(described_class.new(%w[h3 h4], rows))
     end
 
     it "is not equivalent to another type" do
@@ -24,8 +31,14 @@ RSpec.describe TTY::Table, "#eql?" do
       expect(object).to eql(object)
     end
 
-    it "is not equal with different table" do
-      expect(described_class.new(rows)).to_not eql(described_class.new(rows))
+    it "is equal with a table containing same data" do
+      expect(described_class.new(header, rows)).
+        to eql(described_class.new(header, rows))
+    end
+
+    it "is not equal with a table containing different data" do
+      expect(described_class.new(header, rows)).
+        to_not eql(described_class.new(%w[h3 h4], rows))
     end
 
     it "is not equal to another type" do
@@ -35,7 +48,7 @@ RSpec.describe TTY::Table, "#eql?" do
 
   describe "#inspect" do
     it "displays object information" do
-      expect(described_class.new(rows).inspect).to match(/#<TTY::Table header=nil rows=\[(.*?)\] orientation=(.*?) original_rows=nil original_columns=nil/)
+      expect(described_class.new(rows).inspect).to match(/#<TTY::Table header=nil rows=\[(.*?)\] original_rows=nil original_columns=nil/)
     end
   end
 
