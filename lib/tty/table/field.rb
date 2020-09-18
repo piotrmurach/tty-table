@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
-require 'equatable'
-require 'pastel'
-require 'strings'
+require "strings"
 
 module TTY
   class Table
@@ -13,8 +11,6 @@ module TTY
     #
     # @api private
     class Field
-      include Equatable
-
       # The value inside the field
       #
       # @api public
@@ -151,6 +147,43 @@ module TTY
       # @api public
       def to_s
         content
+      end
+
+      # Compare fields for equality of value attribute
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def eql?(other)
+        instance_of?(other.class) && value.eql?(other.value)
+      end
+
+      # Compare fields for equivalence of value attribute
+      #
+      # @return [Boolean]
+      #
+      # @api public
+      def ==(other)
+        other.is_a?(self.class) && value == other.value
+      end
+
+      # Inspect this instance attributes
+      #
+      # @return [String]
+      #
+      # @api public
+      def inspect
+        "#<#{self.class.name} value=#{value.inspect} " \
+          "rowspan=#{rowspan.inspect} colspan=#{colspan.inspect}>"
+      end
+
+      # Hash for this instance and its attributes
+      #
+      # @return [Numeric]
+      #
+      # @api public
+      def hash
+        [self.class, value].hash
       end
     end # Field
   end # Table

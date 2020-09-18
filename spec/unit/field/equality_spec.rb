@@ -1,49 +1,59 @@
 # frozen_string_literal: true
 
-RSpec.describe TTY::Table::Field, '#==' do
-  let(:value)  { '1' }
+RSpec.describe TTY::Table::Field, "equality" do
+  let(:value) { "1" }
   let(:object) { described_class.new(value) }
 
-  subject { object == other }
+  describe "#==" do
+    it "is equal with the same object" do
+      expect(object).to eq(object)
+    end
 
-  context 'with the same object' do
-    let(:other) { object }
+    it "is equal with an quivalent object" do
+      expect(object).to eq(object.dup)
+    end
 
-    it { is_expected.to eql(true) }
+    it "is equal with an equivalent object of subclass" do
+      other = Class.new(described_class).new(value)
+      expect(object).to eq(other)
+    end
 
-    it 'is symmetric' do
-      is_expected.to eql(other == object)
+    it "isn't equal with an object having a dirrent value" do
+      other = described_class.new("2")
+      expect(object).to_not eq(other)
     end
   end
 
-  context 'with an equivalent object' do
-    let(:other) { object.dup }
+  describe "#eql" do
+    it "is equal with the same object" do
+      expect(object).to eql(object)
+    end
 
-    it { is_expected.to eql(true) }
+    it "is equal with an quivalent object" do
+      expect(object).to eql(object.dup)
+    end
 
-    it 'is symmetric' do
-      is_expected.to eql(other == object)
+    it "is equal with an equivalent object of subclass" do
+      other = described_class.new(value)
+      expect(object).to eql(other)
+    end
+
+    it "isn't equal with an object having a dirrent value" do
+      other = described_class.new("2")
+      expect(object).to_not eql(other)
     end
   end
 
-  context 'with an equivalent object of subclass' do
-    let(:other) { Class.new(described_class).new(value) }
-
-    it { is_expected.to eq(true) }
-
-    it 'is symmetric' do
-      is_expected.not_to eql(other == object)
+  describe "#inspect" do
+    it "displays object information" do
+      expect(object.inspect).to eq("#<TTY::Table::Field value=\"1\" " \
+                                   "rowspan=1 colspan=1>")
     end
   end
 
-  context 'with an object having a different value' do
-    let(:other_value) { '2' }
-    let(:other)       { described_class.new(other_value) }
-
-    it { is_expected.to eql(false) }
-
-    it 'is symmetric' do
-      is_expected.to eql(other == object)
+  describe "#hash" do
+    it "calculates object hash" do
+      expect(object.hash).to be_a_kind_of(Numeric)
     end
   end
 end
