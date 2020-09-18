@@ -14,27 +14,12 @@ module TTY
       # The value inside the field
       #
       # @api public
-      attr_reader :value
+      attr_accessor :value
 
       # The formatted value inside the field used for display
       #
       # @api public
-      attr_reader :content
-
-      # The name for the value
-      #
-      # @api public
-      attr_reader :name
-
-      # The actual value
-      #
-      # @api public
-      attr_writer :value
-
-      # The formatted string
-      #
-      # @api public
-      attr_writer :content
+      attr_accessor :content
 
       # Number of columns this field spans. Defaults to 1.
       #
@@ -71,9 +56,9 @@ module TTY
         @value, options = extract_options(value)
         @content = @value.to_s
         @width   = options[:width]
-        @alignment = options.fetch(:alignment) { nil }
-        @colspan = options.fetch(:colspan) { 1 }
-        @rowspan = options.fetch(:rowspan) { 1 }
+        @alignment = options.fetch(:alignment, nil)
+        @colspan = options.fetch(:colspan, 1)
+        @rowspan = options.fetch(:rowspan, 1)
       end
 
       # Extract options and set value
