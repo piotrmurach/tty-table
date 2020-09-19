@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative "lib/tty/table/version"
 
 Gem::Specification.new do |spec|
@@ -24,11 +26,10 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
   spec.required_ruby_version = ">= 2.0.0"
 
-  spec.add_dependency "equatable",   "~> 0.6"
-  spec.add_dependency "pastel",      "~> 0.8"
-  spec.add_dependency "tty-screen",  "~> 0.8"
-  spec.add_dependency "strings",     "~> 0.2.0"
+  spec.add_dependency "pastel",     "~> 0.8"
+  spec.add_dependency "strings",    "~> 0.2.0"
+  spec.add_dependency "tty-screen", "~> 0.8"
 
   spec.add_development_dependency "rake"
-  spec.add_development_dependency "rspec", "~> 3.1"
+  spec.add_development_dependency "rspec", ">= 3.0"
 end
