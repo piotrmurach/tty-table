@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require "equatable"
 require "pastel"
 require "strings"
 
@@ -13,8 +12,6 @@ module TTY
   class Table
     # Abstract base class that is responsible for building the table border.
     class Border
-      include Equatable
-
       EMPTY_CHAR = ""
 
       SPACE_CHAR = " "
