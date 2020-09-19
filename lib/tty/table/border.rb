@@ -1,13 +1,13 @@
 # frozen_string_literal: true
 
-require 'equatable'
-require 'pastel'
-require 'strings'
+require "equatable"
+require "pastel"
+require "strings"
 
-require_relative 'border_options'
-require_relative 'border_dsl'
-require_relative 'border/row_line'
-require_relative 'error'
+require_relative "border_options"
+require_relative "border_dsl"
+require_relative "border/row_line"
+require_relative "error"
 
 module TTY
   class Table
@@ -15,9 +15,9 @@ module TTY
     class Border
       include Equatable
 
-      EMPTY_CHAR = ''.freeze
+      EMPTY_CHAR = ""
 
-      SPACE_CHAR = ' '.freeze
+      SPACE_CHAR = " "
 
       # Represent a separtor on each row
       EACH_ROW = :each_row
@@ -44,11 +44,11 @@ module TTY
       # @api private
       def initialize(column_widths, options = nil)
         if self.class == Border
-          fail NotImplementedError, "#{self} is an abstract class"
+          raise NotImplementedError, "#{self} is an abstract class"
         else
           @widths = column_widths
           @border_options = TTY::Table::BorderOptions.from options
-          @color  = Pastel.new
+          @color = Pastel.new
         end
       end
 
@@ -60,7 +60,7 @@ module TTY
       # @return [Hash]
       #
       # @api public
-      def self.def_border(characters=(not_set=true), &block)
+      def self.def_border(characters = (not_set = true), &block)
         return self.characters = characters unless not_set
 
         dsl = TTY::Table::BorderDSL.new(&block)
@@ -130,7 +130,7 @@ module TTY
       #
       # @api public
       def row_line(row)
-        line = RowLine.new(self['left'], self['center'], self['right'])
+        line = RowLine.new(self["left"], self["center"], self["right"])
         line.colorize(self, border_options.style) if color?
 
         result = row_heights(row, line)
@@ -148,7 +148,7 @@ module TTY
       # @api public
       def set_color(color, *strings)
         strings.map do |string|
-          if string.gsub(/\s+/, '').empty?
+          if string.gsub(/\s+/, EMPTY_CHAR).empty?
             string
           else
             @color.decorate(string, color)
@@ -222,6 +222,7 @@ module TTY
                            self["#{type}_mid"])
 
         return line unless color?
+
         set_color(border_options.style, line).join
       end
 
