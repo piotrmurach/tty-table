@@ -7,49 +7,46 @@ module TTY
     # Used internally by {Table::Border} to manage options such as style
     #
     # @api private
-    class BorderOptions < Struct.new(:characters, :separator, :style)
-      # Initialize a BorderOptions
-      #
-      # @api public
-      def initialize(*args)
-        super(*args)
-        self.characters = {} unless characters
-      end
-
+    class BorderOptions
       # Create options instance from hash
       #
       # @api public
-      def self.from(value)
-        value ? new.update(value) : new
+      def self.from(options)
+        options ? new(**options) : new
       end
 
-      # Set all accessors with hash attributes
+      attr_accessor :characters
+
+      attr_accessor :separator
+
+      attr_accessor :style
+
+      # Initialize a BorderOptions
       #
-      # @param [Hash, BorderOptions] obj
-      #
-      # @return [BorderOptions]
+      # @param [String] style
+      #   the style like :red
+      # @param [String] separator
+      #   the separator character
+      # @param [Hash] characters
+      #   the border characters
       #
       # @api public
-      def update(obj)
-        obj.each_pair do |key, value|
-          send("#{key}=", value)
-        end
-        self
+      def initialize(characters: {}, separator: nil, style: nil)
+        @characters = characters
+        @separator = separator
+        @style = style
       end
 
       # Convert to hash
       #
+      # @return [Hash]
+      #
       # @api public
       def to_hash
-        hash = {}
-        members.each do |key|
-          value = send(key)
-          hash[key.to_sym] = value if value
-        end
-        hash
+        { characters: characters, separator: separator, style: style }
       end
 
-      # return true if there should be a separator AFTER this line
+      # Check if there should be a separator AFTER this line
       #
       # @param [Integer] line
       #
