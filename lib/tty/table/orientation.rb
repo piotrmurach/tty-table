@@ -33,8 +33,8 @@ module TTY
         when /v|ert(ical)?/i
           Vertical.new :vertical
         else
-          fail InvalidOrientationError,
-               "orientation must be one of :horizontal, :vertical"
+          raise InvalidOrientationError,
+                "orientation must be one of :horizontal, :vertical"
         end
       end
 

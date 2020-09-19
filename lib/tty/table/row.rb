@@ -113,7 +113,7 @@ module TTY
           data[attributes[attribute]].value
         else
           data.fetch(attribute) do |name|
-            fail UnknownAttributeError, "the attribute #{name} is unkown"
+            raise UnknownAttributeError, "the attribute #{name} is unkown"
           end.value
         end
       end

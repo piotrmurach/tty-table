@@ -22,8 +22,8 @@ module TTY
         size = (rows[0] || []).size
         rows.each do |row|
           next if row.size == size
-          fail TTY::Table::DimensionMismatchError,
-               "row size differs (#{row.size} should be #{size})"
+          raise TTY::Table::DimensionMismatchError,
+                "row size differs (#{row.size} should be #{size})"
         end
       end
 
@@ -39,8 +39,8 @@ module TTY
         return if rows.empty?
         size = rows.last.size
         return if row.size == size
-        fail TTY::Table::DimensionMismatchError,
-             "row size differs (#{row.size} should be #{size})"
+        raise TTY::Table::DimensionMismatchError,
+              "row size differs (#{row.size} should be #{size})"
       end
 
       # Check if table type is provided
@@ -52,8 +52,8 @@ module TTY
       # @api private
       def assert_table_type(value)
         return value if value.is_a?(TTY::Table)
-        fail ArgumentRequired,
-             "Expected TTY::Table instance, got #{value.inspect}"
+        raise ArgumentRequired,
+              "Expected TTY::Table instance, got #{value.inspect}"
       end
 
       # def assert_matching_widths(rows)
@@ -70,11 +70,11 @@ module TTY
         rows   = options[:rows]
 
         if header && (!header.is_a?(Array) || header.empty?)
-          fail InvalidArgument, ":header must be a non-empty array"
+          raise InvalidArgument, ":header must be a non-empty array"
         end
 
         if rows && !(rows.is_a?(Array) || rows.is_a?(Hash))
-          fail InvalidArgument, ":rows must be a non-empty array or hash"
+          raise InvalidArgument, ":rows must be a non-empty array or hash"
         end
       end
     end # Validatable

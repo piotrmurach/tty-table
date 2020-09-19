@@ -48,12 +48,12 @@ module TTY
       def assert_border_class(border_class)
         return unless border_class
         unless border_class <= TTY::Table::Border
-          fail TypeError,
-               "#{border_class} should inherit from TTY::Table::Border"
+          raise TypeError,
+                "#{border_class} should inherit from TTY::Table::Border"
         end
         unless border_class.characters
-          fail NoImplementationError,
-               "#{border_class} should implement def_border"
+          raise NoImplementationError,
+                "#{border_class} should implement def_border"
         end
       end
       module_function :assert_border_class

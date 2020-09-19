@@ -78,8 +78,8 @@ module TTY
           @attributes[attribute].value
         else
           @attribute_for.fetch(to_field(attribute)) do |header_name|
-            fail UnknownAttributeError,
-                 "the header '#{header_name.value}' is unknown"
+            raise UnknownAttributeError,
+                  "the header '#{header_name.value}' is unknown"
           end
         end
       end

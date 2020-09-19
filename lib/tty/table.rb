@@ -212,7 +212,7 @@ module TTY
       if row_index >= 0 && column_index >= 0
         rows.fetch(row_index) { return nil }[column_index]
       else
-        fail TTY::Table::TupleMissing.new(row_index, column_index)
+        raise TTY::Table::TupleMissing.new(row_index, column_index)
       end
     end
     alias_method :at, :[]

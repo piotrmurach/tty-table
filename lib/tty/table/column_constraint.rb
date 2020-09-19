@@ -157,8 +157,8 @@ module TTY
       def assert_minimum_width
         width = renderer.width
         return unless width <= minimum_width
-        fail ResizeError, "Table's width is too small to contain the content " \
-                          "(min width #{minimum_width}, currently set #{width})"
+        raise ResizeError, "Table's width is too small to contain the content " \
+                           "(min width #{minimum_width}, currently set #{width})"
       end
 
       # Distribute remaining width to meet the total width requirement.
