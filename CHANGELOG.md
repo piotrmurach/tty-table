@@ -1,9 +1,11 @@
 # Change log
 
-## [v0.12.0] - 2020-07-xx
+## [v0.12.0] - unreleased
 
 ### Changed
-* Change to optimize adding rows by Tim Craft(@timcraft)
+* Optimize adding rows by Tim Craft(@timcraft)
+* Remove the equatable and necromancer dependencies
+* Update the pastel, tty-screen and strings dependencies
 
 ### Fixed
 * Fix resize option raising an error for small terminal sizes by Katelyn Schiesser(@slowbro)
