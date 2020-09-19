@@ -154,7 +154,7 @@ module TTY
           @border.separator ||= @table.separators unless @table.separators.empty?
           @border
         end
-        alias_method :border=, :border
+        alias border= border
 
         # Change the value of indentation
         #

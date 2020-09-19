@@ -215,9 +215,9 @@ module TTY
         raise TTY::Table::TupleMissing.new(row_index, column_index)
       end
     end
-    alias_method :at, :[]
-    alias_method :element, :[]
-    alias_method :component, :[]
+    alias at []
+    alias element []
+    alias component []
 
     # Set table value at row(i) and column(j)
     #
