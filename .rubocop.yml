@@ -1,5 +1,5 @@
 AllCops:
-  NewCops: enable
+  NewCops: disable
 
 Lint/AssignmentInCondition:
   Enabled: false
@@ -20,7 +20,7 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Enabled: false
 
-Metrics/LineLength:
+Layout/LineLength:
   Max: 80
 
 Metrics/MethodLength:
