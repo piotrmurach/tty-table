@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require_relative 'error'
-require_relative 'renderer/basic'
-require_relative 'renderer/ascii'
-require_relative 'renderer/unicode'
+require_relative "error"
+require_relative "renderer/basic"
+require_relative "renderer/ascii"
+require_relative "renderer/unicode"
 
 module TTY
   class Table

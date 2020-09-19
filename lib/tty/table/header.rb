@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
 
-require_relative 'error'
-require_relative 'field'
+require_relative "error"
+require_relative "field"
 
 module TTY
   class Table

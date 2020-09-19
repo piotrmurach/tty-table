@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
 
-require_relative 'border_options'
+require_relative "border_options"
 
 module TTY
   class Table
@@ -69,7 +69,7 @@ module TTY
       #
       # @api public
       def top(value)
-        options.characters['top'] = value
+        options.characters["top"] = value
       end
 
       # Set top middle border character
@@ -81,7 +81,7 @@ module TTY
       #
       # @api public
       def top_mid(value)
-        options.characters['top_mid'] = value
+        options.characters["top_mid"] = value
       end
 
       # Set top left corner border character
@@ -93,7 +93,7 @@ module TTY
       #
       # @api public
       def top_left(value)
-        options.characters['top_left'] = value
+        options.characters["top_left"] = value
       end
 
       # Set top right corner border character
@@ -105,7 +105,7 @@ module TTY
       #
       # @api public
       def top_right(value)
-        options.characters['top_right'] = value
+        options.characters["top_right"] = value
       end
 
       # Set bottom border character
@@ -117,7 +117,7 @@ module TTY
       #
       # @api public
       def bottom(value)
-        options.characters['bottom'] = value
+        options.characters["bottom"] = value
       end
 
       # Set bottom middle border character
@@ -129,7 +129,7 @@ module TTY
       #
       # @api public
       def bottom_mid(value)
-        options.characters['bottom_mid'] = value
+        options.characters["bottom_mid"] = value
       end
 
       # Set bottom left corner border character
@@ -141,7 +141,7 @@ module TTY
       #
       # @api public
       def bottom_left(value)
-        options.characters['bottom_left'] = value
+        options.characters["bottom_left"] = value
       end
 
       # Set bottom right corner border character
@@ -153,7 +153,7 @@ module TTY
       #
       # @api public
       def bottom_right(value)
-        options.characters['bottom_right'] = value
+        options.characters["bottom_right"] = value
       end
 
       # Set middle border character
@@ -165,7 +165,7 @@ module TTY
       #
       # @api public
       def mid(value)
-        options.characters['mid'] = value
+        options.characters["mid"] = value
       end
 
       # Set middle border character
@@ -177,7 +177,7 @@ module TTY
       #
       # @api public
       def mid_mid(value)
-        options.characters['mid_mid'] = value
+        options.characters["mid_mid"] = value
       end
 
       # Set middle left corner border character
@@ -189,7 +189,7 @@ module TTY
       #
       # @api public
       def mid_left(value)
-        options.characters['mid_left'] = value
+        options.characters["mid_left"] = value
       end
 
       # Set middle right corner border character
@@ -201,7 +201,7 @@ module TTY
       #
       # @api public
       def mid_right(value)
-        options.characters['mid_right'] = value
+        options.characters["mid_right"] = value
       end
 
       # Set left border character
@@ -213,7 +213,7 @@ module TTY
       #
       # @api public
       def left(value)
-        options.characters['left'] = value
+        options.characters["left"] = value
       end
 
       # Set center border character
@@ -225,7 +225,7 @@ module TTY
       #
       # @api public
       def center(value)
-        options.characters['center'] = value
+        options.characters["center"] = value
       end
 
       # Set right border character
@@ -237,7 +237,7 @@ module TTY
       #
       # @api public
       def right(value)
-        options.characters['right'] = value
+        options.characters["right"] = value
       end
 
       private

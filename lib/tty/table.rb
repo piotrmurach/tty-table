@@ -1,15 +1,15 @@
 # frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
 
-require_relative 'table/columns'
-require_relative 'table/header'
-require_relative 'table/orientation'
-require_relative 'table/row'
-require_relative 'table/renderer'
-require_relative 'table/transformation'
-require_relative 'table/validatable'
-require_relative 'table/version'
+require_relative "table/columns"
+require_relative "table/header"
+require_relative "table/orientation"
+require_relative "table/row"
+require_relative "table/renderer"
+require_relative "table/transformation"
+require_relative "table/validatable"
+require_relative "table/version"
 
 module TTY
   # A core class intended for storing data in a structured, tabular form.
@@ -62,7 +62,7 @@ module TTY
     # Create a new Table where each argument is a row
     #
     # @example
-    #   table = TTY::Table[['a1', 'a2'], ['b1', 'b2']]
+    #   table = TTY::Table[["a1", "a2"], ["b1", "b2"]]
     #
     # @api public
     def self.[](*rows)
@@ -72,18 +72,18 @@ module TTY
     # Instantiate a new Table
     #
     # @example of no header
-    #   table = Table.new [['a1', 'a2'], ['b1', 'b2']]
+    #   table = Table.new [["a1", "a2"], ["b1", "b2"]]
     #
     # @example of direct parameters
-    #   rows  = [['a1', 'a2'], ['b1', 'b2']]
-    #   table = Table.new ['Header 1', 'Header 2'], rows
+    #   rows  = [["a1", "a2"], ["b1", "b2"]]
+    #   table = Table.new ["Header 1", "Header 2"], rows
     #
     # @example of parameters passed as options
-    #   rows  = [['a1', 'a2'], ['b1', 'b2']]
-    #   table = Table.new header: ['Header 1', 'Header 2'], rows: rows
+    #   rows  = [["a1", "a2"], ["b1", "b2"]]
+    #   table = Table.new header: ["Header 1", "Header 2"], rows: rows
     #
     # @example of parameters passed as hash
-    #   Table.new [{'Header1' => ['a1','a2'], 'Header2' => ['b1', 'b2'] }]}
+    #   Table.new [{"Header1" => ["a1","a2"], "Header2" => ["b1", "b2"] }]}
     #
     # @param [Array[Symbol], Hash] args
     #
@@ -201,10 +201,10 @@ module TTY
     # @param [Integer] column_index
     #
     # @example
-    #   table = TTY::Table.new [['a1','a2'], ['b1','b2']]
-    #   table[0]    # => ['a1','a2']
-    #   table[0,0]  # => 'a1'
-    #   table[-1]   # => ['b1','b2']
+    #   table = TTY::Table.new [["a1","a2"], ["b1","b2"]]
+    #   table[0]    # => ["a1","a2"]
+    #   table[0,0]  # => "a1"
+    #   table[-1]   # => ["b1","b2"]
     #
     # @api public
     def [](row_index, column_index = false)
@@ -231,7 +231,7 @@ module TTY
     # When a block is given, the elements of that Array are iterated over.
     #
     # @example
-    #   rows  = [['a1', 'a2'], ['b1', 'b2']]
+    #   rows  = [["a1", "a2"], ["b1", "b2"]]
     #   table = TTY::Table.new rows: rows
     #   table.row(1) { |row| ... }
     #
@@ -258,7 +258,7 @@ module TTY
     #
     # @example
     #   header = [:h1, :h2]
-    #   rows  = [ ['a1', 'a2'], ['b1', 'b2'] ]
+    #   rows  = [ ["a1", "a2"], ["b1", "b2"] ]
     #   table = TTY::Table.new :rows => rows, :header => header
     #   table.column(1)
     #   table.column(1)   { |element| ... }

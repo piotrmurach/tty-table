@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
 
-require_relative 'error'
-require_relative 'field'
+require_relative "error"
+require_relative "field"
 
 module TTY
   class Table
@@ -55,11 +55,11 @@ module TTY
       #
       #   row = new TTY::Table::Row.new [1,2,3], %w[a b c]
       #   row[0]   # => 1
-      #   row['a'] # => 1
+      #   row["a"] # => 1
       #
       #   row = new TTY::Table::Row.new {"a": 1, "b": 2, "c": 3}
       #   row[0]   # => 1
-      #   row['a'] # => 1
+      #   row["a"] # => 1
       #
       # @param [#to_ary] data
       #   the row data
@@ -144,7 +144,7 @@ module TTY
       # Iterate over each element in the Row
       #
       # @example
-      #   vec = Row.new [1,2,3], ['a','b','c']
+      #   vec = Row.new [1,2,3], ["a","b","c"]
       #   vec.each { |element| ... }
       #
       # @return [self]

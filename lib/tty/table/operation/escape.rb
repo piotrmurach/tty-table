@@ -7,7 +7,6 @@ module TTY
       #
       # @api private
       class Escape
-
         # Escape special characters in a table field
         #
         # @param [TTY::Table::Field] field
@@ -21,7 +20,7 @@ module TTY
         # @api public
         def call(field, row, col)
           field.content.gsub(/(\t|\r|\n)/) do |val|
-            val.dump.gsub('"', '')
+            val.dump.gsub('"', "")
           end
         end
       end # Escape

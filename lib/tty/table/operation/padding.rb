@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'strings'
+require "strings"
 
 module TTY
   class Table

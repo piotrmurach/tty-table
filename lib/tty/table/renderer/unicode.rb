@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../border/unicode'
+require_relative "../border/unicode"
 
 module TTY
   class Table

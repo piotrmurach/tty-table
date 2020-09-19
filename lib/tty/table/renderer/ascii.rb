@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../border/ascii'
-require_relative '../renderer/basic'
+require_relative "../border/ascii"
+require_relative "../renderer/basic"
 
 module TTY
   class Table

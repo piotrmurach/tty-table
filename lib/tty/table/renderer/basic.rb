@@ -1,24 +1,24 @@
 # frozen_string_literal: true
 
-require 'tty-screen'
-require 'strings'
+require "strings"
+require "tty-screen"
 
-require_relative '../alignment_set'
-require_relative '../border_dsl'
-require_relative '../border_options'
-require_relative '../border/null'
-require_relative '../column_constraint'
-require_relative '../columns'
-require_relative '../header'
-require_relative '../indentation'
-require_relative '../operations'
-require_relative '../operation/alignment'
-require_relative '../operation/truncation'
-require_relative '../operation/wrapped'
-require_relative '../operation/filter'
-require_relative '../operation/escape'
-require_relative '../operation/padding'
-require_relative '../validatable'
+require_relative "../alignment_set"
+require_relative "../border_dsl"
+require_relative "../border_options"
+require_relative "../border/null"
+require_relative "../column_constraint"
+require_relative "../columns"
+require_relative "../header"
+require_relative "../indentation"
+require_relative "../operations"
+require_relative "../operation/alignment"
+require_relative "../operation/truncation"
+require_relative "../operation/wrapped"
+require_relative "../operation/filter"
+require_relative "../operation/escape"
+require_relative "../operation/padding"
+require_relative "../validatable"
 
 module TTY
   class Table

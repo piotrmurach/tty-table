@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'error'
+require_relative "error"
 
 module TTY
   class Table
@@ -69,7 +69,7 @@ module TTY
         when NilClass
           extract_widths(table.data)
         else
-          fail TypeError, 'Invalid type for column widths'
+          fail TypeError, "Invalid type for column widths"
         end
       end
       module_function :widths_from
@@ -85,12 +85,12 @@ module TTY
       # @api public
       def assert_widths(column_widths, table_widths)
         if column_widths.empty?
-          fail InvalidArgument, 'Value for :column_widths must be ' \
-                                 'a non-empty array'
+          fail InvalidArgument, "Value for :column_widths must be " \
+                                "a non-empty array"
         end
         if column_widths.size != table_widths
-          fail InvalidArgument, 'Value for :column_widths must match ' \
-                                 'table column count'
+          fail InvalidArgument, "Value for :column_widths must match " \
+                                "table column count"
         end
       end
       module_function :assert_widths

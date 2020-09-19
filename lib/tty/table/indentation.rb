@@ -27,7 +27,7 @@ module TTY
       # @api public
       def insert_indentation(line, indentation)
         line = Array(line)[0]
-        ' ' * indentation + line.to_s if line
+        " " * indentation + line.to_s if line
       end
       module_function :insert_indentation
     end # Indentation

@@ -1,1 +1,1 @@
-require_relative 'tty/table'
+require_relative "tty/table"

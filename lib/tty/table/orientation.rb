@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require_relative 'orientation/horizontal'
-require_relative 'orientation/vertical'
+require_relative "orientation/horizontal"
+require_relative "orientation/vertical"
 
 module TTY
   class Table
@@ -34,7 +34,7 @@ module TTY
           Vertical.new :vertical
         else
           fail InvalidOrientationError,
-               'orientation must be one of :horizontal, :vertical'
+               "orientation must be one of :horizontal, :vertical"
         end
       end
 

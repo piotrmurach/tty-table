@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require_relative 'border/null'
-require_relative 'columns'
-require_relative 'error'
+require_relative "border/null"
+require_relative "columns"
+require_relative "error"
 
 module TTY
   class Table
@@ -111,8 +111,8 @@ module TTY
       #
       # @api private
       def rotate
-        Kernel.warn 'The table size exceeds the currently set width.' \
-                   'Defaulting to vertical orientation.'
+        Kernel.warn "The table size exceeds the currently set width." \
+                    "Defaulting to vertical orientation."
         table.orientation = :vertical
         table.rotate
         Columns.widths_from(table)

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'error'
+require_relative "error"
 
 module TTY
   class Table
@@ -70,11 +70,11 @@ module TTY
         rows   = options[:rows]
 
         if header && (!header.is_a?(Array) || header.empty?)
-          fail InvalidArgument, ':header must be a non-empty array'
+          fail InvalidArgument, ":header must be a non-empty array"
         end
 
         if rows && !(rows.is_a?(Array) || rows.is_a?(Hash))
-          fail InvalidArgument, ':rows must be a non-empty array or hash'
+          fail InvalidArgument, ":rows must be a non-empty array or hash"
         end
       end
     end # Validatable

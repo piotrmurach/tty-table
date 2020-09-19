@@ -39,15 +39,15 @@ module TTY
       # Initialize a Field
       #
       # @example
-      #   field = TTY::Table::Field.new 'a1'
+      #   field = TTY::Table::Field.new "a1"
       #   field.value  # => a1
       #
       # @example
-      #   field = TTY::Table::Field.new value: 'a1'
+      #   field = TTY::Table::Field.new value: "a1"
       #   field.value  # => a1
       #
       # @example
-      #   field = TTY::Table::Field.new value: 'a1', alignment: :center
+      #   field = TTY::Table::Field.new value: "a1", alignment: :center
       #   field.value     # => a1
       #   field.alignment # => :center
       #
