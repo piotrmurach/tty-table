@@ -14,6 +14,6 @@ RSpec.describe TTY::Table, "#<<" do
       table << row
     }.to perform_slower_than {
       array << row
-    }.at_most(50).times
+    }.at_most(30).times
   end
 end
