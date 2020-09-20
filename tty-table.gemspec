@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["piotr@piotrmurach.com"]
   spec.summary       = %q{A flexible and intuitive table generator}
   spec.description   = %q{A flexible and intuitive table generator}
-  spec.homepage      = "https://piotrmurach.github.io/tty/"
+  spec.homepage      = "https://ttytoolkit.org"
   spec.license       = "MIT"
   if spec.respond_to?(:metadata=)
     spec.metadata = {
