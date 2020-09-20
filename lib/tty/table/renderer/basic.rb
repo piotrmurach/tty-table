@@ -5,7 +5,6 @@ require "tty-screen"
 
 require_relative "../alignment_set"
 require_relative "../border_dsl"
-require_relative "../border_options"
 require_relative "../border/null"
 require_relative "../column_constraint"
 require_relative "../columns"
@@ -113,10 +112,13 @@ module TTY
         def initialize(table, options = {})
           @table         = assert_table_type(table)
           @multiline     = options.fetch(:multiline) { false }
-          @border        = TTY::Table::BorderOptions.from(options.delete(:border))
+          @border        = BorderDSL.new(options.delete(:border)).options
+          unless @table.separators.empty?
+            @border.separator ||= @table.separators
+          end
           @column_widths = options.fetch(:column_widths, nil)
           alignment      = Array(options[:alignment]) * table.columns_size
-          @alignments    = TTY::Table::AlignmentSet.new(options[:alignments] || alignment)
+          @alignments    = AlignmentSet.new(options[:alignments] || alignment)
           @filter        = options.fetch(:filter) { proc { |val, _| val } }
           @width         = options.fetch(:width) { TTY::Screen.width }
           @border_class  = options.fetch(:border_class) { Border::Null }
@@ -143,16 +145,11 @@ module TTY
         #   block representing border options
         #
         # @api public
-        def border(options=(not_set=true), &block)
-          @border = TTY::Table::BorderOptions.new unless @border
-          if block_given?
-            border_dsl = TTY::Table::BorderDSL.new(&block)
-            @border = border_dsl.options
-          elsif !not_set
-            @border = TTY::Table::BorderOptions.from(options)
-          end
-          @border.separator ||= @table.separators unless @table.separators.empty?
-          @border
+        def border(border_opts = (not_set = true), &block)
+          return @border if not_set && !block_given?
+
+          border_opts = {} if not_set
+          @border = BorderDSL.new(border_opts, &block).options
         end
         alias border= border
 
