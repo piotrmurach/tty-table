@@ -9,8 +9,9 @@ module TTY
         #
         # @api public
         def colorize(border, style)
-          colorized_chars = border.set_color(style, right, center, left)
-          self.right, self.center, self.left = colorized_chars
+          self.right = border.set_color(style, right)
+          self.center = border.set_color(style, center)
+          self.left = border.set_color(style, left)
         end
       end # RowLine
     end # Border

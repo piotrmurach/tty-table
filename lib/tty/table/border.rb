@@ -128,23 +128,20 @@ module TTY
         result.empty? ? EMPTY_CHAR : result
       end
 
-      # Set color on characters
+      # Set color for a string
       #
       # @param [Symbol] color
       #
-      # @param [Array[String]] strings array of strings
+      # @param [String] string
+      #   the string to color
       #
-      # @return [Array[String]]
+      # @return [String]
       #
       # @api public
-      def set_color(color, *strings)
-        strings.map do |string|
-          if string.gsub(/\s+/, EMPTY_CHAR).empty?
-            string
-          else
-            @color.decorate(string, color)
-          end
-        end
+      def set_color(color, string)
+        return string if string.gsub(/\s+/, EMPTY_CHAR).empty?
+
+        @color.decorate(string, color)
       end
 
       protected
@@ -218,7 +215,7 @@ module TTY
 
         return line unless color?
 
-        set_color(border_options.style, line).join
+        set_color(@dsl.style, line)
       end
 
       # Generate a border string
