@@ -1,11 +1,12 @@
 # Change log
 
-## [v0.12.0] - unreleased
+## [v0.12.0] - 2020-09-20
 
 ### Changed
 * Optimize adding rows by Tim Craft(@timcraft)
 * Remove the equatable and necromancer dependencies
 * Update the pastel, tty-screen and strings dependencies
+* Change Border to use BorderDSL exclusively for handling options
 
 ### Fixed
 * Fix resize option raising an error for small terminal sizes by Katelyn Schiesser(@slowbro)
