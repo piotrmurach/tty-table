@@ -21,13 +21,16 @@ module TTY
 
       # Insert indentation into a table renderd line
       #
-      # @param [#to_a, #to_s] line
+      # @param [String] line
       #   the rendered table line
+      # @param [Integer] indentation
+      #   the amount of indentation to apply
+      #
+      # @return [String]
       #
       # @api public
       def insert_indentation(line, indentation)
-        line = Array(line)[0]
-        " " * indentation + line.to_s if line
+        line ? " " * indentation + line.to_s : ""
       end
       module_function :insert_indentation
     end # Indentation

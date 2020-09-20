@@ -29,9 +29,7 @@ module TTY
         #
         # @api private
         def middle_line
-          return [] if border_options.separator # == EACH_ROW #TODO ask about this looks broken.
-          # how could border_options ever be nil, if we just did border_options.separator
-          border_options ? super : nil
+          border_options.separator ? "" : super
         end
       end # Null
     end # Border

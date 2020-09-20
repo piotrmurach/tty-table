@@ -2,7 +2,7 @@
 
 RSpec.describe TTY::Table::Renderer::Basic, 'individual row separators' do
   context 'using the separator option' do
-    let(:header) { ['h1', 'h2', 'h3'] }
+    let(:header) { %w[h1 h2 h3] }
     let(:rows)   { [['a1', 'a2', 'a3'], ['b1', 'b2', 'b3'], ['c1', 'c2', 'c3']] }
     let(:table)  { TTY::Table.new(header, rows) }
 
@@ -34,7 +34,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'individual row separators' do
   end
 
   it "works without a header row" do
-    table = TTY::Table.new([['a1', 'a2', 'a3'], ['b1', 'b2', 'b3'], ['c1', 'c2', 'c3']])
+    table = TTY::Table.new([%w[a1 a2 a3], %w[b1 b2 b3], %w[c1 c2 c3]])
     renderer = described_class.new(table)
     renderer.border.separator = [1]
     expect(renderer.render).to eq unindent(<<-EOS)
@@ -47,7 +47,7 @@ RSpec.describe TTY::Table::Renderer::Basic, 'individual row separators' do
 
   context 'using the :separator keyword as a row' do
     it "the :separator keyword can be used in the row definition" do
-      table = TTY::Table.new([['a1', 'a2', 'a3'], ['b1', 'b2', 'b3'], :separator, ['c1', 'c2', 'c3']])
+      table = TTY::Table.new([%w[a1 a2 a3], %w[b1 b2 b3], :separator, %w[c1 c2 c3]])
       expect(described_class.new(table).render).to eq unindent(<<-EOS)
         a1 a2 a3
         b1 b2 b3
