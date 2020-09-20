@@ -1,5 +1,5 @@
 <div align="center">
-  <a href="https://piotrmurach.github.io/tty" target="_blank"><img width="130" src="https://github.com/piotrmurach/tty/blob/master/images/tty.png" alt="tty logo" /></a>
+  <a href="https://ttytoolkit.org" target="_blank"><img width="130" src="https://github.com/piotrmurach/tty/blob/master/images/tty.png" alt="TTY Toolkit logo" /></a>
 </div>
 
 # TTY::Table [![Gitter](https://badges.gitter.im/Join%20Chat.svg)][gitter]
@@ -36,7 +36,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'tty-table'
+gem "tty-table"
 ```
 
 And then execute:
@@ -76,16 +76,16 @@ Or install it yourself as:
 
 ## 1. Usage
 
-First, provide **TTY::Table** with headers and data:
+First, provide **TTY::Table** with data, for example, two headers and two rows:
 
 ```ruby
-table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table.new(["header1","header2"], [["a1", "a2"], ["b1", "b2"]])
 ```
 
-Then simply call `render` on the instance with with border type as first argument:
+Then to print to the console, call the `render` method with border type as a first argument:
 
 ```ruby
-table.render(:ascii)
+puts table.render(:ascii)
 # =>
 #  +-------+-------+
 #  |header1|header2|
@@ -103,39 +103,39 @@ table.render(:ascii)
 **TTY::Table** can be created in variety of ways. The easiest way is to pass 2-dimensional array:
 
 ```ruby
-table = TTY::Table[['a1', 'a2'], ['b1', 'b2']]
-table = TTY::Table.new [['a1', 'a2'], ['b1', 'b2']]
-table = TTY::Table.new rows: [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table[["a1", "a2"], ["b1", "b2"]]
+table = TTY::Table.new([["a1", "a2"], ["b1", "b2"]])
+table = TTY::Table.new(rows: [["a1", "a2"], ["b1", "b2"]])
 ```
 
-Alternatively you can specify rows one by one inside block:
+Alternatively you can specify the rows one by one inside a block:
 
 ```ruby
 table = TTY::Table.new do |t|
-  t << ['a1', 'a2']
-  t << ['b1', 'b2']
+  t << ["a1", "a2"]
+  t << ["b1", "b2"]
 end
 ```
 
-You can add rows of data after initialization:
+You can add rows of data after initialization with `<<` operator:
 
 ```ruby
 table = TTY::Table.new
-table << ['a1','a2']
-table << ['b1','b2']
+table << ["a1","a2"]
+table << ["b1","b2"]
 ```
 
-In addition to rows you can specify table header:
+In addition to rows, you can specify table header:
 
 ```ruby
-table = TTY::Table.new ['h1', 'h2'], [['a1', 'a2'], ['b1', 'b2']]
-table = TTY::Table.new header: ['h1', 'h2'], rows: [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table.new(["h1", "h2"], [["a1", "a2"], ["b1", "b2"]])
+table = TTY::Table.new(header: ["h1", "h2"], rows: [["a1", "a2"], ["b1", "b2"]])
 ```
 
-or cross header with rows inside a hash like so
+You can also mix header with rows inside a hash like so:
 
 ```ruby
-table = TTY::Table.new [{'h1' => ['a1', 'a2'], 'h2' => ['b1', 'b2']}]
+table = TTY::Table.new([{"h1" => ["a1", "a2"], "h2" => ["b1", "b2"]}])
 ```
 
 ### 2.2 Iteration
@@ -143,9 +143,9 @@ table = TTY::Table.new [{'h1' => ['a1', 'a2'], 'h2' => ['b1', 'b2']}]
 Table behaves like an Array so `<<`, `each` and familiar methods can be used:
 
 ```ruby
-table << ['a1', 'a2', 'a3']
-table << ['b1', 'b2', 'b3']
-table << ['a1', 'a2'] << ['b1', 'b2']  # chain rows assignment
+table << ["a1", "a2", "a3"]
+table << ["b1", "b2", "b3"]
+table << ["a1", "a2"] << ["b1", "b2"]  # chain rows assignment
 ```
 
 In order to iterate over table rows including headers do:
@@ -160,30 +160,30 @@ table.each_with_index  { |row, index| ... }    # iterate over rows with an index
 In order to reference the row at `index` do:
 
 ```ruby
-table = TTY::Table.new [['a1','a2'], ['b1','b2']]
-table[0]                    # => ['a1','a2']
-table.row(0)                # => ['a1','a2']
+table = TTY::Table.new [["a1","a2"], ["b1","b2"]]
+table[0]                    # => ["a1","a2"]
+table.row(0)                # => ["a1","a2"]
 table.row(i) { |row| ... }  # return array for row(i)
 ```
 
 Negative indices count backwards from the end of table data (`-1` is the last element):
 
 ```ruby
-table[-1]   # => ['b1','b2']
+table[-1]   # => ["b1","b2"]
 ```
 
 To reference element at given row(i) and column(j) do:
 
 ```ruby
 table[i, j]   # return element at row(i) and column(j)
-table[0,0]    # => 'a1'
+table[0,0]    # => "a1"
 ```
 
 To specifically reference column(j) do:
 
 ```ruby
 table.column(j) { ... }   # return array for column(j)
-table.column(0)           # => ['a1','b1']
+table.column(0)           # => ["a1","b1"]
 table.column(name)        # return array for column(name), name of header
 ```
 
@@ -210,7 +210,7 @@ table.size             # return an array of [row_size, column_size]
 Given a table:
 
 ```ruby
-table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table.new(["header1","header2"], [["a1", "a2"], ["b1", "b2"]])
 ```
 
 Once you have an instance of `TTY::Table` you can decorate the content using the `render` method. In order to display a basic whitespace delimited view do:
@@ -246,7 +246,7 @@ end
 Given a table of data:
 
 ```ruby
-table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table.new ["header1","header2"], [["a1", "a2"], ["b1", "b2"]]
 ```
 
 You can create a special renderer for it:
@@ -347,25 +347,16 @@ table.render(:unicode)
 
 Rendering of **TTY-Table** includes numerous customization options:
 
-```ruby
-alignments     # array of cell alignments out of :left, :center and :right,
-               # default :left
-border         # hash of border options - :characters, :style and :separator
-border_class   # a type of border to use such as TTY::Table::Border::Null,
-               # TTY::Table::Border::ASCII, TTY::Table::Border::Unicode
-column_widths  # array of maximum column widths
-filter         # a proc object that is applied to every field in a row
-indent         # indentation applied to rendered table, by default 0
-multiline      # if true will wrap text at new line or column width,
-               # when false will escape special characters
-padding        # array of integers to set table fields padding,
-               # by default [0,0,0,0]
-resize         # if true will expand/shrink table column sizes to match
-               # the terminal width, otherwise if false will rotate
-               # table vertically. By default set to false
-width          # constrain the table total width, by default dynamically
-               # calculated based on content and terminal size
-```
+* `:alignments` - array of cell alignments out of `:left`, `:center` and `:righit`. Defaults to `:left`.
+* `:border` - hash of border options out of `:characters`, `:style` and `:separator`
+* `:border_class` - a type of border to use such as `TTY::Table::Border::Null`, `TTY::Table::Border::ASCII` and `TTY::Table::Border::Unicode`
+* `:column_widths` - array of maximum column widths
+* `:filter` - a `proc` object that is applied to every field in a row
+* `:indent` - indentation applied to rendered table, by default 0
+* `:multiline` - when `true` will wrap text at new line or column width, when `false` will escape special characters
+* `:padding` - array of integers to set table fields padding. Defaults to `[0,0,0,0]`.
+* `:resize` - when `true` will expand/shrink table column sizes to match the terminal width, otherwise when `false` will rotate table vertically. Defaults to `false`.
+* `:width` - constrains the table total width. Defaults to value automatically calculated based on the content and terminal size.
 
 The `render` method can accept as a second argument the above options either as hash value:
 
@@ -373,11 +364,11 @@ The `render` method can accept as a second argument the above options either as 
 table.render(:basic, alignments: [:left, :center])
 ```
 
-or inside a block:
+Or inside a block as a property:
 
 ```ruby
 table.render(:basic) do |renderer|
-  renderer.alignments= [:left, :center]
+  renderer.alignments = [:left, :center]
 end
 ```
 
@@ -385,10 +376,10 @@ end
 
 By default all columns are `:left` aligned.
 
-You can align each column individuall by passing `alignments` option to table renderer:
+You can align each column individually by passing `:alignments` option to table renderer:
 
 ```ruby
-table.render :ascii, alignments: [:center, :right]
+table.render(:ascii, alignments: [:center, :right])
 # =>
 #  +-------+-------+
 #  |header1|header2|
@@ -398,10 +389,10 @@ table.render :ascii, alignments: [:center, :right]
 #  +-------+-------+
 ```
 
-Alternatively you can align all columns with `alignment` option:
+Alternatively you can align all columns with `:alignment` option:
 
 ```ruby
-table.render :ascii, alignment: [:center]
+table.render(:ascii, alignment: [:center])
 # =>
 #  +-------+-------+
 #  |header1|header2|
@@ -414,9 +405,9 @@ table.render :ascii, alignment: [:center]
 If you require a more granular alignment you can align individual fields in a row by passing `:alignment` option like so:
 
 ```ruby
-table = TTY::Table.new header: ['header1', 'header2']
-table << [{value: 'a1', alignment: :right}, 'a2']
-table << ['b1', {value: 'b2', alignment: :center}]
+table = TTY::Table.new(header: ["header1", "header2"])
+table << [{value: "a1", alignment: :right}, "a2"]
+table << ["b1", {value: "b2", alignment: :center}]
 ```
 
 and then simply render:
@@ -437,7 +428,7 @@ table.render(:ascii)
 To print border around data table you need to specify `renderer` type out of `basic`, `ascii`, `unicode`. By default `basic` is used. For instance, to output unicode border:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table.new ["header1", "header2"], [["a1", "a2"], ["b1", "b2"]]
 table.render :unicode
 # =>
 #  ┌───────┬───────┐
@@ -480,11 +471,11 @@ The following are available border parts:
 Using the above border parts you can create your own border with the `border` helper:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
+table = TTY::Table.new ["header1", "header2"], [["a1", "a2"], ["b1", "b2"]
 table.render do |renderer|
   renderer.border do
-    mid          '='
-    mid_mid      ' '
+    mid          "="
+    mid_mid      " "
   end
 end
 # =>
@@ -501,13 +492,13 @@ You can also create your own custom border by subclassing `TTY::Table::Border` a
 ```ruby
 class MyBorder < TTY::Table::Border
   def_border do
-    left         '$'
-    center       '$'
-    right        '$'
-    bottom       ' '
-    bottom_mid   '*'
-    bottom_left  '*'
-    bottom_right '*'
+    left         "$"
+    center       "$"
+    right        "$"
+    bottom       " "
+    bottom_mid   "*"
+    bottom_left  "*"
+    bottom_right "*"
   end
 end
 ```
@@ -515,7 +506,7 @@ end
 Next pass the border class to your table instance `render_with` method
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']
+table = TTY::Table.new ["header1", "header2"], [["a1", "a2"], ["b1", "b2"]
 table.render_with MyBorder
 # =>
 #  $header1$header2$
@@ -528,7 +519,7 @@ table.render_with MyBorder
 In addition to specifying border characters you can force the table to render a separator line on each row like:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table.new ["header1", "header2"], [["a1", "a2"], ["b1", "b2"]]
 table.render do |renderer|
   renderer.border.separator = :each_row
 end
@@ -545,7 +536,7 @@ end
 If you want more control you can provide an array of rows *after* which a separator will be added:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2'], ['c1', 'c2']]
+table = TTY::Table.new ["header1", "header2"], [["a1", "a2"], ["b1", "b2"], ["c1", "c2"]]
 table.render do |renderer|
   renderer.border.separator = [0, 2]
 end
@@ -566,8 +557,8 @@ will not be automatically added.
 You can also give the separator option a proc to control where the separators are:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'],
-                       [['a1', 'a2'], ['b1', 'b2'], ['c1', 'c2'], ['d1', 'd2']]
+table = TTY::Table.new ["header1", "header2"],
+                       [["a1", "a2"], ["b1", "b2"], ["c1", "c2"], ["d1", "d2"]]
 table.render do |renderer|
   renderer.border.separator = ->(row) { row == 0 || (row+1) % 2 == 0} # separate every two rows
 end
@@ -586,9 +577,9 @@ end
 Finally you can also position a separator using the `:separator` key word in place of a row:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'],
-                       [:separator, ['a1', 'a2'], ['b1', 'b2']]
-table << :separator << ['c1', 'c2']  # you can push separators on too!
+table = TTY::Table.new ["header1", "header2"],
+                       [:separator, ["a1", "a2"], ["b1", "b2"]]
+table << :separator << ["c1", "c2"]  # you can push separators on too!
 table.render
 # =>
 #  +-------+-------+
@@ -615,12 +606,14 @@ All [supported colors](https://github.com/piotrmurach/pastel#3-supported-colors)
 
 ### 3.6 Filter
 
-You can define filters that will modify individual table fields value before they are rendered. A filter can be a callable such as proc. Here's an example that formats
+You can define filters that will modify individual table field value before it is rendered. A filter can be a callable such as proc.
+
+Here's an example that formats capitalizes each field in second column skipping the header:
 
 ```ruby
-table = TTY::Table.new ['header1', 'header2'], [['a1', 'a2'], ['b1', 'b2']]
+table = TTY::Table.new(["header1", "header2"], [["a1", "a2"], ["b1", "b2"]])
 table.render do |renderer|
-  renderer.filter = Proc.new do |val, row_index, col_index|
+  renderer.filter = ->(val, row_index, col_index) do
     if col_index == 1 and !(row_index == 0)
       val.capitalize
     else
@@ -638,13 +631,13 @@ end
 #  +-------+-------+
 ```
 
-To color even fields red on green background add filter like so
+To color even fields red on green background add filter like so:
 
 ```ruby
 pastel = Pastel.new
 
 table.render do |renderer|
-  renderer.filter = proc do |val, row_index, col_index|
+  renderer.filter = ->(val, row_index, col_index) do
     col_index % 2 == 1 ? pastel.red.on_green(val) : val
   end
 end
@@ -652,11 +645,11 @@ end
 
 ### 3.7 Multiline
 
-Renderer options may include `multiline` parameter. When set to `true`, table fields will wrap at their natural line breaks or the column widths(if provided).
+Renderer options may include `:multiline` parameter. When set to `true`, table fields will wrap at their natural line breaks or the column widths(if provided).
 
 ```ruby
-table = TTY::Table.new [ ["First", '1'], ["Multi\nLine\nContent", '2'], ["Third", '3']]
-table.render :ascii, multiline: true
+table = TTY::Table.new([["First", "1"], ["Multi\nLine\nContent", "2"], ["Third", "3"]])
+table.render(:ascii, multiline: true)
 # =>
 #  +-------+-+
 #  |First  |1|
@@ -670,7 +663,7 @@ table.render :ascii, multiline: true
 When `multiline` is set to `false`, all line break characters will be escaped. In cases when the column widths are set, the content will be truncated.
 
 ```ruby
-table = TTY::Table.new [["First", '1'], ["Multiline\nContent", '2'], ["Third", '3']]
+table = TTY::Table.new [["First", "1"], ["Multiline\nContent", "2"], ["Third", "3"]]
 table.render :ascii, multiline: false
 # =>
 #  +------------------+-+
@@ -712,15 +705,15 @@ table.render(:ascii, padding: [1,2,1,2])
 However, when adding top or bottom padding to content with line breaks, the `multiline` option needs to be set to `true` to allow for rows to span multiple lines. For example:
 
 ```ruby
-table = TTY::Table.new header: ['head1', 'head2']
+table = TTY::Table.new(header: ["head1", "head2"])
 table << ["Multi\nLine", "Text\nthat\nwraps"]
-table << ["Some\nother\ntext", 'Simple']
+table << ["Some\nother\ntext", "Simple"]
 ```
 
-would render as:
+This would render as:
 
 ```ruby
-table.render :ascii, multiline: true, padding: [1,2,1,2]
+table.render(:ascii, multiline: true, padding: [1,2,1,2])
 # =>
 #  +---------+----------+
 #  |         |          |
@@ -742,17 +735,30 @@ table.render :ascii, multiline: true, padding: [1,2,1,2]
 
 ### 3.9 Resize
 
+You can force table to resize to the terminal full width using the `:resize` option:
+
+```ruby
+table.render(:ascii, resize: true)
+```
+
 ### 3.10 Width
 
 To control table's column sizes pass `width`, `resize` options. By default table's natural column widths are calculated from the content. If the total table width does not fit in terminal window then the table is rotated vertically to preserve content.
 
 The `resize` property will force the table to expand/shrink to match the terminal width or custom `width`. On its own the `width` property will not resize table but only enforce table vertical rotation if content overspills.
 
+For example, given the following table:
+
 ```ruby
-header = ['h1', 'h2', 'h3']
-rows   = [['aaa1', 'aa2', 'aaaaaaa3'], ['b1', 'b2', 'b3']]
-table = TTY::Table.new header, rows
-table.render width: 80, resize: true
+header = ["h1", "h2", "h3"]
+rows   = [["aaa1", "aa2", "aaaaaaa3"], ["b1", "b2", "b3"]]
+table = TTY::Table.new(header, rows)
+```
+
+The result of rending to `80` columns width will produce:
+
+```ruby
+table.render(width: 80, resize: true)
 # =>
 #  +---------+-------+------------+
 #  |h1       |h2     |h3          |
