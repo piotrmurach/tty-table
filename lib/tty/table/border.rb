@@ -3,7 +3,6 @@
 require "pastel"
 require "strings"
 
-require_relative "border_options"
 require_relative "border_dsl"
 require_relative "border/row_line"
 require_relative "error"
@@ -29,26 +28,6 @@ module TTY
         attr_accessor :characters
       end
 
-      # Instantiate a new object
-      #
-      # @param [Array] column_widths
-      #   the table column widths
-      #
-      # @param [BorderOptions] options
-      #
-      # @return [Object]
-      #
-      # @api private
-      def initialize(column_widths, options = nil)
-        if self.class == Border
-          raise NotImplementedError, "#{self} is an abstract class"
-        else
-          @widths = column_widths
-          @border_options = TTY::Table::BorderOptions.from options
-          @color = Pastel.new
-        end
-      end
-
       # Define border characters
       #
       # @param [Hash] characters
@@ -60,8 +39,29 @@ module TTY
       def self.def_border(characters = (not_set = true), &block)
         return self.characters = characters unless not_set
 
-        dsl = TTY::Table::BorderDSL.new(&block)
+        dsl = BorderDSL.new(&block)
         self.characters = dsl.characters
+      end
+
+      # Instantiate a new object
+      #
+      # @param [Array] column_widths
+      #   the table column widths
+      #
+      # @param [BorderOptions] border_opts
+      #
+      # @return [Object]
+      #
+      # @api private
+      def initialize(column_widths, border_opts = nil)
+        if self.class == Border
+          raise NotImplementedError, "#{self} is an abstract class"
+        end
+
+        @widths = column_widths
+        @dsl = BorderDSL.new(border_opts)
+        @characters = self.class.characters.merge(@dsl.characters)
+        @color = Pastel.new
       end
 
       # Retrive individual character by type
@@ -73,13 +73,7 @@ module TTY
       #
       # @api private
       def [](type)
-        characters = self.class.characters
-        chars = if border_options.nil?
-                  characters
-                else
-                  characters.merge(border_options.characters)
-                end
-        chars[type] || EMPTY_CHAR
+        @characters[type] || EMPTY_CHAR
       end
 
       # Check if border color is set
@@ -88,7 +82,7 @@ module TTY
       #
       # @api public
       def color?
-        border_options && border_options.style
+        !!@dsl.style
       end
 
       # A line spanning all columns marking top of a table.
@@ -128,7 +122,7 @@ module TTY
       # @api public
       def row_line(row)
         line = RowLine.new(self["left"], self["center"], self["right"])
-        line.colorize(self, border_options.style) if color?
+        line.colorize(self, @dsl.style) if color?
 
         result = row_heights(row, line)
         result.empty? ? EMPTY_CHAR : result
@@ -163,7 +157,9 @@ module TTY
       # The table custom border options including styling
       #
       # @api private
-      attr_reader :border_options
+      def border_options
+        @dsl.options
+      end
 
       # Separate multiline string into individual rows with border.
       #
@@ -207,7 +203,9 @@ module TTY
       # Generate particular border type
       #
       # @param [String] type
-      #  border type one of [:top, :bottom, :mid]
+      #  border type one of :top, :bottom and :mid
+      #
+      # @return [String]
       #
       # @api private
       def render(type)
