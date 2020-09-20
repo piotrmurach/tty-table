@@ -44,6 +44,7 @@ module TTY
       # @api public
       def style(value = (not_set = true))
         return options.style if not_set
+
         options.style = value
       end
 
@@ -55,8 +56,10 @@ module TTY
       # @return [undefined]
       #
       # @api public
-      def separator(value)
-        value ? options.separator = value : options.separator
+      def separator(value = (not_set = true))
+        return options.separator if not_set
+
+        options.separator = value
       end
 
       # Set top border character
