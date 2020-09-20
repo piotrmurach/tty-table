@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
-require_relative '../lib/tty-table'
+require_relative "../lib/tty-table"
 
-table = TTY::Table.new ['header1','header2'], [['a1', 'a2'], ['b1', 'b2']]
-puts table.render(:basic)
+table = TTY::Table.new(%w[header1 header2],
+                       [%w[a1 a2], %w[b1 b2], %w[c1 c2]])
+puts table.render(:ascii) do |renderer|
+  renderer.border.separator = :each_row
+end
