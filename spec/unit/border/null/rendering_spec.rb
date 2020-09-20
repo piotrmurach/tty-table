@@ -14,7 +14,7 @@ RSpec.describe TTY::Table::Border::Null, '#rendering' do
     end
 
     it 'draws middle line' do
-      expect(subject.separator).to be_nil
+      expect(subject.middle_line).to be_nil
     end
 
     it 'draw bottom line' do
@@ -35,7 +35,7 @@ RSpec.describe TTY::Table::Border::Null, '#rendering' do
     end
 
     it 'draw middle line' do
-      expect(subject.separator).to be_nil
+      expect(subject.middle_line).to be_nil
     end
 
     it 'draw bottom line' do
@@ -113,8 +113,8 @@ a1 a2 a3
       expect(subject.top_line).to eql '=========='
     end
 
-    it 'draws separator line' do
-      expect(subject.separator).to eql '=========='
+    it 'draws middle line line' do
+      expect(subject.middle_line).to eql '=========='
     end
 
     it 'draws bottom line' do

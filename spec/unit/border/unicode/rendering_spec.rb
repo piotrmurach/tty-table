@@ -13,7 +13,7 @@ RSpec.describe TTY::Table::Border::Unicode, '#rendering' do
     end
 
     it 'draws middle line' do
-      expect(border.separator).to eq("├┤")
+      expect(border.middle_line).to eq("├┤")
     end
 
     it 'draw bottom line' do
@@ -34,7 +34,7 @@ RSpec.describe TTY::Table::Border::Unicode, '#rendering' do
     end
 
     it 'draw middle line' do
-      expect(border.separator).to eq("├──┼──┼──┤")
+      expect(border.middle_line).to eq("├──┼──┼──┤")
     end
 
     it 'draw bottom line' do

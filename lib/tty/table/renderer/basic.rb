@@ -268,8 +268,10 @@ module TTY
         def render_header(row, data_border)
           top_line = data_border.top_line
           return top_line unless row.is_a?(TTY::Table::Header)
-          separator = data_border.separator if !border.separator || border.separator?(0)
-          header = [top_line, data_border.row_line(row), separator]
+          header = [top_line, data_border.row_line(row)]
+          if !border.separator || border.separator?(0)
+            header << data_border.middle_line
+          end
           Indentation.indent(header.compact, @indent)
         end
 
@@ -302,13 +304,11 @@ module TTY
         #
         # @api private
         def render_row(row, index, data_border, is_not_last_row)
-          separator = data_border.separator
           row_line  = data_border.row_line(row)
-          line = if border.separator?(index) && is_not_last_row
-                   [row_line, separator]
-                 else
-                   row_line
-                 end
+          line = [row_line]
+          if border.separator?(index) && is_not_last_row
+            line << data_border.middle_line
+          end
           Indentation.indent(line, @indent)
         end
       end # Basic

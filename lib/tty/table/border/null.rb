@@ -25,10 +25,10 @@ module TTY
           right         EMPTY_CHAR
         end
 
-        # A stub separator line
+        # A stub middle line
         #
         # @api private
-        def separator
+        def middle_line
           return [] if border_options.separator # == EACH_ROW #TODO ask about this looks broken.
           # how could border_options ever be nil, if we just did border_options.separator
           border_options ? super : nil

@@ -108,7 +108,7 @@ module TTY
       # @return [String]
       #
       # @api private
-      def separator
+      def middle_line
         (result = render(:mid)).empty? ? nil : result
       end
 
