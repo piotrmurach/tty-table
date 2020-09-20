@@ -12,7 +12,15 @@ module TTY
       #
       # @api public
       def self.from(options)
-        options ? new(**options) : new
+        return new if options.nil?
+
+        opts = case options
+               when self.class
+                 options.to_hash
+               else
+                 options
+               end
+        new(**opts)
       end
 
       attr_accessor :characters

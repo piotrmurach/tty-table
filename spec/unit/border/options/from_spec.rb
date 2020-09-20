@@ -23,4 +23,16 @@ RSpec.describe TTY::Table::BorderOptions, "#from" do
 
     it { expect(options.characters).to eql({}) }
   end
+
+  context "when BorderOptions" do
+    let(:object) { described_class.new(style: :red, separator: :none) }
+
+    it { expect(options).to be_kind_of(described_class) }
+
+    it { expect(options.style).to eql :red }
+
+    it { expect(options.separator).to eql :none }
+
+    it { expect(options.characters).to eql({}) }
+  end
 end
