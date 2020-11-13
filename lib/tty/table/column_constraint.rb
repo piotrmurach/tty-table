@@ -87,21 +87,18 @@ module TTY
       def enforce
         assert_minimum_width
         padding = renderer.padding
+        width_bool = natural_width <= renderer.width
 
-        if natural_width <= renderer.width
-          if renderer.resize
-            expand_column_widths
-          else
-            renderer.column_widths.map do |width|
-              padding.left + width + padding.right
-            end
+        if width_bool && renderer.resize
+          expand_column_widths
+        elsif width_bool || renderer.resize.nil?
+          renderer.column_widths.map do |width|
+            padding.left + width + padding.right
           end
+        elsif renderer.resize
+          shrink
         else
-          if renderer.resize
-            shrink
-          else
-            rotate
-          end
+          rotate
         end
       end
 

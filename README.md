@@ -355,7 +355,7 @@ Rendering of **TTY-Table** includes numerous customization options:
 * `:indent` - indentation applied to rendered table, by default 0
 * `:multiline` - when `true` will wrap text at new line or column width, when `false` will escape special characters
 * `:padding` - array of integers to set table fields padding. Defaults to `[0,0,0,0]`.
-* `:resize` - when `true` will expand/shrink table column sizes to match the terminal width, otherwise when `false` will rotate table vertically. Defaults to `false`.
+* `:resize` - when `true` will expand/shrink table column sizes to match the terminal width, when `false` will rotate table vertically, otherwise when `nil` the table will not be altered. Defaults to `false`.
 * `:width` - constrains the table total width. Defaults to value automatically calculated based on the content and terminal size.
 
 The `render` method can accept as a second argument the above options either as hash value:
