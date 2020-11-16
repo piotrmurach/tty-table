@@ -86,23 +86,34 @@ module TTY
       # @api public
       def enforce
         assert_minimum_width
-        padding = renderer.padding
-        width_bool = natural_width <= renderer.width
 
-        if width_bool && renderer.resize
-          expand_column_widths
-        elsif width_bool || renderer.resize.nil?
-          renderer.column_widths.map do |width|
-            padding.left + width + padding.right
+        if natural_width <= renderer.width
+          if renderer.resize
+            expand_column_widths
+          else
+            natural_column_widths
           end
-        elsif renderer.resize
-          shrink
         else
-          rotate
+          if renderer.resize
+            shrink
+          elsif renderer.rotate
+            rotate
+          else
+            natural_column_widths
+          end
         end
       end
 
       private
+
+      # Determine the column widths without expanding or shrinking
+      #
+      # @api private
+      def natural_column_widths
+        renderer.column_widths.map do |width|
+          renderer.padding.left + width + renderer.padding.right
+        end
+      end
 
       # Rotate table to vertical orientation and print information to stdout
       #

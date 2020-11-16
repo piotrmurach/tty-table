@@ -33,7 +33,7 @@ RSpec.describe TTY::Table::ColumnConstraint, '#enforce' do
     let(:renderer) { TTY::Table::Renderer::Basic.new(table, options) }
 
     context 'with resize' do
-      let(:options) { { width: 8, resize: true } }
+      let(:options) { { width: 8, resize: true, rotate: true } }
 
       it 'calls shrink' do
         allow(columns).to receive(:shrink)
@@ -42,8 +42,8 @@ RSpec.describe TTY::Table::ColumnConstraint, '#enforce' do
       end
     end
 
-    context 'without resize (false)' do
-      let(:options) { { width: 8, resize: false }}
+    context 'with rotate and without resize' do
+      let(:options) { { width: 8, resize: false, rotate: true } }
 
       it 'changes table orientation to vertical' do
         allow(Kernel).to receive(:warn)
@@ -55,10 +55,10 @@ RSpec.describe TTY::Table::ColumnConstraint, '#enforce' do
       end
     end
 
-    context 'without resize (nil)' do
-      let(:options) { { width: 8, resize: nil }}
+    context 'without resize nor rotate' do
+      let(:options) { { width: 8, resize: false, rotate: false } }
 
-      it 'ignores the maximum width constraint' do
+      it 'does not alter the column width nor table orientation' do
         expect(columns).not_to receive(:shrink)
         column_widths = columns.enforce
         expect(column_widths).to eql([2,2,2,2])
