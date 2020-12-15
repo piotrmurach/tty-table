@@ -347,7 +347,7 @@ table.render(:unicode)
 
 Rendering of **TTY-Table** includes numerous customization options:
 
-* `:alignments` - array of cell alignments out of `:left`, `:center` and `:righit`. Defaults to `:left`.
+* `:alignments` - array of cell alignments out of `:left`, `:center` and `:right`. Defaults to `:left`.
 * `:border` - hash of border options out of `:characters`, `:style` and `:separator`
 * `:border_class` - a type of border to use such as `TTY::Table::Border::Null`, `TTY::Table::Border::ASCII` and `TTY::Table::Border::Unicode`
 * `:column_widths` - array of maximum column widths
