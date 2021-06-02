@@ -5,7 +5,10 @@ gemspec
 if Gem::Version.new(RUBY_VERSION) >= Gem::Version.new("2.1.0")
   gem "rspec-benchmark"
 end
-gem "json", "2.4.1" if RUBY_VERSION == "2.0.0"
+if RUBY_VERSION == "2.0.0"
+  gem "json", "2.4.1"
+  gem "rake", "12.3.3"
+end
 
 group :tools do
   gem "yard", "~> 0.9.12"
