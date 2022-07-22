@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 RSpec.describe TTY::Table::Renderer, '#select' do
-  let(:klass)    { ::Class.new }
   let(:instance) { described_class }
 
   subject { instance.select(renderer) }
