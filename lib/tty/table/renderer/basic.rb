@@ -85,6 +85,13 @@ module TTY
         # @api public
         attr_accessor :resize
 
+        # The table automatic rotation behaviour. If true and resize is false
+        # the table will be rotated to vertical. Has no effect if resize is
+        # true. By default it's true.
+        #
+        # @api public
+        attr_accessor :rotate
+
         # The table padding settings
         #
         # @return [TTY::Table::Padder]
@@ -124,6 +131,7 @@ module TTY
           @border_class  = options.fetch(:border_class) { Border::Null }
           @indent        = options.fetch(:indent) { 0 }
           @resize        = options.fetch(:resize) { false }
+          @rotate        = options.fetch(:rotate) { true }
           @padding       = Strings::Padder.parse(options[:padding])
         end
 
