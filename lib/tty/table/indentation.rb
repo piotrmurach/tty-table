@@ -30,7 +30,7 @@ module TTY
       #
       # @api public
       def insert_indentation(line, indentation)
-        line ? " " * indentation + line.to_s : ""
+        line ? " " * indentation + line.to_s : line
       end
       module_function :insert_indentation
     end # Indentation

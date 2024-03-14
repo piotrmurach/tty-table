@@ -199,7 +199,6 @@ module TTY
             operations.add(*op)
           end
           operations.apply_to(table, *select_operations)
-
           render_data.compact.join("\n")
         end
 
