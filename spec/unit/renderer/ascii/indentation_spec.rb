@@ -37,3 +37,17 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'indentation' do
     end
   end
 end
+
+RSpec.describe TTY::Table::Renderer::ASCII, 'indentation without headers' do
+  it "indents top border correctly" do
+    table = TTY::Table.new
+    table << ["a1","a2","a3"]
+    table << ["b1","b2","b3"]
+    expect(table.render(:ascii, indent: 3)).to eql([
+      "   +--+--+--+",
+      "   |a1|a2|a3|",
+      "   |b1|b2|b3|",
+      "   +--+--+--+"
+    ].join("\n"))
+  end
+end
