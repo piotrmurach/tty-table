@@ -38,7 +38,7 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'indentation' do
   end
 end
 
-RSpec.describe TTY::Table::Renderer::ASCII, 'indentation without headers' do
+RSpec.describe TTY::Table::Renderer::ASCII, "indentation without headers" do
   it "indents top border correctly" do
     table = TTY::Table.new
     table << %w(a1 a2 a3)
