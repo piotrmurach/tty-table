@@ -267,7 +267,9 @@ module TTY
         # @api private
         def render_header(row, data_border)
           top_line = data_border.top_line
-          return Indentation.indent(top_line, @indent) unless row.is_a?(TTY::Table::Header)
+          unless row.is_a?(TTY::Table::Header)
+            return Indentation.indent(top_line, @indent)
+          end
           header = [top_line, data_border.row_line(row)]
           if !border.separator || border.separator?(0)
             header << data_border.middle_line
