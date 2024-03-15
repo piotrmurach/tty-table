@@ -37,3 +37,17 @@ RSpec.describe TTY::Table::Renderer::ASCII, 'indentation' do
     end
   end
 end
+
+RSpec.describe TTY::Table::Renderer::ASCII, "indentation without headers" do
+  it "does not regress on issue 45" do
+    table = TTY::Table.new
+    table << %w(a1 a2 a3)
+    table << %w(b1 b2 b3)
+    expect(table.render(:ascii, indent: 3)).to eql([
+      "   +--+--+--+",
+      "   |a1|a2|a3|",
+      "   |b1|b2|b3|",
+      "   +--+--+--+"
+    ].join("\n"))
+  end
+end
