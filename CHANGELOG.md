@@ -1,7 +1,7 @@
 # Change log
 
 ### Fixed
-* Fix indentation of tables with no headers by Roger Marlow(@rogermarlow)
+* Fix indentation of tables without headers by Roger Marlow(@rogermarlow)
 
 ## [v0.12.0] - 2020-09-20
 
