@@ -76,5 +76,32 @@ RSpec.describe TTY::Table::Renderer::Basic, 'individual row separators' do
         b1 b2 b3
       EOS
     end
+
+    it "inserts separators correctly when appended conditionally" do
+      table = TTY::Table.new(header: %w[type name amount avg yield yield_percent])
+      prev_type = "stock"
+      rows = [
+        ["stock", "a", "1", "1", "1", "1"],
+        ["stock", "b", "2", "2", "2", "2"],
+        ["bond", "c", "3", "3", "3", "3"]
+      ]
+
+      rows.each do |row|
+        table << :separator if row[0] != prev_type
+        table << row
+        prev_type = row[0]
+      end
+
+      rendered = described_class.new(table).render
+      normalized = rendered.lines.map(&:rstrip).join("\n")
+
+      expect(normalized).to eq unindent(<<-EOS)
+        type  name amount avg yield yield_percent
+        stock a    1      1   1     1
+        stock b    2      2   2     2
+
+        bond  c    3      3   3     3
+      EOS
+    end
   end
 end

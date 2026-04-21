@@ -293,7 +293,7 @@ module TTY
     # @api public
     def <<(row)
       if row == Border::SEPARATOR
-        separators << columns_size - (header ? 0 : 2)
+        separators << rows_size - (header ? 0 : 1)
       else
         assert_row_size(row, rows)
         rows << to_row(row)
