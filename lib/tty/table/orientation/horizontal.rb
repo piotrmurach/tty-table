@@ -24,23 +24,21 @@ module TTY
         # @api public
         def slice(table)
           head, body, array_h, array_b = 4.times.map { [] }
-          index         = 0
           first_column  = 0
           second_column = 1
 
           (0...table.original_columns * table.original_rows).each do |col_index|
-            row      = table.rows[index]
+            row      = table.rows[col_index]
             array_h += [row[first_column]]
             array_b += [row[second_column]]
 
-            if col_index % table.original_columns == 2
+            if (col_index + 1) % table.original_columns == 0
               head << array_h
               body << array_b
               array_h, array_b = [], []
             end
-            index += 1
           end
-          [head, body]
+          [head.uniq, body]
         end
       end # Horizontal
     end # Orientation

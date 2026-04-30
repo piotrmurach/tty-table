@@ -80,5 +80,19 @@ RSpec.describe TTY::Table, '#rotate' do
       expect(table.rotate.to_a).to eql [header] + rows
       expect(table.header).to eql header
     end
+
+    context 'with more than three columns' do
+      let(:header) { ['h1', 'h2', 'h3', 'h4'] }
+      let(:rows) { [['a1', 'a2', 'a3', 'a4'], ['b1', 'b2', 'b3', 'b4']] }
+
+      it 'rotates the rows and header back' do
+        table.orientation = :vertical
+        table.rotate
+        table.orientation = :horizontal
+
+        expect(table.rotate.to_a).to eql [header] + rows
+        expect(table.header).to eql header
+      end
+    end
   end
 end

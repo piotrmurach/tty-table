@@ -1,5 +1,11 @@
 # Change log
 
+## Unreleased
+
+### Fixed
+* Fix terminal control sequences to be treated as zero-width for field and column sizing
+* Fix wrapped output to preserve active SGR styling and OSC 8 hyperlinks across inserted line breaks
+
 ## [v0.12.0] - 2020-09-20
 
 ### Changed

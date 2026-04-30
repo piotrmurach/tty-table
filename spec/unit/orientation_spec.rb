@@ -109,6 +109,19 @@ RSpec.describe TTY::Table, 'orientation' do
         expect(subject.to_a).to eql rotated_rows
       end
 
+      context 'with more columns than rows' do
+        let(:rows) { [['a1', 'a2', 'a3', 'a4'], ['b1', 'b2', 'b3', 'b4']] }
+
+        it 'numbers rows based on the number of columns' do
+          rotated_rows = [
+            ['1', 'a1'], ['2', 'a2'], ['3', 'a3'], ['4', 'a4'],
+            ['1', 'b1'], ['2', 'b2'], ['3', 'b3'], ['4', 'b4']
+          ]
+
+          expect(subject.to_a).to eql rotated_rows
+        end
+      end
+
       context 'without border' do
         it 'displays table' do
           expect(subject.to_s).to eq unindent(<<-EOS)
