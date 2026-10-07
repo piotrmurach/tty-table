@@ -1,5 +1,10 @@
 # Change log
 
+## Unreleased
+
+### Fixed
+* Fix indentation for every line of multiline content and headers
+
 ## [v0.12.0] - 2020-09-20
 
 ### Changed
